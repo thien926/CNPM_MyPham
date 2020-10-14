@@ -20,6 +20,7 @@ namespace CNPM_MyPham.Controllers
 
         public IActionResult Index()
         {
+            LayUserCurrent();
             return View();
         }
 
@@ -32,6 +33,10 @@ namespace CNPM_MyPham.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public void LayUserCurrent(){
+            ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUser>(HttpContext.Session, "CurrentUser");
         }
     }
 }

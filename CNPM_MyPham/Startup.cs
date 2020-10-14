@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CNPM_MyPham.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +26,14 @@ namespace CNPM_MyPham
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // Thêm dịch vụ Session
+            services.AddSession();
+
+            services.AddDbContext<MyphamDbContext>(options => 
+                options.UseSqlite(Configuration.GetConnectionString("Default")));
+            
+            services.AddScoped<KhachHangEFContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,11 +56,14 @@ namespace CNPM_MyPham
 
             app.UseAuthorization();
 
+            //  Sử dụng service Session
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
