@@ -30,9 +30,8 @@ namespace CNPM_MyPham.Controllers
                 }
                 CurrentUser U = new CurrentUser();
                 U.KhachHang = kh;
-                //ViewData["script"] = "<script>alert('Đăng nhập thành công');</script>";
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", U);
-                //ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUser>(HttpContext.Session, "CurrentUser");
+                ViewBag.Message_Login = "Đăng nhập thành công!";
                 LayUserCurrent();
                 return View();
             }

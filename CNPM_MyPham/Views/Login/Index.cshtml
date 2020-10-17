@@ -20,8 +20,15 @@
     <script src="~/js/Validate-client/jquery.validate.min.js"></script>
     <script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
     <script>
-        function login(){
-            alert("Đăng nhập thành công");
+        Message_Login();
+        function Message_Login(){
+            @if(ViewBag.Message_Login != null){
+                <text>
+                $(document).ready(function() {
+                    alert("Đăng nhập thành công!");
+                });
+                </text>
+            }
         }
     </script>
 }
@@ -72,7 +79,7 @@
                         <button type="submit" class="site-btn login-btn">Đăng nhập</button>
                     </form>
                     <div class="switch-login">
-                        <a href="./register.html" class="or-login">Tạo tài khoản</a>
+                        <a asp-controller="Register" asp-action="Index" class="or-login">Tạo tài khoản</a>
                     </div>
                 </div>
             </div>

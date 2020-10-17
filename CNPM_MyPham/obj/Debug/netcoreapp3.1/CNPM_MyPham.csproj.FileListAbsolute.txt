@@ -97,3 +97,5 @@ G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\s
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\Register\Index.cshtml.g.cs
+G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\Product\Index.cshtml.g.cs

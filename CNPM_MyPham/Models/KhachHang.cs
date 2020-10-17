@@ -1,6 +1,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CNPM_MyPham.Models
 {
@@ -20,11 +21,11 @@ namespace CNPM_MyPham.Models
         public string repass{get; set;}
 
         [Required(ErrorMessage = "Họ tên là bắt buộc")]
-        [StringLength(maximumLength:100, MinimumLength = 4, ErrorMessage = "Mật khẩu từ 4 đến 100 kí tự")]
+        [StringLength(maximumLength:100, MinimumLength = 4, ErrorMessage = "Họ tên từ 4 đến 100 kí tự")]
         public string full_name{get; set;}
 
         [Required(ErrorMessage = "Số điện thoại là bắt buộc")]
-        [RegularExpression(pattern: "[\\D]/ig", ErrorMessage="Số điện thoại phải là số")]
+        [RegularExpression(pattern: "^([\\d]{10,11})", ErrorMessage="Số điện thoại phải là số và dài từ 10 đến 11")]
         public string phone{get; set;}
 
         [Required(ErrorMessage = "Thư điện tử là bắt buộc")]
@@ -34,16 +35,20 @@ namespace CNPM_MyPham.Models
         [Required(ErrorMessage = "Địa chỉ là bắt buộc")]
         public string address {get; set;}
 
-        [Required(ErrorMessage = "Giới tính là bắt buộc")]
-        [RegularExpression(pattern: "(Nam|Nữ)/g", ErrorMessage="Giới tính là Nam hoặc Nữ")]
+        [BindProperty, Required(ErrorMessage = "Giới tính là bắt buộc")]
         public string sex{get; set;}
 
         [Required(ErrorMessage = "Ngày sinh là bắt buộc")]
         [DataType(DataType.Date)]
         public DateTime dateborn{get; set;}
 
-        [Required(ErrorMessage = "Trạng thái là bắt buộc")]
-        [RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
+        //[Required(ErrorMessage = "Trạng thái là bắt buộc")]
+        //[RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
         public int status{get; set;}
+
+        public KhachHang()
+        {
+            status = 1;
+        }
     }
 }

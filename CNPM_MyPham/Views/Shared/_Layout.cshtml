@@ -47,22 +47,13 @@
                 </div>
                 <div class="ht-right">
                     @{
-                        if(ViewData["CurrentUser"] != null){
+                        if(ViewBag.CurrentUser != null){
                             <a href="/Login/Index" class="login-panel"><i class="fa fa-user"></i>@ViewBag.CurrentUser.KhachHang.full_name</a>
                         }
                         else{
                             <a href="/Login/Index" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
                         }
                     }
-                    
-                    @* <div class="lan-selector">
-                        <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                            <option value='yt' data-image="img/flag-1.jpg" data-imagecss="flag yt"
-                                data-title="English">English</option>
-                            <option value='yu' data-image="img/flag-2.jpg" data-imagecss="flag yu"
-                                data-title="Bangladesh">German </option>
-                        </select>
-                    </div> *@
                     <div class="top-social">
                         <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -86,19 +77,19 @@
                         <div class="advanced-search">
                             @* <button type="button" class="category-btn">All Categories</button> *@
                             <div class="input-group">
-                                <input type="text" placeholder="What do you need?">
+                                <input type="text" placeholder="Nhập sản phẩm tìm kiếm">
                                 <button type="button"><i class="ti-search"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
-                            <li class="heart-icon">
+                            @* <li class="heart-icon">
                                 <a href="#">
                                     <i class="icon_heart_alt"></i>
                                     <span>1</span>
                                 </a>
-                            </li>
+                            </li> *@
                             <li class="cart-icon">
                                 <a href="#">
                                     <i class="icon_bag_alt"></i>
@@ -156,7 +147,7 @@
                 <div class="nav-depart">
                     <div class="depart-btn">
                         <i class="ti-menu"></i>
-                        <span>All departments</span>
+                        <span>Danh mục</span>
                         <ul class="depart-hover">
                             <li class="active"><a href="#">Women’s Clothing</a></li>
                             <li><a href="#">Men’s Clothing</a></li>
@@ -171,25 +162,22 @@
                 </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
-                        <li><a href="#">Collection</a>
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li><a href="./shop.html">Sản phẩm</a></li>
+                        @* <li><a href="#">Collection</a>
                             <ul class="dropdown">
                                 <li><a href="#">Men's</a></li>
                                 <li><a href="#">Women's</a></li>
                                 <li><a href="#">Kid's</a></li>
                             </ul>
-                        </li>
-                        <li><a href="./blog.html">Blog</a></li>
-                        <li><a href="./contact.html">Contact</a></li>
-                        <li><a href="#">Pages</a>
+                        </li> *@
+                        <li><a href="./blog.html">Diễn đàn</a></li>
+                        <li><a href="./contact.html">Liên lạc</a></li>
+                        <li><a>Trang</a>
                             <ul class="dropdown">
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                                <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                <li><a href="./check-out.html">Checkout</a></li>
-                                <li><a href="./faq.html">Faq</a></li>
-                                <li><a href="./register.html">Register</a></li>
-                                <li><a href="./login.html">Login</a></li>
+                                <li><a asp-controller="Login" asp-action="Index">Đăng nhập</a></li>
+                                <li><a asp-controller="Register" asp-action="Index">Đăng kí</a></li>
+                                <li><a href="./check-out.html">Sản phẩm</a></li>
                             </ul>
                         </li>
                     </ul>

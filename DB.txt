@@ -24,6 +24,8 @@ Table NhanVien {
   dateborn date
   status int
   permission_id int
+  bill_id int
+  importcoupon_id int
  }
  
 Table Quyen {
@@ -36,6 +38,16 @@ Table LoaiSanPham {
   product_type_id int [pk]
   name varchar
   description varchar
+}
+
+Table ThuongHieu{
+  brand_id int [pk]
+  name varchar
+}
+
+Table ThuongHieuAndSanPham{
+  brand_id int [pk]
+  product_id int [pk]
 }
  
 Table SanPham {
@@ -77,9 +89,35 @@ Table ChiTietHoaDon {
   total decimal
  }
  
+Table PhieuNhap {
+   importcoupon_id int [pk]
+   user_nv varchar
+   NCC_id int
+   date_receive date
+   total decimal
+ }
+Table ChiTietPhieuNhap {
+  importcoupon_id int [pk]
+  product_id int [pk]
+  amount int
+  total decimal
+}
+ 
+Table NCC{
+  NCC_id int [pk]
+  name varchar
+}
+ 
 Ref: NhanVien.permission_id > Quyen.permission_id
 Ref: SanPham.product_type_id > LoaiSanPham.product_type_id
 Ref: HoaDon.user_kh > KhachHang.user
 Ref: HoaDon.promotion_id > KhuyenMai.promotion_id
 Ref: ChiTietHoaDon.bill_id > HoaDon.bill_id
 Ref: ChiTietHoaDon.product_id > SanPham.product_id
+Ref: SanPham.product_id < ThuongHieuAndSanPham.product_id
+Ref: ThuongHieu.brand_id < ThuongHieuAndSanPham.brand_id
+Ref: NhanVien.bill_id < HoaDon.bill_id
+Ref: NhanVien.importcoupon_id < PhieuNhap.importcoupon_id
+Ref: PhieuNhap.importcoupon_id < ChiTietPhieuNhap.importcoupon_id
+Ref: SanPham.product_id < ChiTietPhieuNhap.product_id
+Ref: NCC.NCC_id < PhieuNhap.NCC_id

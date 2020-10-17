@@ -1,0 +1,154 @@
+@model CNPM_MyPham.Models.KhachHang;
+@{
+    ViewData["Title"] = "Register";
+}
+
+@section Stylesheet{
+    <style>
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
+    </style>
+}
+
+@section Scripts{
+    <script src="~/js/Validate-client/jquery-2.2.0.min.js"></script>
+    <script src="~/js/Validate-client/jquery.validate.min.js"></script>
+    <script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        Message_Register();
+        function Message_Register(){
+            @if(ViewBag.Message_Register != null){
+                <text>
+                $(document).ready(function() {
+                    alert("Đăng kí thành công!");
+                });
+                </text>
+            }
+        }
+    </script>
+}
+
+
+<!-- Breadcrumb Section Begin -->
+<div class="breacrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <a href="#"><i class="fa fa-home"></i> Trang chủ</a>
+                    <span>Đăng kí</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Form Section Begin -->
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="login-form">
+                    <h2>Đăng kí</h2>
+                    <form action="/Register/Index" method="post">
+                        <div asp-validation-summary="ModelOnly">
+                            @* <span>Danh sách lỗi</span> *@
+                        </div>
+                        <div class="group-input">
+                            <label asp-for="user">Tài khoản *</label>
+                            <input asp-for="user">
+                            <span asp-validation-for="user"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="pass">Mật khẩu *</label>
+                            <input asp-for="pass" type="password">
+                            <span asp-validation-for="pass"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="repass">Nhập lại mật khẩu *</label>
+                            <input asp-for="repass" type="password">
+                            <span asp-validation-for="repass"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="full_name">Họ tên *</label>
+                            <input asp-for="full_name">
+                            <span asp-validation-for="full_name"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="phone">Số điện thoại *</label>
+                            <input asp-for="phone">
+                            <span asp-validation-for="phone"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="mail">Thư điện tử *</label>
+                            <input asp-for="mail">
+                            <span asp-validation-for="mail"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="address">Địa chỉ *</label>
+                            <input asp-for="address">
+                            <span asp-validation-for="address"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="sex">Giới tính * &nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        @Html.RadioButtonFor(model => model.sex, "Nam", new {style = "width:63%;"}) Nam
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        @Html.RadioButtonFor(model => model.sex, "Nữ") Nữ
+                                    </label>
+                                </div>
+
+                            </label>
+                            @* <label style="float: left; width: 20%;">Nam: </label>
+                            <input type="radio" asp-for="sex" value="Nam" style="float: left; width: 10%;"/>
+                            <label style="float: left; width: 20%;">Nữ: </label>
+                            <input type="radio" asp-for="sex" value="Nữ" style="float: left; width: 10%;"/> *@
+                            @* <input asp-for="sex" value="" style="display: none;" id="sex" class="input_sex_register"/> *@
+                            <span asp-validation-for="sex"></span>
+                        </div>
+
+                        <div class="group-input">
+                            <label asp-for="dateborn">Ngày sinh *</label>
+                            <input asp-for="dateborn">
+                            <span asp-validation-for="dateborn"></span>
+                        </div>
+
+                        @* <input asp-for="status" value=1 style="display: none;"> *@
+
+                        @* <div class="group-input gi-check">
+                            <div class="gi-more">
+                                <label for="save-pass">
+                                        Save Password
+                                        <input type="checkbox" id="save-pass">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                <a href="#" class="forget-pass">Quên mật khẩu</a>
+                            </div>
+                        </div> *@
+                        <button type="submit" class="site-btn login-btn">Đăng kí</button>
+                    </form>
+                    <div class="switch-login">
+                        <a asp-controller="Login" asp-action="Index" class="or-login">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

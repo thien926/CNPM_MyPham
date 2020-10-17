@@ -34,6 +34,9 @@ namespace CNPM_MyPham
                 options.UseSqlite(Configuration.GetConnectionString("Default")));
             
             services.AddScoped<KhachHangEFContext>();
+            services.AddScoped<LoaiSanPhamEFContext>();
+            services.AddScoped<SanPhamEFContext>();
+            services.AddScoped<ThuongHieuEFContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +66,7 @@ namespace CNPM_MyPham
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=Register}/{action=Index}/{id?}");
             });
         }
     }
