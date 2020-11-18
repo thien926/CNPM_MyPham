@@ -1,4 +1,5 @@
-using CNPM_MyPham.Data;
+using Domain.Entities;
+using Infrastructure.Persistence;
 using CNPM_MyPham.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,28 +7,31 @@ namespace CNPM_MyPham.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly KhachHangEFContext context;
+        private readonly KhachHangEFContext KHcontext;
 
-        public RegisterController(KhachHangEFContext context){
-            this.context = context;
+        private readonly LoaiSanPhamEFContext LSPcontext;
+
+        public RegisterController(KhachHangEFContext KHcontext, LoaiSanPhamEFContext LSPcontext){
+            this.KHcontext = KHcontext;
+            this.LSPcontext = LSPcontext;
         }
 
         [HttpGet]
         public IActionResult Index(){
-            LayUserCurrent();
+            View_Chung();
             return View();
         }
 
         [HttpPost]
         public IActionResult Index(KhachHang U){
             if(ModelState.IsValid){
-                KhachHang kh = context.KhachHang_GetByUser(U.user);
+                KhachHang kh = KHcontext.KhachHang_GetByUser(U.user);
                 if(kh == null){
-                    context.KhachHang_Add(U);
+                    KHcontext.KhachHang_Add(U);
                     CurrentUser currentuser = new CurrentUser();
                     currentuser.KhachHang = U;
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", currentuser);
-                    LayUserCurrent();
+                    View_Chung();
                     U = null;
                     ViewBag.Message_Register = "Đăng kí thành công!";
                     return View();
@@ -37,11 +41,15 @@ namespace CNPM_MyPham.Controllers
             return View(U);
         }
 
-        public void LayUserCurrent(){
+        public void View_Chung(){
+            // Lấy session User hiện hành
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUser>(HttpContext.Session, "CurrentUser");
-            // if(ViewBag.CurrentUser == null){
-            //     ViewData["script"] = "";
-            // }
+
+            // Lấy session Don Hang
+            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHang>(HttpContext.Session, "DonHang");
+            
+            // Lấy danh sách loại sản phẩm cho danh mục
+            ViewBag.Danhmuc = LSPcontext.LoaiSanPham_GetAll();
         }
     }
 }

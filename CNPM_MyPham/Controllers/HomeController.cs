@@ -5,22 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Domain.Entities;
+using Infrastructure.Persistence;
 using CNPM_MyPham.Models;
 
 namespace CNPM_MyPham.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly LoaiSanPhamEFContext LSPcontext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(LoaiSanPhamEFContext LSPcontext)
         {
-            _logger = logger;
+            this.LSPcontext = LSPcontext;
         }
 
         public IActionResult Index()
         {
-            LayUserCurrent();
+            View_Chung();
             return View();
         }
 
@@ -35,8 +37,15 @@ namespace CNPM_MyPham.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public void LayUserCurrent(){
+        public void View_Chung(){
+            // Lấy session User hiện hành
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUser>(HttpContext.Session, "CurrentUser");
+
+            // Lấy session Don Hang
+            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHang>(HttpContext.Session, "DonHang");
+
+            // Lấy danh sách loại sản phẩm cho danh mục
+            ViewBag.Danhmuc = LSPcontext.LoaiSanPham_GetAll();
         }
     }
 }

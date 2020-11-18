@@ -1,4 +1,4 @@
-@model CNPM_MyPham.Models.SanPham;
+@model Domain.Entities.SanPham;
 @{
     ViewData["Title"] = "Product";
 }
@@ -16,7 +16,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Trang chủ</a>
-                        <a href="./shop.html">Shop</a>
+                        <a asp-controller="Shop" asp-action="Index">Shop</a>
                         <span>Detail</span>
                     </div>
                 </div>
@@ -36,12 +36,12 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="product-pic">
-                                <img class="product-big-img" src="~/img/product-single/product-1.jpg" alt="">
+                                <img class="product-big-img" src="@Url.Content(@Model.img)" alt="">
                             </div>
                             @* <div class="product-thumbs">
                                 <div class="product-thumbs-track ps-slider owl-carousel">
-                                    <div class="pt active" data-imgbigurl="img/product-single/product-1.jpg"><img
-                                            src="img/product-single/product-1.jpg" alt=""></div>
+                                    <div class="pt active" data-imgbigurl="@Url.Content(@Model.img)"><img
+                                            src="@Url.Content(@Model.img)" alt=""></div>
                                     <div class="pt" data-imgbigurl="img/product-single/product-2.jpg"><img
                                             src="img/product-single/product-2.jpg" alt=""></div>
                                     <div class="pt" data-imgbigurl="img/product-single/product-3.jpg"><img
@@ -109,6 +109,7 @@
                                 </ul>
                                 <div class="pd-share">
                                     <div class="p-code">Mã sản phẩm : @Model.product_id</div>
+                                    <br><div class="p-code">Số lượng : @Model.amount</div>
                                     <div class="pd-social">
                                         <a href="#"><i class="ti-facebook"></i></a>
                                         <a href="#"><i class="ti-twitter-alt"></i></a>

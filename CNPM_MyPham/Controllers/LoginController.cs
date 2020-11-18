@@ -1,4 +1,5 @@
-using CNPM_MyPham.Data;
+using Domain.Entities;
+using Infrastructure.Persistence;
 using CNPM_MyPham.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,22 +7,24 @@ namespace CNPM_MyPham.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly KhachHangEFContext context;
+        private readonly KhachHangEFContext KHcontext;
+        private readonly LoaiSanPhamEFContext LSPcontext;
 
-        public LoginController(KhachHangEFContext context){
-            this.context = context;
+        public LoginController(KhachHangEFContext KHcontext, LoaiSanPhamEFContext LSPcontext){
+            this.KHcontext = KHcontext;
+            this.LSPcontext = LSPcontext;
         }
 
         [HttpGet]
         public IActionResult Index(){
-            LayUserCurrent();
+            View_Chung();
             return View();
         }
 
         [HttpPost]
         public IActionResult Index(LoginModel lg){
             if(ModelState.IsValid){
-                KhachHang kh = context.KhachHang_GetByUser(lg.user);
+                KhachHang kh = KHcontext.KhachHang_GetByUser(lg.user);
                 if(kh == null){
                     return View(lg);
                 }
@@ -32,17 +35,21 @@ namespace CNPM_MyPham.Controllers
                 U.KhachHang = kh;
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", U);
                 ViewBag.Message_Login = "Đăng nhập thành công!";
-                LayUserCurrent();
+                View_Chung();
                 return View();
             }
             return View(lg);
         }
 
-        public void LayUserCurrent(){
+        public void View_Chung(){
+            // Lấy session User hiện hành
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUser>(HttpContext.Session, "CurrentUser");
-            // if(ViewBag.CurrentUser == null){
-            //     ViewData["script"] = "";
-            // }
+
+            // Lấy session Don Hang
+            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHang>(HttpContext.Session, "DonHang");
+            
+            // Lấy danh sách loại sản phẩm cho danh mục
+            ViewBag.Danhmuc = LSPcontext.LoaiSanPham_GetAll();
         }
     }
 }

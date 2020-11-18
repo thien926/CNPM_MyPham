@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rYNI08RRnwXphWfxliMKPy4ExOIvEFFaQug1ddj0SWbrjhTY3qm6d/dBTeWVn0VHhh4nvGw5WuzW3aUkwS7H3Q==",
+  "dgSpecHash": "HsqgPqf+p4wUf6tvz/T8a9pqMDqEI5pRYc4dKIjb8aV13gnacXfQJ5qv95kQP8vHa/CNtI4cSHPprjajbywoRA==",
   "success": true,
   "projectFilePath": "G:\\Git\\CNPM_MyPham\\CNPM_MyPham\\CNPM_MyPham.csproj",
   "expectedPackageFiles": [
@@ -72,6 +72,7 @@
     "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
+    "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.linq.dynamic.core\\1.2.5\\system.linq.dynamic.core.1.2.5.nupkg.sha512",
     "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
     "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\FPT SHOP\\.nuget\\packages\\system.net.nameresolution\\4.3.0\\system.net.nameresolution.4.3.0.nupkg.sha512",
