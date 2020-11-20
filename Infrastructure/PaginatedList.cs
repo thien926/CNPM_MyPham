@@ -10,6 +10,12 @@ namespace Infrastructure
             this.AddRange(items);
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            if(PageIndex > TotalPages){
+                PageIndex = TotalPages;
+            }
+            if(PageIndex < 1){
+                PageIndex = 1;
+            }
         }
 
         public int PageIndex { get; }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using Domain.Entities;
+using Domain.Interfaces;
 
 namespace Infrastructure.Persistence
 {
-    public class SanPhamEFContext
+    public class SanPhamEFContext : ISanPhamEFContext
     {
         private readonly MyphamDbContext context;
 
@@ -38,7 +39,18 @@ namespace Infrastructure.Persistence
             context.SaveChanges();
         }
 
-        public List<SanPham> SanPham_Filter(string Type, string Brand, string SearchString, int pageIndex, int pageSize, out int count, out decimal pricemax, string price)
+        public decimal SanPham_MaxPrice(){
+            List<SanPham> ListSP = SanPham_GetAll();
+            decimal maxprice = 0;
+            foreach(var q in ListSP){
+                if(maxprice <= q.price){
+                    maxprice = q.price;
+                }
+            }
+            return maxprice;
+        }
+
+        public List<SanPham> SanPham_Filter(string Type, string Brand, string SearchString, string sort, int pageIndex, int pageSize, out int count, out decimal pricemax, string price)
         {
             var query = context.SanPhams.AsQueryable();
             // Lấy dữ liệu theo thương hiệu
@@ -75,18 +87,47 @@ namespace Infrastructure.Persistence
             }
             // Lấy dữ liệu theo giá
             if(!string.IsNullOrEmpty(price)){
-                var arrprice = price.Split('-');
-                decimal pricefrom = decimal.Parse(arrprice[0]);
-                decimal priceto = decimal.Parse(arrprice[1]);
+                string[] arrprice = price.Split('-');
+                long pricefrom = long.Parse(arrprice[0]);
+                long priceto = long.Parse(arrprice[1]);
+                // Console.WriteLine(pricefrom.CompareTo(pricefrom));       bằng nhau xuất 0
+                // Console.WriteLine(pricefrom.CompareTo(priceto));         nhỏ hơn xuất -1
+                // Console.WriteLine(priceto.CompareTo(pricefrom));         lớn hơn xuất 1
+                //query = query.Where(m => (m.price.CompareTo(pricefrom) == 1 || m.price.CompareTo(pricefrom) == 0)
+                //    && (m.price.CompareTo(priceto) == -1 || m.price.CompareTo(priceto) == 0));
+                //query = query.Where(m => 
+                //        (Decimal.Round(m.price).CompareTo(Decimal.Round(pricefrom)) == 1 ||
+                //        Decimal.Round(m.price).CompareTo(Decimal.Round(pricefrom)) == 0) &&
+                //        (Decimal.Round(m.price).CompareTo(Decimal.Round(priceto)) == -1 ||
+                //        Decimal.Round(m.price).CompareTo(Decimal.Round(priceto)) == 0)
+                //        );
                 query = query.Where(m => m.price >= pricefrom && m.price <= priceto);
             }
             count = query.Count();
-            pricemax = 0;
-            foreach(var q in query.ToList()){
-                if(pricemax <= q.price){
-                    pricemax = q.price;
+            pricemax = SanPham_MaxPrice();
+
+            if(!string.IsNullOrEmpty(sort)){
+                switch(sort){
+                    case "name-asc": query = query.OrderBy(m => m.name);
+                                    break;
+                    case "name-desc": query = query.OrderByDescending(m => m.name);
+                                    break;
+                    case "price-asc": query = query.OrderBy(m => (int?)m.price);
+                                    break;
+                    case "price-desc": query = query.OrderByDescending(m => (int?)m.price);
+                                    break;
+                    default: break;
                 }
             }
+
+            int TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            if(pageIndex > TotalPages){
+                pageIndex = TotalPages;
+            }
+            if(pageIndex < 1){
+                pageIndex = 1;
+            }
+
             return query.Skip((pageIndex - 1) * pageSize)
                         .Take(pageSize).ToList();
         }

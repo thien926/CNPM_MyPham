@@ -13,6 +13,8 @@
             var Brand = "@Model.Brand";
             var SearchString = "@Model.SearchString";
             var pageIndex = "@Model.ListSP.PageIndex";
+            var price = "@Model.price";
+            var sort = "@Model.sort";
             
             if (document.getElementById(idbrand).checked) {
                 Brand += idbrand + "-";
@@ -22,21 +24,60 @@
             }
 
             var url = lay_URL_truoc_dau_hoi();
+            // Thêm Type vào url
+            var booldauhoi = false;
             if(Type != ""){
                 url += "?Type=" + Type;
-                if(Brand != ""){
-                    url +=  "&Brand=" + Brand + "&price=" + price + "&pageIndex=" + pageIndex;
-                }
-                else{
-                    url += "&price=" + price + "&pageIndex=" + pageIndex;
-                }
+                booldauhoi = true;                           // đánh dấu đã có dấu ?
             }
             else{
-                if(Brand != ""){
-                    url +=  "?Brand=" + Brand + "&price=" + price + "&pageIndex=" + pageIndex;
+                if(SearchString != ""){
+                    url += "?SearchString=" + SearchString;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm Brand vào url
+            if(Brand != ""){
+                if(booldauhoi){
+                    url +=  "&Brand=" + Brand;
                 }
                 else{
-                    url +=  "?price=" + price + "&pageIndex=" + pageIndex;
+                    url +=  "?Brand=" + Brand;
+                    booldauhoi = true;                         // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm giá vào url
+            if(price != ""){
+                if(booldauhoi){
+                    url += "&price=" + price;
+                }
+                else{
+                    url += "?price=" + price;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm sort vào url
+            if(sort != ""){
+                if(booldauhoi){
+                    url += "&sort=" + sort;
+                }
+                else{
+                    url += "?sort=" + sort;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm pageIndex vào url
+            if(pageIndex != ""){
+                if(booldauhoi){
+                    url += "&pageIndex=" + pageIndex;
+                }
+                else{
+                    url += "?pageIndex=" + pageIndex;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
                 }
             }
             
@@ -49,27 +90,147 @@
             var Type = "@Model.Type";
             var Brand = "@Model.Brand";
             var SearchString = "@Model.SearchString";
+            var sort = "@Model.sort";
             var pageIndex = "@Model.ListSP.PageIndex";
             var price = pricefrom + "-" + priceto;
+            if(price == (pricefrom + "-")){
+                price += "0";
+            }
+            if(price == ("-" + priceto)){
+                price = "0" + price;
+            }
             var url = lay_URL_truoc_dau_hoi();
+
+            // Thêm Type vào url
+            var booldauhoi = false;
             if(Type != ""){
                 url += "?Type=" + Type;
-                if(Brand != ""){
-                    url +=  "&Brand=" + Brand + "&price=" + price + "&pageIndex=" + pageIndex;
-                }
-                else{
-                    url += "&price=" + price + "&pageIndex=" + pageIndex;
-                }
+                booldauhoi = true;                           // đánh dấu đã có dấu ?
             }
             else{
-                if(Brand != ""){
-                    url +=  "?Brand=" + Brand + "&price=" + price + "&pageIndex=" + pageIndex;
-                }
-                else{
-                    url +=  "?price=" + price + "&pageIndex=" + pageIndex;
+                if(SearchString != ""){
+                    url += "?SearchString=" + SearchString;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
                 }
             }
 
+            // Thêm Brand vào url
+            if(Brand != ""){
+                if(booldauhoi){
+                    url +=  "&Brand=" + Brand;
+                }
+                else{
+                    url +=  "?Brand=" + Brand;
+                    booldauhoi = true;                         // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm giá vào url
+            if(price != ""){
+                if(booldauhoi){
+                    url += "&price=" + price;
+                }
+                else{
+                    url += "?price=" + price;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm sort vào url
+            if(sort != ""){
+                if(booldauhoi){
+                    url += "&sort=" + sort;
+                }
+                else{
+                    url += "?sort=" + sort;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm pageIndex vào url
+            if(pageIndex != ""){
+                if(booldauhoi){
+                    url += "&pageIndex=" + pageIndex;
+                }
+                else{
+                    url += "?pageIndex=" + pageIndex;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            location.href = url; 
+        }
+
+        function changesort(){
+            var sort = "@Model.sort";
+            if(sort == $("#sort").val()){
+                return;
+            }
+            sort = $("#sort").val();
+
+            var price = "@Model.price";
+            var Type = "@Model.Type";
+            var Brand = "@Model.Brand";
+            var SearchString = "@Model.SearchString";
+            var pageIndex = "@Model.ListSP.PageIndex";
+            var url = lay_URL_truoc_dau_hoi();
+
+            // Thêm Type vào url
+            var booldauhoi = false;
+            if(Type != ""){
+                url += "?Type=" + Type;
+                booldauhoi = true;                           // đánh dấu đã có dấu ?
+            }
+            else{
+                if(SearchString != ""){
+                    url += "?SearchString=" + SearchString;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm Brand vào url
+            if(Brand != ""){
+                if(booldauhoi){
+                    url +=  "&Brand=" + Brand;
+                }
+                else{
+                    url +=  "?Brand=" + Brand;
+                    booldauhoi = true;                         // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm giá vào url
+            if(price != ""){
+                if(booldauhoi){
+                    url += "&price=" + price;
+                }
+                else{
+                    url += "?price=" + price;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm sort vào url
+            if(sort != ""){
+                if(booldauhoi){
+                    url += "&sort=" + sort;
+                }
+                else{
+                    url += "?sort=" + sort;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
+
+            // Thêm pageIndex vào url
+            if(pageIndex != ""){
+                if(booldauhoi){
+                    url += "&pageIndex=" + pageIndex;
+                }
+                else{
+                    url += "?pageIndex=" + pageIndex;
+                    booldauhoi = true;                      // đánh dấu đã có dấu ?
+                }
+            }
             location.href = url; 
         }
 
@@ -85,6 +246,7 @@
 
         function loadCheckThuongHieu(){
             var Brand = "@Model.Brand";
+            Brand = Brand.trim('-');
             if(Brand == ""){
                 return;
             }
@@ -96,15 +258,43 @@
 
         function loadPrice(){
             var price = "@Model.price";
-            if(price == ""){
+            if (price == "") {
+                document.getElementById("minamount").value = "0";
+                document.getElementById("maxamount").value = "@Model.pricemax";
                 return;
             }
             price = price.split("-");
-            document.getElementById("minamount").value = price[0];
-            document.getElementById("maxamount").value = price[1];
+            var pricefrom = price[0];
+            var priceto = price[1];
+            document.getElementById("minamount").value = pricefrom;
+            document.getElementById("maxamount").value = priceto;
+            @* var rangeSlider = $(".price-range");
+		    maxPrice = rangeSlider.data('max');
+            document.getElementById("range1").style = "left: " + ((pricefrom / maxPrice) * 100) + "%;";
+            document.getElementById("range2").style = "left: " + ((priceto / maxPrice) * 100) + "%;";
+            document.getElementById("widthrange").style = "left: " + ((pricefrom / maxPrice) * 100) + "%; width: " + ((priceto / maxPrice) * 100) + "%;"; *@
         }
 
+        function loadSort(){
+            var sort = "@Model.sort";
+            if(sort == "") return;
+            
+            document.getElementById("sort").value = sort;
+            @* var s = "";
+            var x = document.getElementsByClassName("list");
+            for(let i = 0; i < x.length; ++i){
+                x[i].className = "option";
+                alert(x.length);
+                if(sort == x[i].data-value){
+                    x[i].className = "option selected";
+                }
+            } *@
+        }
+
+        loadSort();
+        loadPrice();
         loadCheckThuongHieu();
+        
     </script>
 }
 
@@ -180,16 +370,16 @@
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <input type="text" id="minamount" disabled>
-                                    <input type="text" id="maxamount" disabled>
+                                    <input type="text" id="minamount" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="10">
+                                    <input type="text" id="maxamount" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="10">
                                 </div>
                             </div>
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                            @*<div class="price-range"
                                 data-min="0" data-max="@Model.pricemax">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            </div>
+                                <div class="ui-slider-range ui-corner-all ui-widget-header" id="widthrange"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" id="range1"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" id="range2"></span>
+                            </div>*@
                             @* <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                 data-min="33" data-max="98">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -197,7 +387,7 @@
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div> *@
                         </div>
-                        <a class="filter-btn" onclick="loadprice()">Lọc</a>
+                        <a class="filter-btn" onclick="loadprice()" style="cursor: pointer;">Lọc</a>
                     </div>
                     
                 </div>
@@ -222,26 +412,17 @@
                             </div>
                             <div class="col-lg-4 col-md-4 text-right">
                                 <div class="select-option">
-                                    <select class="sorting">
-                                        <option value="">Default Sorting</option>
+                                    <select class="thien-sort" id="sort" onchange="changesort()">
+                                        <option value="">Sắp xếp: Mặc định</option>
+                                        <option value="name-asc">Sắp xếp theo tên từ A-Z</option>
+                                        <option value="name-desc">Sắp xếp theo tên từ Z-A</option>
+                                        <option value="price-asc">Sắp xếp theo giá tăng dần</option>
+                                        <option value="price-desc">Sắp xếp theo giá giảm dần</option>
                                     </select>
                                 </div>
                             </div>
                             
                         </div>
-                        @* @{
-                            if(!string.IsNullOrEmpty(Model.NameType)){
-                                <div class="row" style="margin-left: 5%; font-weight: bold;">Loại sản phẩm: @Model.NameType</div>
-                            }
-                            else{
-                                if(!string.IsNullOrEmpty(Model.SearchString)){
-                                    <div class="row" style="margin-left: 5%; font-weight: bold;">Kết quả tìm kiếm: @Model.SearchString</div>
-                                }
-                                else{
-                                    <div class="row" style="margin-left: 5%; font-weight: bold;">Kết quả tìm kiếm: Tất cả</div>
-                                }
-                            }
-                        } *@
                     </div>
                     <div class="product-list">
                         <div class="row">
@@ -270,7 +451,8 @@
                                                     <h5>@sp.name</h5>
                                                 </a>
                                                 <div class="product-price">
-                                                    @(String.Format("{0:n0}", (int)sp.price)) đ
+                                                    @(String.Format("{0:n0}", sp.price)) đ
+                                                    @*@(String.Format("{0:n0}", (int)sp.price)) đ*@
                                                     @* @((int)sp.price) đ *@
                                                     @* @(sp.price.ToString("C3", CultureInfo.CreateSpecificCulture("da-DK"))) đ *@
                                                     @* <span>$35.00</span> *@
@@ -280,240 +462,88 @@
                                     </div>
                                 }
                             }
-                            @* <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-1.jpg" alt="">
-                                        <div class="sale pp-sale">Sale</div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
-                                        <a href="#">
-                                            <h5>Pure Pineapple</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $14.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-2.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="#">
-                                            <h5>Guangzhou sweater</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $13.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-3.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Guangzhou sweater</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-4.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="#">
-                                            <h5>Microfiber Wool Scarf</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $64.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-5.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Men's Painted Hat</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $44.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-6.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Converse Shoes</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-7.jpg" alt="">
-                                        <div class="sale pp-sale">Sale</div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
-                                        <a href="#">
-                                            <h5>Pure Pineapple</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $64.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-8.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="#">
-                                            <h5>2 Layer Windbreaker</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $44.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="img/products/product-9.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="#">
-                                            <h5>Converse Shoes</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> *@
                         </div>
                     </div>
                     <div class="loading-more">
-                        <i class="icon_loading"></i>
-                        <a href="#">
-                            Loading More
-                        </a>
+                        @{
+                            if(@Model.count > @Model.pageSize){
+                                if(@Model.ListSP.PageIndex > 1){
+                                    <a asp-route-Type="@Model.Type"
+                                    asp-route-SearchString="@Model.SearchString"
+                                    asp-route-Brand="@Model.Brand"
+                                    asp-route-price="@Model.price"
+                                    asp-route-sort="@Model.sort">
+                                    &lt;&lt;</a>
+
+                                    <a asp-route-Type="@Model.Type"
+                                    asp-route-SearchString="@Model.SearchString"
+                                    asp-route-Brand="@Model.Brand"
+                                    asp-route-price="@Model.price"
+                                    asp-route-sort="@Model.sort"
+                                    asp-route-pageIndex="@(Model.ListSP.PageIndex -1)">&lt;</a>;
+                                }
+
+                                var total_page = @Model.ListSP.TotalPages;
+                                var Range = @Model.pageSize;
+                                int min = 0, max = 0;
+                                int middle = @Model.ListSP.TotalPages / 2;
+                                if(@Model.ListSP.TotalPages <= @Model.Range){
+                                    min = 1;
+                                    max = @Model.ListSP.TotalPages;
+                                }
+                                else{
+                                    if(@Model.ListSP.PageIndex < middle){
+                                        min = 1;
+                                        max = @Model.Range;
+                                    }
+                                    else{
+                                        if(@Model.ListSP.PageIndex >= (@Model.ListSP.TotalPages - middle)){
+                                            max = @Model.ListSP.TotalPages;
+                                            min = @Model.ListSP.TotalPages - @Model.Range;
+                                        }
+                                        else{
+                                            min = @Model.ListSP.PageIndex - middle;
+                                            max = @Model.ListSP.PageIndex + middle;
+                                        }
+                                    }
+                                }
+
+                                for(var i = min; i <= max; ++i){
+                                    if(i == @Model.ListSP.PageIndex){
+                                        <a asp-route-Type="@Model.Type"
+                                        asp-route-SearchString="@Model.SearchString"
+                                        asp-route-Brand="@Model.Brand"
+                                        asp-route-price="@Model.price"
+                                        asp-route-sort="@Model.sort"
+                                        asp-route-pageIndex="@i" style="color: #f07c29;">@i</a>;
+                                    }
+                                    else{
+                                        <a asp-route-Type="@Model.Type"
+                                        asp-route-SearchString="@Model.SearchString"
+                                        asp-route-Brand="@Model.Brand"
+                                        asp-route-price="@Model.price"
+                                        asp-route-sort="@Model.sort"
+                                        asp-route-pageIndex="@i">@i</a>;
+                                    }
+                                }
+
+                                if(@Model.ListSP.PageIndex < @Model.ListSP.TotalPages){
+                                    <a asp-route-Type="@Model.Type"
+                                    asp-route-SearchString="@Model.SearchString"
+                                    asp-route-Brand="@Model.Brand"
+                                    asp-route-price="@Model.price"
+                                    asp-route-sort="@Model.sort"
+                                    asp-route-pageIndex="@(Model.ListSP.PageIndex +1)">&gt;</a>;
+
+                                    <a asp-route-Type="@Model.Type"
+                                    asp-route-SearchString="@Model.SearchString"
+                                    asp-route-Brand="@Model.Brand"
+                                    asp-route-price="@Model.price"
+                                    asp-route-sort="@Model.sort"
+                                    asp-route-pageIndex="@(Model.ListSP.TotalPages)">&gt;&gt;</a>
+                                }
+                            }
+                        }
                     </div>
                 </div>
             </div>

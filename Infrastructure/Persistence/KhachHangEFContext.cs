@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities;
+using Domain.Interfaces;
 
 namespace Infrastructure.Persistence
 {
-    public class KhachHangEFContext
+    public class KhachHangEFContext : IKhachHangEFcontext
     {
         private readonly MyphamDbContext context;
         public KhachHangEFContext(MyphamDbContext context){

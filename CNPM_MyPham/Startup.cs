@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Infrastructure.Persistence;
 using CNPM_MyPham.Models;
+using Domain.Interfaces;
+using Application.Services;
 
 namespace CNPM_MyPham
 {
@@ -34,10 +36,14 @@ namespace CNPM_MyPham
             services.AddDbContext<MyphamDbContext>(options => 
                 options.UseSqlite(Configuration.GetConnectionString("Default")));
             
-            services.AddScoped<KhachHangEFContext>();
-            services.AddScoped<LoaiSanPhamEFContext>();
-            services.AddScoped<SanPhamEFContext>();
-            services.AddScoped<ThuongHieuEFContext>();
+            services.AddScoped<IKhachHangEFcontext, KhachHangEFContext>();
+            services.AddScoped<KhachHangService>();
+            services.AddScoped<ILoaiSanPhamEFContext, LoaiSanPhamEFContext>();
+            services.AddScoped<LoaiSanPhamService>();
+            services.AddScoped<ISanPhamEFContext, SanPhamEFContext>();
+            services.AddScoped<SanPhamService>();
+            services.AddScoped<IThuongHieuEFContext, ThuongHieuEFContext>();
+            services.AddScoped<ThuongHieuService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -23,7 +23,7 @@ namespace Domain.Entities
         public int amount {get; set;}
 
         [Required(ErrorMessage = "Giá là bắt buộc")]
-        public decimal price {get; set;}
+        public long price {get; set;}
 
         [Required(ErrorMessage = "Mô tả là bắt buộc")]
         public string description {get; set;}

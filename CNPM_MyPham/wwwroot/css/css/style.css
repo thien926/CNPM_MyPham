@@ -2050,6 +2050,8 @@ ol {
 	color: #252525;
 	position: relative;
 	display: inline-block;
+	/* Thiện thêm */
+	margin: 0px 5px;
 }
 
 .loading-more a:before {
@@ -2059,9 +2061,20 @@ ol {
 	width: 100%;
 	height: 2px;
 	background: #e7ab3c;
-	content: "";
+	/* Thiện xóa content */
+	/* content: ""; */
+	
 }
 
+/* Thiện thêm */
+.loading-more a:hover{
+	color: #f07c29;
+}
+
+/* Thiện thêm */
+.shop-phantrang-a-active{
+	color: #f07c29;
+}
 /*---------------------
   Product Details
 -----------------------*/
@@ -4333,4 +4346,17 @@ ol {
     height: 460px;
     overflow: auto;
      /* cursor: pointer; */
+}
+
+/* Thiện thêm */
+.thien-sort{
+	margin-right: 20px;
+}
+/* Thiện thêm */
+.thien-sort.nice-select {
+	padding-right: 70px;
+}
+/* Thiện thêm */
+.thien-sort.nice-select {
+	margin-bottom: 10px;
 }

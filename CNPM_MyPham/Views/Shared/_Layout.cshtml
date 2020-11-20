@@ -1,4 +1,4 @@
-﻿@model IndexViewShopModel
+﻿@* @model IndexViewShopModel *@
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -48,7 +48,7 @@
                 <div class="ht-right">
                     @{
                         if(ViewBag.CurrentUser != null){
-                            <a href="/User/Index" class="login-panel"><i class="fa fa-user"></i>@ViewBag.CurrentUser.KhachHang.full_name</a>
+                            <a href="/User/Index" class="login-panel"><i class="fa fa-user"></i>@ViewBag.CurrentUser.KhachHangDto.full_name</a>
                         }
                         else{
                             <a href="/Login/Index" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
@@ -78,7 +78,7 @@
                             @* <button type="button" class="category-btn">All Categories</button> *@
                             @* <div > *@
                                 <form action="/Shop/Index" method="GET" class="input-group">
-                                    <input type="text" asp-for="SearchString" placeholder="Nhập sản phẩm tìm kiếm">
+                                    <input type="text" name="SearchString" placeholder="Nhập sản phẩm tìm kiếm">
                                     <button type="submit"><i class="ti-search"></i></button>
                                 </form>
                                 

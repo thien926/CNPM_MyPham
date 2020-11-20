@@ -2,18 +2,21 @@ using Domain.Entities;
 using Infrastructure.Persistence;
 using CNPM_MyPham.Models;
 using Microsoft.AspNetCore.Mvc;
+using Domain.Interfaces;
+using Application.Services;
+using Application.DTOs;
 
 namespace CNPM_MyPham.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly KhachHangEFContext KHcontext;
+        private readonly KhachHangService KHservice;
 
-        private readonly LoaiSanPhamEFContext LSPcontext;
+        private readonly LoaiSanPhamService LSPservice;
 
-        public RegisterController(KhachHangEFContext KHcontext, LoaiSanPhamEFContext LSPcontext){
-            this.KHcontext = KHcontext;
-            this.LSPcontext = LSPcontext;
+        public RegisterController(KhachHangService KHservice, LoaiSanPhamService LSPservice){
+            this.KHservice = KHservice;
+            this.LSPservice = LSPservice;
         }
 
         [HttpGet]
@@ -23,13 +26,13 @@ namespace CNPM_MyPham.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(KhachHang U){
+        public IActionResult Index(KhachHangDto U){
             if(ModelState.IsValid){
-                KhachHang kh = KHcontext.KhachHang_GetByUser(U.user);
+                KhachHangDto kh = KHservice.KhachHang_GetByUser(U.user);
                 if(kh == null){
-                    KHcontext.KhachHang_Add(U);
-                    CurrentUser currentuser = new CurrentUser();
-                    currentuser.KhachHang = U;
+                    KHservice.KhachHang_Add(U);
+                    CurrentUserDto currentuser = new CurrentUserDto();
+                    currentuser.KhachHangDto = U;
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", currentuser);
                     View_Chung();
                     U = null;
@@ -43,13 +46,13 @@ namespace CNPM_MyPham.Controllers
 
         public void View_Chung(){
             // Lấy session User hiện hành
-            ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUser>(HttpContext.Session, "CurrentUser");
+            ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
 
             // Lấy session Don Hang
             ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHang>(HttpContext.Session, "DonHang");
             
             // Lấy danh sách loại sản phẩm cho danh mục
-            ViewBag.Danhmuc = LSPcontext.LoaiSanPham_GetAll();
+            ViewBag.Danhmuc = LSPservice.LoaiSanPham_GetAll();
         }
     }
 }
