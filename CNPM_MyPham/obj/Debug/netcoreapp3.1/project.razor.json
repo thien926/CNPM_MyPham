@@ -14407,6 +14407,21 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Type\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Type\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Product\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
@@ -14417,8 +14432,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Customer\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\Register\\Index.cshtml",
       "TargetPath": "Views\\Register\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Brand\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Brand\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14437,6 +14467,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\User\\Detail.cshtml",
+      "TargetPath": "Views\\User\\Detail.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\User\\Edit.cshtml",
+      "TargetPath": "Views\\User\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
@@ -14444,6 +14484,41 @@
     {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\Shop\\Index.cshtml",
       "TargetPath": "Views\\Shop\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Login\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Login\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Permission\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Permission\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Staff\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Staff\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Icon\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Icon\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\User\\EditPass.cshtml",
+      "TargetPath": "Views\\User\\EditPass.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\User\\MyOrder.cshtml",
+      "TargetPath": "Views\\User\\MyOrder.cshtml",
       "FileKind": "mvc"
     },
     {

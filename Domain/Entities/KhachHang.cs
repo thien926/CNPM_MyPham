@@ -9,7 +9,7 @@ namespace Domain.Entities
     {
         [Key]
         [Required(ErrorMessage = "Tài khoản bắt buộc")]
-        [StringLength(maximumLength:25, MinimumLength = 3, ErrorMessage = "Tên đăng nhập từ 3 đến 25 kí tự")]
+        [StringLength(maximumLength:25, MinimumLength = 3, ErrorMessage = "Tài khoản từ 3 đến 25 kí tự")]
         [RegularExpression(pattern: @"^[a-zA-Z][\w]{1,}", ErrorMessage="Tài khoản phải bắt đầu bằng chữ")]
         public string user{get; set;}
 
@@ -42,8 +42,8 @@ namespace Domain.Entities
         [DataType(DataType.Date)]
         public DateTime dateborn{get; set;}
 
-        //[Required(ErrorMessage = "Trạng thái là bắt buộc")]
-        //[RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
+        [Required(ErrorMessage = "Trạng thái là bắt buộc")]
+        [RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
         public int status{get; set;}
 
         public KhachHang()

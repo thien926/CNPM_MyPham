@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces;
 using Application.Services;
 using Application.DTOs;
+using Application.DTOs.CurrentUserDTO;
 
 namespace CNPM_MyPham.Controllers
 {
@@ -36,6 +37,9 @@ namespace CNPM_MyPham.Controllers
                 }
                 CurrentUserDto U = new CurrentUserDto();
                 U.KhachHangDto = kh;
+                // Không cho hiện mật khẩu khách hàng vào session
+                U.KhachHangDto.pass = "";
+                U.KhachHangDto.repass = "";
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", U);
                 ViewBag.Message_Login = "Đăng nhập thành công!";
                 View_Chung();
@@ -49,7 +53,7 @@ namespace CNPM_MyPham.Controllers
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
 
             // Lấy session Don Hang
-            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHang>(HttpContext.Session, "DonHang");
+            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHangDto>(HttpContext.Session, "DonHang");
             
             // Lấy danh sách loại sản phẩm cho danh mục
             ViewBag.Danhmuc = LSPservice.LoaiSanPham_GetAll();

@@ -6,6 +6,7 @@ using Infrastructure;
 using Domain.Interfaces;
 using Application.Services;
 using Application.DTOs;
+using Application.DTOs.CurrentUserDTO;
 
 namespace CNPM_MyPham.Controllers
 {
@@ -63,7 +64,7 @@ namespace CNPM_MyPham.Controllers
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
 
             // Lấy session Don Hang
-            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHang>(HttpContext.Session, "DonHang");
+            ViewBag.DonHang = SessionHelper.GetObjectFromJson<DonHangDto>(HttpContext.Session, "DonHang");
             
             // Lấy danh sách loại sản phẩm cho danh mục
             ViewBag.Danhmuc = LSPservice.LoaiSanPham_GetAll();

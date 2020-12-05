@@ -57,14 +57,14 @@
                     <h2>Đăng nhập</h2>
                     <form action="/Login/Index" method="post">
                         <div class="group-input">
-                            <label asp-for="user">Tài khoản *</label>
-                            <input asp-for="user">
-                            <span asp-validation-for="user"></span>
+                            <label asp-for="@Model.user">Tài khoản *</label>
+                            <input asp-for="@Model.user">
+                            <span asp-validation-for="@Model.user"></span>
                         </div>
                         <div class="group-input">
-                            <label asp-for="pass">Mật khẩu *</label>
-                            <input asp-for="pass" type="password">
-                            <span asp-validation-for="pass"></span>
+                            <label asp-for="@Model.pass">Mật khẩu *</label>
+                            <input asp-for="@Model.pass" type="password">
+                            <span asp-validation-for="@Model.pass"></span>
                         </div>
                         <div class="group-input gi-check">
                             <div class="gi-more">

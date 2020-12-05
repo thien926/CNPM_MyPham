@@ -47,10 +47,12 @@
                 </div>
                 <div class="ht-right">
                     @{
-                        if(ViewBag.CurrentUser != null){
+                        if (ViewBag.CurrentUser != null)
+                        {
                             <a href="/User/Index" class="login-panel"><i class="fa fa-user"></i>@ViewBag.CurrentUser.KhachHangDto.full_name</a>
                         }
-                        else{
+                        else
+                        {
                             <a href="/Login/Index" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
                         }
                     }
@@ -77,83 +79,83 @@
                         <div class="advanced-search">
                             @* <button type="button" class="category-btn">All Categories</button> *@
                             @* <div > *@
-                                <form action="/Shop/Index" method="GET" class="input-group">
-                                    <input type="text" name="SearchString" placeholder="Nhập sản phẩm tìm kiếm">
-                                    <button type="submit"><i class="ti-search"></i></button>
-                                </form>
-                                
+                            <form action="/Shop/Index" method="GET" class="input-group">
+                                <input type="text" name="SearchString" placeholder="Nhập sản phẩm tìm kiếm">
+                                <button type="submit"><i class="ti-search"></i></button>
+                            </form>
+
                             @* </div> *@
                         </div>
                     </div>
                     <div class="col-lg-3 text-right col-md-3">
                         <ul class="nav-right">
                             <li class="cart-icon">
-                                <a href="#">
+                                <a href="#" id="suatotalsoluongdonhanglayout">
                                     <i class="icon_bag_alt"></i>
-                                    @{
-                                        if(ViewBag.DonHang != null){
-                                            <span>@ViewBag.DonHang.total</span>
-                                        }
-                                    }
-                                    
+                                    @* @{
+                                            if(ViewBag.DonHang != null){
+                                                <span>@ViewBag.DonHang.total</span>
+                                            }
+                                        } *@
+
                                 </a>
                                 <div class="cart-hover">
                                     <div class="select-items">
-                                        <table>
+                                        <table id="loadcartlayout">
                                             <tbody>
-                                                @{
-                                                    if(ViewBag.DonHang != null){
-                                                        foreach(var q in ViewBag.DonHang.ListSP){
-                                                            <tr>
-                                                                <td class="si-pic"><img src="@Url.Content(@q.img)" alt=""></td>
-                                                                <td class="si-text">
-                                                                    <div class="product-selected">
-                                                                        <p>@q.price x @q.amount</p>
-                                                                        <h6>@q.name</h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="si-close">
-                                                                    <i class="ti-close"></i>
-                                                                </td>
-                                                            </tr>
+                                                @* @{
+                                                        if(ViewBag.DonHang != null){
+                                                            foreach(var q in ViewBag.DonHang.ListSP){
+                                                                <tr>
+                                                                    <td class="si-pic"><img src="@Url.Content(@q.img)" alt=""></td>
+                                                                    <td class="si-text">
+                                                                        <div class="product-selected">
+                                                                            <p>@q.price x @q.amount</p>
+                                                                            <h6>@q.name</h6>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="si-close">
+                                                                        <i class="ti-close"></i>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
                                                         }
-                                                        
-                                                    }
-                                                }
+                                                    } *@
                                                 @* <tr>
-                                                    <td class="si-pic"><img src="~/img/select-product-1.jpg" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="si-pic"><img src="~/img/select-product-2.jpg" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr> *@
+                                                        <td class="si-pic"><img src="~/img/select-product-1.jpg" alt=""></td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>$60.00 x 1</p>
+                                                                <h6>Kabino Bedside Table</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-close">
+                                                            <i class="ti-close"></i>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="si-pic"><img src="~/img/select-product-2.jpg" alt=""></td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>$60.00 x 1</p>
+                                                                <h6>Kabino Bedside Table</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-close">
+                                                            <i class="ti-close"></i>
+                                                        </td>
+                                                    </tr> *@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="select-total">
+                                    <div class="select-total" id="loadtotalcartlayout">
                                         <span>Tổng:</span>
-                                        @{
-                                            if(ViewBag.DonHang != null){
-                                                <h5>@ViewBag.DonHang.totalprice đ</h5>
-                                            }
-                                        }
+                                        @* @{
+                                                if(ViewBag.DonHang != null){
+                                                    <h5>@ViewBag.DonHang.totalprice đ</h5>
+                                                }
+                                            } *@
                                     </div>
                                     <div class="select-button">
                                         <a href="#" class="primary-btn view-card">VIEW CARD</a>
@@ -161,7 +163,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="cart-price">$150.00</li>
+                            <li class="cart-price" id="totalpricelayout"></li>
                         </ul>
                     </div>
                 </div>
@@ -175,20 +177,22 @@
                         <span>Danh mục</span>
                         <ul class="depart-hover">
                             @{
-                                if(ViewBag.Danhmuc != null){
-                                    foreach(var q in ViewBag.Danhmuc){
+                                if (ViewBag.Danhmuc != null)
+                                {
+                                    foreach (var q in ViewBag.Danhmuc)
+                                    {
                                         <li><a href="/Shop/Index/?Type=@q.product_type_id">@q.name</a></li>
                                     }
                                 }
                             }
                             @* <li class="active"><a href="#">Women’s Clothing</a></li>
-                            <li><a href="#">Men’s Clothing</a></li>
-                            <li><a href="#">Underwear</a></li>
-                            <li><a href="#">Kid's Clothing</a></li>
-                            <li><a href="#">Brand Fashion</a></li>
-                            <li><a href="#">Accessories/Shoes</a></li>
-                            <li><a href="#">Luxury Brands</a></li>
-                            <li><a href="#">Brand Outdoor Apparel</a></li> *@
+                                <li><a href="#">Men’s Clothing</a></li>
+                                <li><a href="#">Underwear</a></li>
+                                <li><a href="#">Kid's Clothing</a></li>
+                                <li><a href="#">Brand Fashion</a></li>
+                                <li><a href="#">Accessories/Shoes</a></li>
+                                <li><a href="#">Luxury Brands</a></li>
+                                <li><a href="#">Brand Outdoor Apparel</a></li> *@
                         </ul>
                     </div>
                 </div>
@@ -197,15 +201,16 @@
                         <li class="active"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
                         <li><a href="/Shop/Index">Sản phẩm</a></li>
                         @* <li><a href="#">Collection</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Men's</a></li>
-                                <li><a href="#">Women's</a></li>
-                                <li><a href="#">Kid's</a></li>
-                            </ul>
-                        </li> *@
+                                <ul class="dropdown">
+                                    <li><a href="#">Men's</a></li>
+                                    <li><a href="#">Women's</a></li>
+                                    <li><a href="#">Kid's</a></li>
+                                </ul>
+                            </li> *@
                         <li><a href="./blog.html">Diễn đàn</a></li>
                         <li><a href="./contact.html">Liên lạc</a></li>
-                        <li><a>Trang</a>
+                        <li>
+                            <a>Trang</a>
                             <ul class="dropdown">
                                 <li><a asp-controller="Login" asp-action="Index">Đăng nhập</a></li>
                                 <li><a asp-controller="Register" asp-action="Index">Đăng kí</a></li>
@@ -219,7 +224,7 @@
         </div>
     </header>
     <!-- Header End -->
-    
+
     @RenderBody()
 
     <!-- Partner Logo Section Begin -->
@@ -255,7 +260,6 @@
         </div>
     </div>
     <!-- Partner Logo Section End -->
-
     <!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">
@@ -318,8 +322,9 @@
                     <div class="col-lg-12">
                         <div class="copyright-text">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </div>
                         <div class="payment-pic">
                             <img src="~/img/payment-method.png" alt="">
@@ -330,7 +335,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- Footer Section End -->
-
     <!-- Js Plugins -->
     <script src="~/js/js/jquery-3.3.1.min.js"></script>
     <script src="~/js/js/bootstrap.min.js"></script>
@@ -342,6 +346,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="~/js/js/jquery.slicknav.js"></script>
     <script src="~/js/js/owl.carousel.min.js"></script>
     <script src="~/js/js/main.js"></script>
+    <script src="~/js/js/sweetalert2@8.js"></script>
+    <script src="~/js/js/layout.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 

@@ -44,6 +44,10 @@ namespace CNPM_MyPham
             services.AddScoped<SanPhamService>();
             services.AddScoped<IThuongHieuEFContext, ThuongHieuEFContext>();
             services.AddScoped<ThuongHieuService>();
+            services.AddScoped<IQuyenEFContext, QuyenEFContext>();
+            services.AddScoped<QuyenService>();
+            services.AddScoped<INhanVienEFContext, NhanVienEFContext>();
+            services.AddScoped<NhanVienService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,7 +77,12 @@ namespace CNPM_MyPham
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Shop}/{action=Index}/{id?}");
+                    pattern: "{controller=Shop}/{action=Index}/{id?}"
+                );
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Login}/{action=Index}/{id?}"
+                );
             });
         }
     }

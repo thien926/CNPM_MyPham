@@ -2,6 +2,7 @@
 using System;
 //Microsoft.EntityFrameworkCore
 using System.ComponentModel.DataAnnotations;
+using Application.DTOs.UserDtos;
 
 namespace Application.DTOs
 {
@@ -42,13 +43,35 @@ namespace Application.DTOs
         [DataType(DataType.Date)]
         public DateTime dateborn{get; set;}
 
-        //[Required(ErrorMessage = "Trạng thái là bắt buộc")]
-        //[RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
+        [Required(ErrorMessage = "Trạng thái là bắt buộc")]
+        [RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
         public int status{get; set;}
 
         public KhachHangDto()
         {
             status = 1;
+        }
+
+        public KhachHangDto(EditUserDto edituserdto){
+            user = edituserdto.user;
+            full_name = edituserdto.full_name;
+            phone = edituserdto.phone;
+            mail = edituserdto.mail;
+            address = edituserdto.address;
+            sex = edituserdto.sex;
+            dateborn = edituserdto.dateborn;
+            status = 1;
+        }
+
+        public KhachHangDto(EditPassDto editpassdto){
+            pass = editpassdto.pass;
+            repass = editpassdto.repass;
+            status = 1;
+        }
+
+        public void EditPassDto(EditPassDto editpassdto){
+            pass = editpassdto.pass;
+            repass = editpassdto.repass;
         }
     }
 }

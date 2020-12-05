@@ -54,5 +54,13 @@ namespace Application.Mappings
                 yield return sp.MappingSanPhamDto();
             }
         }
+
+        public static IEnumerable<SanPham> MappingSanPhams(this IEnumerable<SanPhamDto> spdtos)
+        {
+            foreach (var sp in spdtos)
+            {
+                yield return sp.MappingSanPham();
+            }
+        }
     }
 }

@@ -16,6 +16,10 @@ namespace Infrastructure.Persistence
         public DbSet<SanPham> SanPhams {get; set;}
 
         public DbSet<ThuongHieu> ThuongHieus {get; set;}
+        
+        public DbSet<Quyen> Quyens { get; set;}
+
+        public DbSet<NhanVien> NhanViens { get; set;}
 
         // public DbSet<ThuongHieuAndSanPham> ThuongHieuAndSanPhams {get; set;}
 

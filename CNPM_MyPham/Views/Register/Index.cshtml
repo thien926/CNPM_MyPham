@@ -116,11 +116,6 @@
                                 </div>
 
                             </label>
-                            @* <label style="float: left; width: 20%;">Nam: </label>
-                            <input type="radio" asp-for="sex" value="Nam" style="float: left; width: 10%;"/>
-                            <label style="float: left; width: 20%;">Nữ: </label>
-                            <input type="radio" asp-for="sex" value="Nữ" style="float: left; width: 10%;"/> *@
-                            @* <input asp-for="sex" value="" style="display: none;" id="sex" class="input_sex_register"/> *@
                             <span asp-validation-for="sex"></span>
                         </div>
 
@@ -129,19 +124,6 @@
                             <input asp-for="dateborn">
                             <span asp-validation-for="dateborn"></span>
                         </div>
-
-                        @* <input asp-for="status" value=1 style="display: none;"> *@
-
-                        @* <div class="group-input gi-check">
-                            <div class="gi-more">
-                                <label for="save-pass">
-                                        Save Password
-                                        <input type="checkbox" id="save-pass">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                <a href="#" class="forget-pass">Quên mật khẩu</a>
-                            </div>
-                        </div> *@
                         <button type="submit" class="site-btn login-btn">Đăng kí</button>
                     </form>
                     <div class="switch-login">

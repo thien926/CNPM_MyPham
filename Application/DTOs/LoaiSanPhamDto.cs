@@ -22,5 +22,12 @@ namespace Application.DTOs
         public LoaiSanPhamDto(){
             this.SanPhamdtos = new HashSet<SanPhamDto>();
         }
+
+        public LoaiSanPhamDto(int product_type_id, string name, string description)
+        {
+            this.product_type_id = product_type_id;
+            this.name = name;
+            this.description = description;
+        }
     }
 }

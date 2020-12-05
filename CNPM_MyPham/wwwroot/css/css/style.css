@@ -4360,3 +4360,7 @@ ol {
 .thien-sort.nice-select {
 	margin-bottom: 10px;
 }
+
+.thien-edit-input {
+	width: 100%;
+}

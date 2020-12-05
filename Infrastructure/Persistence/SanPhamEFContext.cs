@@ -20,6 +20,13 @@ namespace Infrastructure.Persistence
             return context.SanPhams.ToList();
         }
 
+        public List<SanPham> SanPham_Shop_GetAll()
+        {
+            var query = context.SanPhams.AsQueryable();
+            query = query.Where(m => m.status == 1);
+            return query.ToList();
+        }
+
         public SanPham SanPham_GetById(int id){
             return context.SanPhams.Find(id);
         }
@@ -36,6 +43,14 @@ namespace Infrastructure.Persistence
 
         public void SanPham_Remove(SanPham SP){
             context.SanPhams.Remove(SP);
+            context.SaveChanges();
+        }
+
+        public void SanPham_RemoveBy_Product_Type_Id(int product_type_id)
+        {
+            var query = context.SanPhams.AsQueryable();
+            query = query.Where(m => m.product_type_id == product_type_id);
+            context.SanPhams.RemoveRange(query.ToList());
             context.SaveChanges();
         }
 
@@ -103,6 +118,7 @@ namespace Infrastructure.Persistence
                 //        );
                 query = query.Where(m => m.price >= pricefrom && m.price <= priceto);
             }
+            query = query.Where(m => m.status == 1);
             count = query.Count();
             pricemax = SanPham_MaxPrice();
 
