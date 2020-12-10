@@ -32,5 +32,21 @@ namespace Application.DTOs.CurrentUserDTO
                 }
             }
         }
+
+        public void removeSPfromID(int idsp){
+            var q = SpfromID(idsp);
+            if(q != null){
+                ListSP.Remove(q);
+            }
+        }
+
+        public SPForDonHangDto SpfromID(int idsp){
+            foreach(var q in ListSP){
+                if(q.SP.product_id == idsp){
+                    return q;
+                }
+            }
+            return null;
+        }
     }
 }

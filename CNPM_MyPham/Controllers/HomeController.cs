@@ -53,6 +53,25 @@ namespace CNPM_MyPham.Controllers
             return new JsonResult(null);
         }
 
+        [HttpPost]
+        public IActionResult AjaxRemoveSP(int idsp){
+            var currentuser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
+            if(currentuser != null){
+                currentuser.DonHangDto.removeSPfromID(idsp);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", currentuser);
+                return new JsonResult(currentuser.DonHangDto.ListSP);
+            }
+            else{
+                var donhang = SessionHelper.GetObjectFromJson<DonHangDto>(HttpContext.Session, "DonHang");
+                if(donhang != null){
+                    donhang.removeSPfromID(idsp);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "DonHang", donhang);
+                    return new JsonResult(donhang.ListSP);
+                }
+            }
+            return new JsonResult(null);
+        }
+
         public void View_Chung(){
             // Lấy session User hiện hành
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
