@@ -25,10 +25,27 @@ namespace Application.DTOs.CurrentUserDTO
             return -1;
         }
 
+        public bool searchIDSP(int idsp){
+            foreach(var q in ListSP){
+                if(q.SP.product_id == idsp){
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void thaydoisoluongforsanpham(int idsp, int soluong){
             foreach(var q in ListSP){
                 if(q.SP.product_id == idsp){
                     q.soluong = soluong;
+                }
+            }
+        }
+
+        public void addonesoluongforsanpham(int idsp){
+            foreach(var q in ListSP){
+                if(q.SP.product_id == idsp){
+                    q.soluong = q.soluong + 1;
                 }
             }
         }

@@ -8,6 +8,36 @@
 
 @section Scripts{
     <script>
+        function ShopThemSPAjax(idsp){
+            $.ajax({
+                url : "@Url.Action("ShopThemSPAjax")",
+                type : "POST",
+                dataType: "json",
+                data: {
+                    idsp: idsp
+                },
+                async: false,
+                success: function(data){
+                    if(data != null){
+                        Swal.fire({
+                            type: "success",
+                            title : data
+                        }).then((result) => {
+                            // layout.js
+                            LoadCartForLayOut();
+                        });
+                    }
+                },
+                error: function(e){
+                    Swal.fire({
+                            type: "error",
+                            title: "Lỗi thêm sản phẩm => ShopThemSPAjax",
+                            html: e.responseText
+                        });
+                }
+            });
+        }
+
         function BrandAjax(idbrand) {
             var Type = "@Model.Type";
             var Brand = "@Model.Brand";
@@ -433,7 +463,7 @@
                                             <div class="pi-pic">
                                                 <img src="@Url.Content(@sp.img)" alt="">
                                                 <ul>
-                                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                                    <li class="w-icon active"><a onclick="ShopThemSPAjax(@sp.product_id)"><i class="icon_bag_alt"></i></a></li>
                                                     <li class="quick-view"><a href="/Product/Index/@sp.product_id">Xem chi tiết</a></li>
                                                 </ul>
                                             </div>

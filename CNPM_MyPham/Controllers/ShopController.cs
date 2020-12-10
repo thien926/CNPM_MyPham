@@ -59,6 +59,40 @@ namespace CNPM_MyPham.Controllers
             return View(indexVSM);
         }
 
+        [HttpPost]
+        public IActionResult ShopThemSPAjax(int idsp){
+            var sp = SPservice.SanPham_GetById(idsp);
+            var spfordonhang = new SPForDonHangDto(sp, 1);
+            var currentuser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
+            if(currentuser != null){
+                var t = currentuser.DonHangDto.searchIDSP(idsp);
+                if(t){
+                    currentuser.DonHangDto.addonesoluongforsanpham(idsp);
+                }
+                else{
+                    currentuser.DonHangDto.ListSP.Add(spfordonhang);
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", currentuser);
+                return new JsonResult("Đã thêm sản phẩm");
+            }
+            var donhang = SessionHelper.GetObjectFromJson<DonHangDto>(HttpContext.Session, "DonHang");
+            if(donhang == null){
+                donhang = new DonHangDto();
+            }
+            var tdh = donhang.searchIDSP(idsp);
+            if(tdh){
+                donhang.addonesoluongforsanpham(idsp);
+            }
+            else{
+                donhang.ListSP.Add(spfordonhang);
+            }
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "DonHang", donhang);
+            if(donhang == null){
+                return new JsonResult(null);
+            }
+            return new JsonResult("Đã thêm sản phẩm");
+        }
+
         public void View_Chung(){
             // Lấy session User hiện hành
             ViewBag.CurrentUser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
