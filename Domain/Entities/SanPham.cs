@@ -40,11 +40,14 @@ namespace Domain.Entities
 
         public virtual ThuongHieu thuonghieu {get; set;}
 
+        public ICollection<ChiTietHoaDon> chitiethoadons {get; set;}
+
         // public ICollection<ThuongHieuAndSanPham> ThuongHieuAndSanPhams {get; set;}
 
         public SanPham(){
             amount = 0;
             status = 1;
+            this.chitiethoadons = new HashSet<ChiTietHoaDon>();
             // this.ThuongHieuAndSanPhams = new HashSet<ThuongHieuAndSanPham>();
         }
     }

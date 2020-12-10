@@ -14402,6 +14402,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Views\\Product\\Index.cshtml",
       "TargetPath": "Views\\Product\\Index.cshtml",
       "FileKind": "mvc"
@@ -14492,6 +14497,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\NCC\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\NCC\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Permission\\Index.cshtml",
       "TargetPath": "Areas\\Admin\\Views\\Permission\\Index.cshtml",
       "FileKind": "mvc"
@@ -14514,6 +14524,11 @@
     {
       "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\_ViewStart.cshtml",
       "TargetPath": "Areas\\Admin\\Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "g:\\Git\\CNPM_MyPham\\CNPM_MyPham\\Areas\\Admin\\Views\\Bill\\Index.cshtml",
+      "TargetPath": "Areas\\Admin\\Views\\Bill\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

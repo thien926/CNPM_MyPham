@@ -10,6 +10,110 @@ namespace Infrastructure.Persistence
         public static void Initialize(MyphamDbContext context){
             context.Database.EnsureCreated();
             bool temp = false;
+            if(!context.HoaDons.Any()){
+                temp = true;
+                context.HoaDons.AddRange(new List<HoaDon>{
+                    new HoaDon{
+                        bill_id = 1,
+                        user_kh = "thien",
+                        user_nv = "",
+                        phone = "0364117408",
+                        address = "Bình Định",
+                        date_receice = new System.DateTime(2020, 5, 8, 5, 4, 6),
+                        date_order = new System.DateTime(2020, 5, 18, 5, 4, 6),
+                        total = 1055000,
+                        status = 3
+                    },
+                    new HoaDon{
+                        bill_id = 2,
+                        user_kh = "thinh",
+                        user_nv = "",
+                        phone = "0364117408",
+                        address = "Miền Tây",
+                        date_receice = null,
+                        date_order = new System.DateTime(2020, 5, 18, 5, 4, 6),
+                        total = 1125000,
+                        status = 2
+                    },
+                    new HoaDon{
+                        bill_id = 3,
+                        user_kh = "phat",
+                        user_nv = "",
+                        phone = "0364117408",
+                        address = "Bình Dương",
+                        date_receice = null,
+                        date_order = new System.DateTime(2020, 5, 18, 5, 4, 6),
+                        total = 669000,
+                        status = 1
+                    }
+                });
+            }
+            if(!context.ChiTietHoaDons.Any()){
+                temp = true;
+                context.ChiTietHoaDons.AddRange(new List<ChiTietHoaDon>{
+                    new ChiTietHoaDon{
+                        bill_id = 1,
+                        product_id = 1,
+                        amount = 1,
+                        price = 200000
+                    },
+                    new ChiTietHoaDon{
+                        bill_id = 1,
+                        product_id = 2,
+                        amount = 1,
+                        price = 167000
+                    },
+                    new ChiTietHoaDon{
+                        bill_id = 1,
+                        product_id = 5,
+                        amount = 1,
+                        price = 688000
+                    },
+                    new ChiTietHoaDon{
+                        bill_id = 2,
+                        product_id = 5,
+                        amount = 1,
+                        price = 688000
+                    },
+                    new ChiTietHoaDon{
+                        bill_id = 2,
+                        product_id = 6,
+                        amount = 1,
+                        price = 437000
+                    },
+                    new ChiTietHoaDon{
+                        bill_id = 3,
+                        product_id = 7,
+                        amount = 1,
+                        price = 669000
+                    }
+                });
+            }
+            if(!context.NCCs.Any()){
+                temp = true;
+                context.NCCs.AddRange(new List<NCC>{
+                    new NCC{
+                        ncc_id = 1,
+                        name = "Cty Bình Thạnh",
+                        status = 1,
+                    },
+                    new NCC{
+                        ncc_id = 2,
+                        name = "Cty Thủ Đức",
+                        status = 1,
+                    },
+                    new NCC{
+                        ncc_id = 3,
+                        name = "Cty Quận 5",
+                        status = 1,
+                    },
+                    new NCC{
+                        ncc_id = 4,
+                        name = "Cty Quận 1",
+                        status = 1
+                    }
+                });
+            }
             if(!context.Quyens.Any()){
                 temp = true;
                 context.Quyens.AddRange(new List<Quyen>{
@@ -722,6 +826,1953 @@ namespace Infrastructure.Persistence
                         description = "Phấn phủ kiềm dầu, che khuyết điểm Innisfree No-sebum Blur Powder thuộc dòng mĩ phẩm hỗ trợ việc trang điểm, được thiết kế đặc biệt dành cho da nhạy cảm, da tiết quá nhiều dầu hoặc gặp rắc rối về mụn. Hướng đến đối tượng sử dụng là những người có làn da nhạy cảm, nhiều dầu nhờn, phấn phủ kiềm dầu, che khuyết điểm Innisfree No-sebum Blur Powder được bào chế từ các thành phần tự nhiên như muối khoáng, tinh chất trà xanh, tinh chất bạc hà… nên hoàn toàn lành tính, hạn chế gây kích ứng da. Thêm vào đó, sản phẩm còn được bổ sung vitamin và khoáng chất giúp nuôi dưỡng da khỏe mạnh, bảo vệ trước tác động nguy hại từ môi trường.",
                         use = "Dùng ở bước trang điểm cuối cùng hoặc khi da bóng nhờn. Dùng bông phấn lấy lượng vừa đủ và nhẹ nhàng tán đều lên da, cho đến khi phấn bao phủ hết khuôn mặt.",
                         img = "/image/sp49.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =51 ,
+                        product_type_id = 1,
+                        brand_id = 26,
+                        name = "SILKYGIRL MAGIC BB OIL CONTROL",
+                        amount = 50,
+                        price =  136000 ,
+                        description = "Phấn phủ Silkygirl Magic BB Oil chứa chiết xuất cây cọ lùn và trái hồng giúp thấm hút dầu thừa và hạn chế tiết bã nhờn, cho làn da mịn màng, không còn bóng dầu đồng thời còn có khả năng chống nắng với SPF 45/PA++ giúp bảo vệ làn da dưới tác hại của ánh mặt trời. Sản phẩm không dầu, khống bóng nhờn, không mùi, không làm tắc nghẽn lỗ chân lông và không thử nghiệm trên động vật. Được sản xuất dành riêng cho làn da châu Á.",
+                        use = "Dùng bông phấn đi kèm lấy một lượng phấn vừa đủ và dặm đều lên mặt. Bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và nhiệt độ cao",
+                        img = "/image/sp50.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 52,
+                        product_type_id = 1,
+                        brand_id =8,
+                        name = "Innisfree No Sebum Mineral Powder",
+                        amount = 50,
+                        price = 171000 ,
+                        description = "Phấn Phủ Bột kiềm dầu Innisfree No Sebum Mineral Powder là loại phấn khoáng dạng bột, chiết xuất 100% từ bạc hà và hạt ngọc trai, có khả năng hút dầu rất tốt. Phấn có tông màu trong suốt nên rất dễ tiệp với tất cả các tone da và không ảnh hưởng đến tông màu của các phấn trang điểm khác. Sản phẩm có màu trắng trong suốt, lên da không có màu, giúp bạn có làn da sáng nhẹ. Công thức kiểm soát dầu nhờn vượt trội, giữ được lớp makeup lâu trôi đến 24 giờ đồng hồ. Đặc biệt, sản phẩm có khả năng tạo độ ẩm cân bằng trên da giúp da thông thoáng không bị bí dầu.",
+                        use = "Sau khi áp dụng lớp kem nền và hoàn thiện gương mặt bằng kem che khuyết điểm, bạn có thể sử dụng phấn phủ để kết thúc lớp nền. Dùng cọ nhúng bột phấn. Lắc nhẹ cọ cho bột phấn thừa rơi ra sau đó nhẹ nhàng phủ bầu mắt và toàn bộ gương mặt cho thật đều.",
+                        img = "/image/sp51.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 53,
+                        product_type_id = 1,
+                        brand_id =7 ,
+                        name = "MISSHA The Style Defining Blusher",
+                        amount = 50,
+                        price =  240000,
+                        description = "Màu sắc hợp thời trang, tạo đường nét sống động tự nhiên cho khuôn mặt. Công nghệ Air Jet Mill tạo hạt phấn mịn đều bám nhẹ nhàng và mềm mại trên làn da và giữ cho lớp trang điểm bền màu. Chứa bột màu ngọc bích cho đường nét xinh đẹp tự nhiên, kết hợp cùng với một số thành phần giàu dưỡng chất như chiết xuất xoài, bear berry, trái bí,.... giúp bổ sung độ ẩm cho lớp trang điểm mềm mịn, tự nhiên.",
+                        use = "Dùng sau khi hoàn thành các bước trang điểm. Dùng bông phấn hoặc cọ chấm một lượng vừa đủ để tạo độ hồng tự nhiên",
+                        img = "/image/sp52.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =54 ,
+                        product_type_id = 1,
+                        brand_id =1 ,
+                        name = "lustre Pro Eyeshadow Magnetic Palette Case",
+                        amount = 50,
+                        price = 157999 ,
+                        description = "Một bảng màu phấn mắt 16 khe trống, có thể đổ lại, có thể được tùy chỉnh với chảo phấn mắt yêu thích của bạn.",
+                        use = "Sử dụng bảng màu để lưu trữ Luster Pro Pressed của bạn.",
+                        img = "/image/sp53.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 55,
+                        product_type_id = 1,
+                        brand_id = 27,
+                        name = "Refillable Makeup Case",
+                        amount = 50,
+                        price = 245000 ,
+                        description = "Tùy chỉnh hộp trang điểm của riêng bạn.",
+                        use = "Tùy chỉnh hộp trang điểm của riêng bạn.",
+                        img = "/image/sp54.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =56 ,
+                        product_type_id = 1,
+                        brand_id = 1,
+                        name = "LUSTRE MAKEUP",
+                        amount = 50,
+                        price =  760000,
+                        description = "Tùy chỉnh hộp trang điểm của riêng bạn.",
+                        use = "Tùy chỉnh hộp trang điểm của riêng bạn.",
+                        img = "/image/sp55.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 57,
+                        product_type_id = 1,
+                        brand_id = 9 ,
+                        name = "Sisley Phyto-Blush Eclat - 4 Pinky Rose",
+                        amount = 50,
+                        price = 250000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp56.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =58 ,
+                        product_type_id = 1,
+                        brand_id = 28,
+                        name = "Aritaum Sugar Ball Cushion Blusher - 01 Posy Pink",
+                        amount = 50,
+                        price = 650000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp57.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =59 ,
+                        product_type_id = 1,
+                        brand_id = 29,
+                        name = "LOVE 3CE CHEEK MAKER",
+                        amount = 50,
+                        price = 76000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp58.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =60 ,
+                        product_type_id = 1,
+                        brand_id = 1,
+                        name = "Lustre PRO Pressed Blush - Pink Nude",
+                        amount = 50,
+                        price =  279000,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp59.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =61 ,
+                        product_type_id = 1,
+                        brand_id = 30,
+                        name = "Kaleido Cosmetics Astrolight - Electric",
+                        amount = 50,
+                        price =  740000,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp60.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 62,
+                        product_type_id = 1,
+                        brand_id = 31,
+                        name = "Stila Glitter",
+                        amount = 50,
+                        price = 300000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp61.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =63 ,
+                        product_type_id = 1,
+                        brand_id = 1,
+                        name = "Lustre Pro Eyeshadow Magnetic Palette Case",
+                        amount = 50,
+                        price = 200000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp62.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 64,
+                        product_type_id = 1,
+                        brand_id = 1,
+                        name = "Pressed Highlighter - Sun Kissed",
+                        amount = 50,
+                        price = 240000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp63.jpg"
+                    } ,
+                    new SanPham{
+                        product_id =65 ,
+                        product_type_id = 1,
+                        brand_id =1 ,
+                        name = "Pressed Bronzer - Salsa",
+                        amount = 50,
+                        price = 94000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp64.jpg"
+                    } ,
+                    new SanPham{
+                        product_id = 66,
+                        product_type_id = 1,
+                        brand_id =32 ,
+                        name = "Cover FX Contour Kit - Medium",
+                        amount = 50,
+                        price = 349000 ,
+                        description = "Siêu mịn chiết xuất thành phần từ ngọc trai, ánh nhũ lấp lánh đa năng vừa có thể làm highlight cho mặt vừa có thể làm nhũ mắt.Sử dụng trên mặt mộc để tạo hiệu ứng bắt sáng nhẹ nhàng , hoặc phủ lên lớp phấn phủ hoặc kem tạo khối yêu thích của bạn.",
+                        use = "Đánh lớp phấn nền cho da trước khi sử dụng sản phẩm. Dùng miếng puff lấy phấn (hoặc dùng tay) tán lên phần xương gò má và kéo dài lên thái dương để khuôn mặt cân đối mà không cần dùng đến highlight.",
+                        img = "/image/sp65.jpg"
+                    },
+                    new SanPham{
+                        product_id =67 ,
+                        product_type_id = 1,
+                        brand_id = 33,
+                        name = "Anastasia Beverly Hills Glow Kit - Ultimate Glow",
+                        amount = 50,
+                        price = 349000 ,
+                        description = "Màu sắc tỏa sáng giúp đôi môi trông căng mọng, và rạng rỡ. Độ bóng cao giúp đôi môi trông tươi tắn, mềm mại. Kết cấu mềm mại sẽ giữ cho đôi môi được dưỡng ẩm và thoải mái trong nhiều giờ. Lấy cảm hứng từ 10 loại màu đá tự nhiên sẽ mang lại may mắn cho đôi môi của bạn",
+                        use = "Son dưỡng môi là loại son bạn có thể dùng mỗi ngày để bảo vệ cho đôi môi luôn căng mọng, khi thời tiết bắt đầu lạnh, hanh khô hay trước khi trang điểm chính là những lúc quan trọng bạn cần sử dụng đến son dưỡng môi.Trước khi tô son dưỡng môi, việc bạn cần làm là làm sạch đôi môi, lau hết vết lớp son cũ để chắc chắn rằng không có bụi bẩn bám lại, sau đó hãy thoa một lớp son dưỡng mới. Khi môi đã thoa son, hãy nhớ rằng nên trách việc tiếp xúc với thức ăn, nước uống.Ngoài dùng son dưỡng môi, chúng ta cũng có thể đắp mặt nạ cho môi từ thiên nhiên, loại bỏ tế bào chết cho đôi môi bóng mượt. Và đừng quên rằng hãy uống thật nhiều nước.",
+                        img = "/image/sp66.jpg"
+                    },
+                    new SanPham{
+                        product_id = 68,
+                        product_type_id = 1,
+                        brand_id = 33,
+                        name = "Anastasia Beverly Hills Contour Cream Kit",
+                        amount = 50,
+                        price = 349000 ,
+                        description = "Màu sắc tỏa sáng giúp đôi môi trông căng mọng, và rạng rỡ. Độ bóng cao giúp đôi môi trông tươi tắn, mềm mại. Kết cấu mềm mại sẽ giữ cho đôi môi được dưỡng ẩm và thoải mái trong nhiều giờ. Lấy cảm hứng từ 10 loại màu đá tự nhiên sẽ mang lại may mắn cho đôi môi của bạn",
+                        use = "Son dưỡng môi là loại son bạn có thể dùng mỗi ngày để bảo vệ cho đôi môi luôn căng mọng, khi thời tiết bắt đầu lạnh, hanh khô hay trước khi trang điểm chính là những lúc quan trọng bạn cần sử dụng đến son dưỡng môi.Trước khi tô son dưỡng môi, việc bạn cần làm là làm sạch đôi môi, lau hết vết lớp son cũ để chắc chắn rằng không có bụi bẩn bám lại, sau đó hãy thoa một lớp son dưỡng mới. Khi môi đã thoa son, hãy nhớ rằng nên trách việc tiếp xúc với thức ăn, nước uống.Ngoài dùng son dưỡng môi, chúng ta cũng có thể đắp mặt nạ cho môi từ thiên nhiên, loại bỏ tế bào chết cho đôi môi bóng mượt. Và đừng quên rằng hãy uống thật nhiều nước.",
+                        img = "/image/sp67.jpg"
+                    },
+                    new SanPham{
+                        product_id =69 ,
+                        product_type_id = 1,
+                        brand_id = 21,
+                        name = "Laneige Stained Glasstick",
+                        amount = 50,
+                        price = 349000 ,
+                        description = "Màu sắc tỏa sáng giúp đôi môi trông căng mọng, và rạng rỡ. Độ bóng cao giúp đôi môi trông tươi tắn, mềm mại. Kết cấu mềm mại sẽ giữ cho đôi môi được dưỡng ẩm và thoải mái trong nhiều giờ. Lấy cảm hứng từ 10 loại màu đá tự nhiên sẽ mang lại may mắn cho đôi môi của bạn",
+                        use = "Son dưỡng môi là loại son bạn có thể dùng mỗi ngày để bảo vệ cho đôi môi luôn căng mọng, khi thời tiết bắt đầu lạnh, hanh khô hay trước khi trang điểm chính là những lúc quan trọng bạn cần sử dụng đến son dưỡng môi.Trước khi tô son dưỡng môi, việc bạn cần làm là làm sạch đôi môi, lau hết vết lớp son cũ để chắc chắn rằng không có bụi bẩn bám lại, sau đó hãy thoa một lớp son dưỡng mới. Khi môi đã thoa son, hãy nhớ rằng nên trách việc tiếp xúc với thức ăn, nước uống.Ngoài dùng son dưỡng môi, chúng ta cũng có thể đắp mặt nạ cho môi từ thiên nhiên, loại bỏ tế bào chết cho đôi môi bóng mượt. Và đừng quên rằng hãy uống thật nhiều nước.",
+                        img = "/image/sp68.jpg"
+                    },
+                    new SanPham{
+                        product_id = 70,
+                        product_type_id = 1,
+                        brand_id = 8,
+                        name = "Innisfree Glow Tint Lip Balm",
+                        amount = 50,
+                        price = 349000 ,
+                        description = "Màu sắc tỏa sáng giúp đôi môi trông căng mọng, và rạng rỡ. Độ bóng cao giúp đôi môi trông tươi tắn, mềm mại. Kết cấu mềm mại sẽ giữ cho đôi môi được dưỡng ẩm và thoải mái trong nhiều giờ. Lấy cảm hứng từ 10 loại màu đá tự nhiên sẽ mang lại may mắn cho đôi môi của bạn",
+                        use = "Son dưỡng môi là loại son bạn có thể dùng mỗi ngày để bảo vệ cho đôi môi luôn căng mọng, khi thời tiết bắt đầu lạnh, hanh khô hay trước khi trang điểm chính là những lúc quan trọng bạn cần sử dụng đến son dưỡng môi.Trước khi tô son dưỡng môi, việc bạn cần làm là làm sạch đôi môi, lau hết vết lớp son cũ để chắc chắn rằng không có bụi bẩn bám lại, sau đó hãy thoa một lớp son dưỡng mới. Khi môi đã thoa son, hãy nhớ rằng nên trách việc tiếp xúc với thức ăn, nước uống.Ngoài dùng son dưỡng môi, chúng ta cũng có thể đắp mặt nạ cho môi từ thiên nhiên, loại bỏ tế bào chết cho đôi môi bóng mượt. Và đừng quên rằng hãy uống thật nhiều nước.",
+                        img = "/image/sp69.jpg"
+                    },
+                    new SanPham{
+                        product_id = 71,
+                        product_type_id = 1,
+                        brand_id =34 ,
+                        name = "Dior Addict Lip Glow",
+                        amount = 50,
+                        price = 349000 ,
+                        description = "Màu sắc tỏa sáng giúp đôi môi trông căng mọng, và rạng rỡ. Độ bóng cao giúp đôi môi trông tươi tắn, mềm mại. Kết cấu mềm mại sẽ giữ cho đôi môi được dưỡng ẩm và thoải mái trong nhiều giờ. Lấy cảm hứng từ 10 loại màu đá tự nhiên sẽ mang lại may mắn cho đôi môi của bạn",
+                        use = "Son dưỡng môi là loại son bạn có thể dùng mỗi ngày để bảo vệ cho đôi môi luôn căng mọng, khi thời tiết bắt đầu lạnh, hanh khô hay trước khi trang điểm chính là những lúc quan trọng bạn cần sử dụng đến son dưỡng môi.Trước khi tô son dưỡng môi, việc bạn cần làm là làm sạch đôi môi, lau hết vết lớp son cũ để chắc chắn rằng không có bụi bẩn bám lại, sau đó hãy thoa một lớp son dưỡng mới. Khi môi đã thoa son, hãy nhớ rằng nên trách việc tiếp xúc với thức ăn, nước uống.Ngoài dùng son dưỡng môi, chúng ta cũng có thể đắp mặt nạ cho môi từ thiên nhiên, loại bỏ tế bào chết cho đôi môi bóng mượt. Và đừng quên rằng hãy uống thật nhiều nước.",
+                        img = "/image/sp70.jpg"
+                    },
+                    new SanPham{
+                        product_id =72 ,
+                        product_type_id = 1,
+                        brand_id = 21,
+                        name = "Laneige Lip Sleeping Mask",
+                        amount = 50,
+                        price = 194000 ,
+                        description = "Nhẹ nhàng loại bỏ lớp da môi bị khô, nứt nẻ, nuôi dưỡng và bảo vệ làn môi bạn bằng Vitamin E, Bơ Hạt Mỡ, các thành phần chiết xuất trong quả Lê, quả Nho, Hạt dầu Jojoba, và Sáp Copernicia Cerifera làm môi mềm mượt, tươi tắn và tràn đầy sức sống. Sản phẩm có vị ngọt từ đường nâu là sản phẩm đầu tiên của dòng son tấy tế bào chết cho môi e.l.f",
+                        use = "Có thể đáNh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp71.jpg"
+                    },
+                    new SanPham{
+                        product_id =73 ,
+                        product_type_id = 1,
+                        brand_id =35 ,
+                        name = "Son Tẩy Da Chết Môi E.L.F Lip Exfoliator",
+                        amount = 50,
+                        price = 752000 ,
+                        description = "Nhẹ nhàng loại bỏ lớp da môi bị khô, nứt nẻ, nuôi dưỡng và bảo vệ làn môi bạn bằng Vitamin E, Bơ Hạt Mỡ, các thành phần chiết xuất trong quả Lê, quả Nho, Hạt dầu Jojoba, và Sáp Copernicia Cerifera làm môi mềm mượt, tươi tắn và tràn đầy sức sống. Sản phẩm có vị ngọt từ đường nâu là sản phẩm đầu tiên của dòng son tấy tế bào chết cho môi e.l.f",
+                        use = "Có thể đáNh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp72.jpg"
+                    },
+                    new SanPham{
+                        product_id =74 ,
+                        product_type_id = 1,
+                        brand_id = 29,
+                        name = "3CE VELVET LIP TINT",
+                        amount = 50,
+                        price = 927000 ,
+                        description = "Nhẹ nhàng loại bỏ lớp da môi bị khô, nứt nẻ, nuôi dưỡng và bảo vệ làn môi bạn bằng Vitamin E, Bơ Hạt Mỡ, các thành phần chiết xuất trong quả Lê, quả Nho, Hạt dầu Jojoba, và Sáp Copernicia Cerifera làm môi mềm mượt, tươi tắn và tràn đầy sức sống. Sản phẩm có vị ngọt từ đường nâu là sản phẩm đầu tiên của dòng son tấy tế bào chết cho môi e.l.f",
+                        use = "Có thể đáNh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp73.jpg"
+                    },
+                    new SanPham{
+                        product_id = 75,
+                        product_type_id = 1,
+                        brand_id = 36,
+                        name = "YSL Vinyl Cream Lip Stain",
+                        amount = 50,
+                        price = 727000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp74.jpg"
+                    },
+                    new SanPham{
+                        product_id =76 ,
+                        product_type_id = 1,
+                        brand_id =37 ,
+                        name = "Nars Velvet Lip Glide Le Pala",
+                        amount = 50,
+                        price = 127000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp75.jpg"
+                    },
+                    new SanPham{
+                        product_id = 77,
+                        product_type_id = 1,
+                        brand_id = 21,
+                        name = "Laneige Tattoo Lip Tint",
+                        amount = 50,
+                        price = 1227000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp76.jpg"
+                    },
+                    new SanPham{
+                        product_id = 78,
+                        product_type_id = 1,
+                        brand_id =8 ,
+                        name = "Innisfree Vivid Oil Tint",
+                        amount = 50,
+                        price = 927000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp77.jpg"
+                    },
+                    new SanPham{
+                        product_id =79 ,
+                        product_type_id = 1,
+                        brand_id = 25 ,
+                        name = "Eglips Velvet Fit Tint",
+                        amount = 50,
+                        price = 327000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp78.jpg"
+                    },
+                    new SanPham{
+                        product_id = 80,
+                        product_type_id = 1,
+                        brand_id = 8,
+                        name = "Innisfree Vivid Cotton Ink",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp79.jpg"
+                    },
+                    new SanPham{
+                        product_id = 81,
+                        product_type_id = 1,
+                        brand_id = 6,
+                        name = "M.A.C RETRO MATTE LIQUID LIPCOLOUR",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp80.jpg"
+                    },
+                    new SanPham{
+                        product_id =82 ,
+                        product_type_id = 1,
+                        brand_id = 7,
+                        name = "MISSHA M Glossy Lip Rouge SPF13 GBE01",
+                        amount = 50,
+                        price = 865000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp81.jpg"
+                    },
+                    new SanPham{
+                        product_id = 83,
+                        product_type_id = 1,
+                        brand_id =38 ,
+                        name = "Lime Crime DIAMOND CRUSHERS - Unicorn",
+                        amount = 50,
+                        price = 207000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp82.jpg"
+                    },
+                    new SanPham{
+                        product_id =84 ,
+                        product_type_id = 1,
+                        brand_id = 34,
+                        name = "Dior Addict Lip Glow - 004 Coral",
+                        amount = 50,
+                        price =920000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp83.jpg"
+                    },
+                    new SanPham{
+                        product_id = 85,
+                        product_type_id = 1,
+                        brand_id = 19,
+                        name = "Julep Lip Gloss - Lively",
+                        amount = 50,
+                        price = 127000 ,
+                        description = "Đầu cọ nhỏ nhắn, thon dài giúp dễ dàng thoa son. Son có độ lên màu rực rỡ từ lần lướt đầu tiên.Sau khi son khô lớp finish bắt dầu giảm độ bóng và trở nên mịn mượt hơn.Son cũng không gây cảm giác bết dính hay làm khô môi mà tạo cảm giác rất thoải mái.",
+                        use = "Có thể đánh son dưới lớp son màu để tạo độ tươi tắn và sáng cho môi. Có thể chỉ cần đánh son dưỡng mà không cần dùng gì thêm cũng đủ làm cho khuôn mặt bừng sáng.",
+                        img = "/image/sp84.jpg"
+                    },
+                    new SanPham{
+                        product_id = 86,
+                        product_type_id = 1,
+                        brand_id =8 ,
+                        name = "Innisfree Vivid Oil Tint - 5 Brown Cherry",
+                        amount = 50,
+                        price = 182000 ,
+                        description = "Chất chì mềm mượt, lâu trôi giúp định hình tạo cảm giác đôi môi thêm căng mọng hơn. Thành phần chứa vitamin E và bơ hạt mỡ giúp nuôi dưỡng đôi môi trong suốt thời gian sử dụng. Gồm nhiều tone màu thời trang, dễ dàng kết hợp nhiều màu son khác nhau.",
+                        use = "Kẻ đường viền quanh môi trước khi thoa son tạo màu trong lòng môi",
+                        img = "/image/sp85.jpg"
+                    },
+                    new SanPham{
+                        product_id = 87,
+                        product_type_id = 1,
+                        brand_id =7 ,
+                        name = "MISSHA Silky Lasting Lip Pencil",
+                        amount = 50,
+                        price = 290000 ,
+                        description = "Chất chì mềm mượt, lâu trôi giúp định hình tạo cảm giác đôi môi thêm căng mọng hơn. Thành phần chứa vitamin E và bơ hạt mỡ giúp nuôi dưỡng đôi môi trong suốt thời gian sử dụng. Gồm nhiều tone màu thời trang, dễ dàng kết hợp nhiều màu son khác nhau.",
+                        use = "Kẻ đường viền quanh môi trước khi thoa son tạo màu trong lòng môi",
+                        img = "/image/sp86.jpg"
+                    },
+                    new SanPham{
+                        product_id =88 ,
+                        product_type_id = 1,
+                        brand_id = 26,
+                        name = "SILKYGIRL LONG WEARING 05 WINE",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Chất chì mềm mượt, lâu trôi giúp định hình tạo cảm giác đôi môi thêm căng mọng hơn. Thành phần chứa vitamin E và bơ hạt mỡ giúp nuôi dưỡng đôi môi trong suốt thời gian sử dụng. Gồm nhiều tone màu thời trang, dễ dàng kết hợp nhiều màu son khác nhau.",
+                        use = "Kẻ đường viền quanh môi trước khi thoa son tạo màu trong lòng môi",
+                        img = "/image/sp87.jpg"
+                    },
+                    new SanPham{
+                        product_id = 89,
+                        product_type_id = 1,
+                        brand_id =9 ,
+                        name = "Sisley Phyto-Levres Perfect 5 Burgundy",
+                        amount = 50,
+                        price =123000 ,
+                        description = "Chất chì mềm mượt, lâu trôi giúp định hình tạo cảm giác đôi môi thêm căng mọng hơn. Thành phần chứa vitamin E và bơ hạt mỡ giúp nuôi dưỡng đôi môi trong suốt thời gian sử dụng. Gồm nhiều tone màu thời trang, dễ dàng kết hợp nhiều màu son khác nhau.",
+                        use = "Kẻ đường viền quanh môi trước khi thoa son tạo màu trong lòng môi",
+                        img = "/image/sp88.jpg"
+                    },
+                    new SanPham{
+                        product_id = 90,
+                        product_type_id = 1,
+                        brand_id =39 ,
+                        name = "Tarte Tarteist Lip Crayon",
+                        amount = 50,
+                        price = 1290000 ,
+                        description = "Chất chì mềm mượt, lâu trôi giúp định hình tạo cảm giác đôi môi thêm căng mọng hơn. Thành phần chứa vitamin E và bơ hạt mỡ giúp nuôi dưỡng đôi môi trong suốt thời gian sử dụng. Gồm nhiều tone màu thời trang, dễ dàng kết hợp nhiều màu son khác nhau.",
+                        use = "Kẻ đường viền quanh môi trước khi thoa son tạo màu trong lòng môi",
+                        img = "/image/sp89.jpg"
+                    },
+                    new SanPham{
+                        product_id =91 ,
+                        product_type_id = 2,
+                        brand_id = 38,
+                        name = "Zelens Cleansing Liquid Balm",
+                        amount = 50,
+                        price = 1900000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp90.jpg"
+                    },
+                    new SanPham{
+                        product_id =92 ,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "OKAME Peat Purifying Cleansing Water",
+                        amount = 50,
+                        price = 297000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp91.jpg"
+                    },
+                    new SanPham{
+                        product_id =93 ,
+                        product_type_id = 2,
+                        brand_id =40 ,
+                        name = "Byphasse Solution Micellaire",
+                        amount = 50,
+                        price = 131000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp92.jpg"
+                    },
+                    new SanPham{
+                        product_id = 94,
+                        product_type_id = 2,
+                        brand_id =41 ,
+                        name = "Clinique Take The Day Off",
+                        amount = 50,
+                        price = 227000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp93.jpg"
+                    },
+                    new SanPham{
+                        product_id = 95,
+                        product_type_id = 2,
+                        brand_id =42 ,
+                        name = "Bioderma Créaline H2O 250 ML",
+                        amount = 50,
+                        price = 282000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp94.jpg"
+                    },
+                    new SanPham{
+                        product_id = 96,
+                        product_type_id = 2,
+                        brand_id =42 ,
+                        name = "Bioderma Créaline H2O 100 ML",
+                        amount = 50,
+                        price = 200000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp95.jpg"
+                    },
+                    new SanPham{
+                        product_id = 97,
+                        product_type_id = 2,
+                        brand_id = 42,
+                        name = "Bioderma Sebium H2O 100 Ml",
+                        amount = 50,
+                        price = 127000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp96.jpg"
+                    },
+                    new SanPham{
+                        product_id = 98,
+                        product_type_id = 2,
+                        brand_id = 43,
+                        name = "DHC Deep Cleansing Oil - 70 Ml",
+                        amount = 50,
+                        price = 827000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp97.jpg"
+                    },
+                    new SanPham{
+                        product_id =99 ,
+                        product_type_id = 2,
+                        brand_id =44 ,
+                        name = "Mad Hippie Exfoliating Serum 30ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp98.jpg"
+                    },
+                    new SanPham{
+                        product_id = 100,
+                        product_type_id = 2,
+                        brand_id = 45,
+                        name = "Huxley Spa Routine Kit",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp99.jpg"
+                    },
+                    new SanPham{
+                        product_id = 101,
+                        product_type_id = 2,
+                        brand_id =46 ,
+                        name = "Simple Clear Skin Oil Balancing Facial Scrub",
+                        amount = 50,
+                        price = 187000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp100.jpg"
+                    },
+                    new SanPham{
+                        product_id = 102,
+                        product_type_id = 2,
+                        brand_id = 47,
+                        name = "Slinky Touch Body Milk",
+                        amount = 50,
+                        price = 292000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp101.jpg"
+                    },
+                    new SanPham{
+                        product_id =103 ,
+                        product_type_id = 2,
+                        brand_id = 48,
+                        name = "TSURU HANA HIME – Peeling cream for your nose",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp102.jpg"
+                    },
+                    new SanPham{
+                        product_id =104 ,
+                        product_type_id = 2,
+                        brand_id = 43 ,
+                        name = "PIXI Glow Mud Cleanser 135ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp103.jpg"
+                    },
+                    new SanPham{
+                        product_id = 105,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "FRESH Soy Face Cleanser To Go Travel Size 50ml ",
+                        amount = 50,
+                        price = 227000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp104.jpg"
+                    },
+                    new SanPham{
+                        product_id =106 ,
+                        product_type_id = 2,
+                        brand_id =42 ,
+                        name = "Peter Thomas Roth Anti - Aging Cleansing Gel 18ml",
+                        amount = 50,
+                        price = 621000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp105.jpg"
+                    },
+                    new SanPham{
+                        product_id =107 ,
+                        product_type_id = 2,
+                        brand_id = 40,
+                        name = "INDIE LEE Rosehip Cleanser 30ml",
+                        amount = 50,
+                        price = 227000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp106.jpg"
+                    },
+                    new SanPham{
+                        product_id = 108,
+                        product_type_id = 2,
+                        brand_id = 18,
+                        name = "Some By Mi AHA-BHA-PHA 30 Days Miracle Acne Clear Foam 100ml",
+                        amount = 50,
+                        price = 877000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp107.jpg"
+                    },
+                    new SanPham{
+                        product_id = 109,
+                        product_type_id = 2,
+                        brand_id = 19,
+                        name = "Mario Badescu Botanical Facial gel - 472ml",
+                        amount = 50,
+                        price = 254000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp108.jpg"
+                    },
+                    new SanPham{
+                        product_id =110,
+                        product_type_id = 2,
+                        brand_id = 19 ,
+                        name = "Mario Badescu Enzyme Cleansing Gel - 236 ml",
+                        amount = 50,
+                        price = 68000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp109.jpg"
+                    },
+                    new SanPham{
+                        product_id = 111,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "Elta MD FOAMING FACIAL CLEANSER",
+                        amount = 50,
+                        price = 327000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp110.jpg"
+                    },
+                    new SanPham{
+                        product_id =112 ,
+                        product_type_id = 2,
+                        brand_id =19 ,
+                        name = "The Drunk Elephant Detective Game",
+                        amount = 50,
+                        price = 643000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp111.jpg"
+                    },
+                    new SanPham{
+                        product_id = 113,
+                        product_type_id = 2,
+                        brand_id =39 ,
+                        name = "Naruko Tea Tree Blemish Clear Makeup Removing Cleansing Mousse 150 ml",
+                        amount = 50,
+                        price = 60000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp112.jpg"
+                    },
+                    new SanPham{
+                        product_id = 114,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "Naruko Tea Tree Purifying Clay Mask and Cleanser 3 in 1 120 gr",
+                        amount = 50,
+                        price = 92000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp113.jpg"
+                    },
+                    new SanPham{
+                        product_id = 115,
+                        product_type_id = 2,
+                        brand_id =8 ,
+                        name = "Innisfree Green tea foam cleanser 150mL",
+                        amount = 50,
+                        price = 127000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp114.jpg"
+                    },
+                    new SanPham{
+                        product_id =116 ,
+                        product_type_id = 2,
+                        brand_id = 2,
+                        name = "EMMA HARDIE SKINCARE Moringa Cleansing Balm with Cleansing Cloth ",
+                        amount = 50,
+                        price = 622000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp115.jpg"
+                    },
+                    new SanPham{
+                        product_id = 117,
+                        product_type_id = 2,
+                        brand_id =15 ,
+                        name = "Paula's Choice Perfect Cleansing Oil",
+                        amount = 50,
+                        price = 27000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp116.jpg"
+                    },
+                    new SanPham{
+                        product_id =118 ,
+                        product_type_id = 2,
+                        brand_id =9 ,
+                        name = "Sisley Cleansing Milk With Sage 250ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp117.jpg"
+                    },
+                    new SanPham{
+                        product_id = 119,
+                        product_type_id = 2,
+                        brand_id = 25,
+                        name = "Cosrx Low PH Good Morning Gel Cleanser 150 ml",
+                        amount = 50,
+                        price = 267000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp118.jpg"
+                    },
+                    new SanPham{
+                        product_id = 120,
+                        product_type_id = 2,
+                        brand_id = 20,
+                        name = "TWOSOME SET 3",
+                        amount = 50,
+                        price = 2911000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp119.jpg"
+                    },
+                    new SanPham{
+                        product_id = 121,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "Naruko RJT Supercritical CO2 Pore Minimizing and Brightening Lotion 150 ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp120.jpg"
+                    },
+                    new SanPham{
+                        product_id = 122,
+                        product_type_id = 2,
+                        brand_id =49 ,
+                        name = "PIXI Rose Tonic 100 ml",
+                        amount = 50,
+                        price = 21000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp121.jpg"
+                    },
+                    new SanPham{
+                        product_id = 123,
+                        product_type_id = 2,
+                        brand_id = 49,
+                        name = "PIXI Retinol Tonic 100 ml",
+                        amount = 50,
+                        price = 87000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp122.jpg"
+                    },
+                    new SanPham{
+                        product_id =124 ,
+                        product_type_id = 2,
+                        brand_id = 49 ,
+                        name = "PIXI Vitamin C Tonic 100 ml",
+                        amount = 50,
+                        price = 231000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp123.jpg"
+                    },
+                    new SanPham{
+                        product_id =125 ,
+                        product_type_id = 2,
+                        brand_id = 20,
+                        name = "Mario Badescu Glycolic Acid Toner - 236ml",
+                        amount = 50,
+                        price = 127000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp124.jpg"
+                    },
+                    new SanPham{
+                        product_id =126 ,
+                        product_type_id = 2,
+                        brand_id = 21,
+                        name = "MAMONDE ROSE WATER TONER MINI SIZE 25ml",
+                        amount = 50,
+                        price = 602000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp125.jpg"
+                    },
+                    new SanPham{
+                        product_id =127 ,
+                        product_type_id = 2,
+                        brand_id =49 ,
+                        name = "PIXI Glow Tonic - 250ml",
+                        amount = 50,
+                        price = 145000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp126.jpg"
+                    },
+                    new SanPham{
+                        product_id =128,
+                        product_type_id = 2,
+                        brand_id =35 ,
+                        name = "Kiehl's Calendula Herbal Extract Alcohol-Free Toner 40 ml",
+                        amount = 50,
+                        price = 145000 ,
+                        description = "Khai thác hiệu quả tuyệt vời của dầu tầm xuân giàu vitamin, sản phẩm có thể lấy đi lớp trang điểm mắt nhẹ nhàng, giúp làm dịu da để giúp giảm những dấu hiệu của sự lão hóa, đảm bảo độ ẩm và điều trị các vết đỏ . Sản phẩm nhẹ nhàng cho làn da nhạy cảm Hàm lượng cao chất chống oxy hóa và vitamin A, E, và K Giúp cải thiện sự xuất hiện của các nếp nhăn và giữ ẩm da.",
+                        use = "Thoa một lượng nhỏ sữa rửa mặt để mặt ẩm ướt. Sử dụng với một miếng bông ướt để loại bỏ trang điểm mắt. Rửa sạch hoàn toàn bằng nước. Không sử dụng với những vết thương hở",
+                        img = "/image/sp127.jpg"
+                    },
+                    new SanPham{
+                        product_id = 129,
+                        product_type_id = 2,
+                        brand_id = 10,
+                        name = "JMSOLUTION MARINE LUMINOUS PEARL DEEP BALANCING MASK 27ML",
+                        amount = 50,
+                        price = 427000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp128.jpg"
+                    },
+                    new SanPham{
+                        product_id = 130,
+                        product_type_id = 2,
+                        brand_id =50 ,
+                        name = "Naruko RJT Pore Minimizing and Brightening Mask",
+                        amount = 50,
+                        price = 621000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp129.jpg"
+                    },
+                    new SanPham{
+                        product_id =131 ,
+                        product_type_id = 2,
+                        brand_id =50 ,
+                        name = "Naruko Tea Tree Shine Control and Blemish Clear Mask ",
+                        amount = 50,
+                        price = 422000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp130.jpg"
+                    },
+                    new SanPham{
+                        product_id =132 ,
+                        product_type_id = 2,
+                        brand_id = 45,
+                        name = "Huxley Spa Routine Kit",
+                        amount = 50,
+                        price = 132000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp131.jpg"
+                    },
+                    new SanPham{
+                        product_id =133 ,
+                        product_type_id = 2,
+                        brand_id = 25,
+                        name = "Mulbit Firming Sleeping Mask",
+                        amount = 50,
+                        price = 421000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp132.jpg"
+                    },
+                    new SanPham{
+                        product_id = 134,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "Mặt nạ lụa sinh học OKAME Bio - cellulose Mask - Set 5 Anti - aging Masks",
+                        amount = 50,
+                        price = 42000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp133.jpg"
+                    },
+                    new SanPham{
+                        product_id = 135,
+                        product_type_id = 2,
+                        brand_id = 30,
+                        name = "Kiehl's Calendula & Aloe Soothing Hydration Masque 14ml",
+                        amount = 50,
+                        price = 124000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp134.jpg"
+                    },
+                    new SanPham{
+                        product_id = 136,
+                        product_type_id = 2,
+                        brand_id = 21,
+                        name = "Laneige Water Sleeping Mask 15ml",
+                        amount = 50,
+                        price = 254000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp135.jpg"
+                    },
+                    new SanPham{
+                        product_id =137 ,
+                        product_type_id = 2,
+                        brand_id =19 ,
+                        name = "Andalou Naturals Skin Food Mask, Avo Cocoa",
+                        amount = 50,
+                        price = 523000 ,
+                        description = "Bắt đầu nổi lên như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng- thương hiệu mỹ phẩm đến tứ xứ sở kim chi Hàn Quốc là một biểu tượng đương đại, khám phá những thành phần chưa được biết đến, hoàn thiện và dẫn dắt xu hướng mới của vẻ đẹp hiện đại. Thương hiệu mỹ phẩm Huxley đã học hỏi phương pháp làm đẹp cổ xưa của những người phụ nữ Berber ở xứ sở Morocco, sử dụng tinh dầu chiết xuất từ hạt của giống xương rồng Prickly Pear, có tác dụng tốt cho làn da phải luôn đối mặt với tình trạng mất nước. Theo đuổi triết lý “Less is more” và những tiến bộ về tư duy làm đẹp hiện đại, sản phẩm ngoài sử dụng thành phần xương rồng hữu cơ và sản xuất thủ công, còn đạt tiêu chuẩn: không cồn, paraben, dầu khoáng, hương thơm tổng hợp và các chất bảo quản khác.",
+                        use = "Sau khi làm sạch da mặt trải đều mặt nạ lên da rồi thư giãn 10~15 phút.  Bỏ lớp mặt nạ giấy ra rồi dùng tay vỗ nhẹ để dưỡng chất thẩm thấu tốt hơn vào da. Dùng toner và các bước dưỡng da tiếp theo mà không cần rửa lại với nước",
+                        img = "/image/sp136.jpg"
+                    },
+                    new SanPham{
+                        product_id = 138,
+                        product_type_id = 2,
+                        brand_id = 19,
+                        name = "CHARLOTTE TILBURY Charlotte's Magic Cream 30 ml",
+                        amount = 50,
+                        price = 245000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp137.jpg"
+                    },
+                    new SanPham{
+                        product_id = 139,
+                        product_type_id = 2,
+                        brand_id =39 ,
+                        name = "OMOROVICZA REJUVENATING NIGHT CREAM 15ml",
+                        amount = 50,
+                        price =512000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp138.jpg"
+                    },
+                    new SanPham{
+                        product_id = 140,
+                        product_type_id = 2,
+                        brand_id =52,
+                        name = "Malin + Goetz Vitamin E Face Moisturizer 30ml",
+                        amount = 50,
+                        price = 517000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp139.jpg"
+                    },
+                    new SanPham{
+                        product_id = 141,
+                        product_type_id = 2,
+                        brand_id = 43,
+                        name = "AHC Capture White Solution Max Cream 50ml",
+                        amount = 50,
+                        price = 651000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp140.jpg"
+                    },
+                    new SanPham{
+                        product_id =142 ,
+                        product_type_id = 2,
+                        brand_id =46 ,
+                        name = "Some By Mi AHA BHA PHA 30 Days Miracle Cream",
+                        amount = 50,
+                        price = 58000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp141.jpg"
+                    },
+                    new SanPham{
+                        product_id = 143,
+                        product_type_id = 2,
+                        brand_id = 51,
+                        name = "Dermedic ANGIO PREVENTI NANO VIT C Active anti - wrinkle night cream ",
+                        amount = 50,
+                        price = 767000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp142.jpg"
+                    },
+                    new SanPham{
+                        product_id = 144,
+                        product_type_id = 2,
+                        brand_id =51 ,
+                        name = "Sunday Riley Good Genes All in One Lactic Acid Treatment 50 ml",
+                        amount = 50,
+                        price = 863000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp143.jpg"
+                    },
+                    new SanPham{
+                        product_id =145 ,
+                        product_type_id = 2,
+                        brand_id = 41,
+                        name = "Clinique iD™: Hydrating Jelly + Cartridge for Irritation 125ml",
+                        amount = 50,
+                        price = 527000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp144.jpg"
+                    },
+                    new SanPham{
+                        product_id = 146,
+                        product_type_id = 2,
+                        brand_id =41 ,
+                        name = "Clinique iD™: Hydrating Jelly + Cartridge for Fatigue 125ml",
+                        amount = 50,
+                        price = 727000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp145.jpg"
+                    },
+                    new SanPham{
+                        product_id =147 ,
+                        product_type_id = 2,
+                        brand_id = 41,
+                        name = "Clinique iD™: Oil - Control Gel + Cartridge for Pores & Uneven Texture 125ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp146.jpg"
+                    },
+                    new SanPham{
+                        product_id = 148,
+                        product_type_id = 2,
+                        brand_id =10 ,
+                        name = "Oribe Matte Waves Texture Lotion 15ml",
+                        amount = 50,
+                        price = 327000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp147.jpg"
+                    },
+                    new SanPham{
+                        product_id =149 ,
+                        product_type_id = 2,
+                        brand_id = 10,
+                        name = "Dr.Dennis Gross Alpha Beta® Exfoliating Moisturizer(4 ml)",
+                        amount = 50,
+                        price = 67000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp148.jpg"
+                    },
+                    new SanPham{
+                        product_id = 150,
+                        product_type_id = 2,
+                        brand_id = 52,
+                        name = "MURAD Oil - Control Mattifier SPF 15 PA++",
+                        amount = 50,
+                        price = 81000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp149.jpg"
+                    },
+                    new SanPham{
+                        product_id =151 ,
+                        product_type_id = 2,
+                        brand_id = 45,
+                        name = "Huxley Extra Moisture Duo Set",
+                        amount = 50,
+                        price =152000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp150.jpg"
+                    },
+                    new SanPham{
+                        product_id = 152,
+                        product_type_id = 2,
+                        brand_id =45 ,
+                        name = "Huxley Antioxidant Duo Set",
+                        amount = 50,
+                        price = 182000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp151.jpg"
+                    },
+                    new SanPham{
+                        product_id =153 ,
+                        product_type_id = 2,
+                        brand_id =45 ,
+                        name = "Huxley Cream ; More than Moist",
+                        amount = 50,
+                        price = 282000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp152.jpg"
+                    },
+                    new SanPham{
+                        product_id =154 ,
+                        product_type_id = 2,
+                        brand_id =40 ,
+                        name = "Neutrogena Hydro Boost Water Gel",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp153.jpg"
+                    },
+                    new SanPham{
+                        product_id =155 ,
+                        product_type_id = 2,
+                        brand_id = 41,
+                        name = "Clinique Dramatically Different Moisturising Gel with pump 125 ml",
+                        amount = 50,
+                        price = 62500 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp154.jpg"
+                    },
+                    new SanPham{
+                        product_id =156 ,
+                        product_type_id = 2,
+                        brand_id = 33,
+                        name = "Mario Badescu Oil Free Moisturizer - 59 ml ",
+                        amount = 50,
+                        price = 51000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp155.jpg"
+                    },
+                    new SanPham{
+                        product_id = 157,
+                        product_type_id = 2,
+                        brand_id =50 ,
+                        name = "Naruko Tea Tree Purifying Essential Oil 10 ml",
+                        amount = 50,
+                        price = 612000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp.156jpg"
+                    },
+                    new SanPham{
+                        product_id = 158,
+                        product_type_id = 2,
+                        brand_id =45 ,
+                        name = "Huxley Extra Moisture Duo Set",
+                        amount = 50,
+                        price = 253000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp157.jpg"
+                    },
+                    new SanPham{
+                        product_id = 159,
+                        product_type_id = 2,
+                        brand_id = 2,
+                        name = "Andalou Naturals Argan Oil + Omega Natural Glow 3 in 1 Treatment",
+                        amount = 50,
+                        price =712000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp158.jpg"
+                    },
+                    new SanPham{
+                        product_id =160,
+                        product_type_id = 2,
+                        brand_id =45 ,
+                        name = "HUXLEY OIL ; LIGHT AND MORE",
+                        amount = 50,
+                        price = 832000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp159.jpg"
+                    },
+                    new SanPham{
+                        product_id =161,
+                        product_type_id = 2,
+                        brand_id =12 ,
+                        name = "Radha Argan Oil",
+                        amount = 50,
+                        price = 512000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp160.jpg"
+                    },
+                    new SanPham{
+                        product_id = 162,
+                        product_type_id = 2,
+                        brand_id =44 ,
+                        name = "Mad Hippie Face Cream 30ml",
+                        amount = 50,
+                        price = 722000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp161.jpg"
+                    },
+                    new SanPham{
+                        product_id =163,
+                        product_type_id = 2,
+                        brand_id = 52,
+                        name = "Balance Active Formula Dragons Blood Eye Cream 15ml",
+                        amount = 50,
+                        price = 902000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "-Dùng ngón áp út lấy kem và dặm nhẹ vùng trên, dọc theo hốc mắt và vùng xương chân mày từ trong ra ngoài theo 4 điểm ấn huyệt. Thoa nhẹ ở vùng dưới mắt, dọc theo hốc mắt từ trong ra ngoài theo 4 điểm ấn huyệt.",
+                        img = "/image/sp162.jpg"
+                    },
+                    new SanPham{
+                        product_id =164,
+                        product_type_id = 2,
+                        brand_id = 43,
+                        name = "AHC ANGELESS REAL EYE CREAM FOR FACE 12ml",
+                        amount = 50,
+                        price = 412000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "-Dùng ngón áp út lấy kem và dặm nhẹ vùng trên, dọc theo hốc mắt và vùng xương chân mày từ trong ra ngoài theo 4 điểm ấn huyệt. Thoa nhẹ ở vùng dưới mắt, dọc theo hốc mắt từ trong ra ngoài theo 4 điểm ấn huyệt.",
+                        img = "/image/sp163.jpg"
+                    },
+                    new SanPham{
+                        product_id = 165,
+                        product_type_id = 2,
+                        brand_id =44 ,
+                        name = "Mad Hippie Eye Cream 15ml",
+                        amount = 50,
+                        price = 1411000 ,
+                        description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
+                        use = "-Dùng ngón áp út lấy kem và dặm nhẹ vùng trên, dọc theo hốc mắt và vùng xương chân mày từ trong ra ngoài theo 4 điểm ấn huyệt. Thoa nhẹ ở vùng dưới mắt, dọc theo hốc mắt từ trong ra ngoài theo 4 điểm ấn huyệt.",
+                        img = "/image/sp164.jpg"
+                    },
+                    new SanPham{
+                        product_id = 166,
+                        product_type_id = 2,
+                        brand_id = 8,
+                        name = "Innisfree Green Tea Mist 50 ml",
+                        amount = 50,
+                        price = 617000 ,
+                        description = "là những bác sĩ da liễu từng đoạt giải Nobel đã phát triển hệ thống thương hiệu Healing Concentrate ™ để cung cấp các khoáng chất trị liệu, mang lại một làn da trẻ trung hơn. Các sản phẩm chứa khoáng chất với các hoạt chất tự nhiên khác như làm sạch bùn đất Hungary, các sản phẩm của Omorovicza đã có được sự sùng bái trên toàn thế giới nhờ các đặc tính chống lão hóa, phát sáng. Được kết hợp với các vitamin tốt nhất, tinh dầu và các thành phần tự nhiên khác có nguồn gốc từ khắp nơi trên thế giới, từ lòng hồ Heviz đến đỉnh núi Andes. Stephen và Margaret tin rằng sắc đẹp chỉ đến khi các sản phẩm chăm sóc da không chứa các thành phần có hại, gây bí bách cho da, cũng như vẻ đẹp đẹp hiện đại là sự kết hợp hoàn hảo của các thành phần truyền thống và các công thức khoa học tiên tiến. ",
+                        use = "Xịt bất cứ lúc nào da cảm thấy khô và mệt mỏi. Xịt sau khi make up để lớp make up lâu trôi và bền đẹp.",
+                        img = "/image/sp165.jpg"
+                    },
+                    new SanPham{
+                        product_id =167,
+                        product_type_id = 2,
+                        brand_id =30,
+                        name = "Mario Badescu Facial Spray with Aloe, Herbs and Rosewater",
+                        amount = 50,
+                        price = 1127000 ,
+                        description = "là những bác sĩ da liễu từng đoạt giải Nobel đã phát triển hệ thống thương hiệu Healing Concentrate ™ để cung cấp các khoáng chất trị liệu, mang lại một làn da trẻ trung hơn. Các sản phẩm chứa khoáng chất với các hoạt chất tự nhiên khác như làm sạch bùn đất Hungary, các sản phẩm của Omorovicza đã có được sự sùng bái trên toàn thế giới nhờ các đặc tính chống lão hóa, phát sáng. Được kết hợp với các vitamin tốt nhất, tinh dầu và các thành phần tự nhiên khác có nguồn gốc từ khắp nơi trên thế giới, từ lòng hồ Heviz đến đỉnh núi Andes. Stephen và Margaret tin rằng sắc đẹp chỉ đến khi các sản phẩm chăm sóc da không chứa các thành phần có hại, gây bí bách cho da, cũng như vẻ đẹp đẹp hiện đại là sự kết hợp hoàn hảo của các thành phần truyền thống và các công thức khoa học tiên tiến. ",
+                        use = "Xịt bất cứ lúc nào da cảm thấy khô và mệt mỏi. Xịt sau khi make up để lớp make up lâu trôi và bền đẹp.",
+                        img = "/image/sp166.jpg"
+                    },
+                    new SanPham{
+                        product_id = 168,
+                        product_type_id = 2,
+                        brand_id = 39,
+                        name = "OMOROVICZA QUEEN OF HUNGARY MIST - 100 ml",
+                        amount = 50,
+                        price = 533000 ,
+                        description = "là những bác sĩ da liễu từng đoạt giải Nobel đã phát triển hệ thống thương hiệu Healing Concentrate ™ để cung cấp các khoáng chất trị liệu, mang lại một làn da trẻ trung hơn. Các sản phẩm chứa khoáng chất với các hoạt chất tự nhiên khác như làm sạch bùn đất Hungary, các sản phẩm của Omorovicza đã có được sự sùng bái trên toàn thế giới nhờ các đặc tính chống lão hóa, phát sáng. Được kết hợp với các vitamin tốt nhất, tinh dầu và các thành phần tự nhiên khác có nguồn gốc từ khắp nơi trên thế giới, từ lòng hồ Heviz đến đỉnh núi Andes. Stephen và Margaret tin rằng sắc đẹp chỉ đến khi các sản phẩm chăm sóc da không chứa các thành phần có hại, gây bí bách cho da, cũng như vẻ đẹp đẹp hiện đại là sự kết hợp hoàn hảo của các thành phần truyền thống và các công thức khoa học tiên tiến. ",
+                        use = "Xịt bất cứ lúc nào da cảm thấy khô và mệt mỏi. Xịt sau khi make up để lớp make up lâu trôi và bền đẹp.",
+                        img = "/image/sp167.jpg"
+                    },
+                    new SanPham{
+                        product_id = 169,
+                        product_type_id = 2,
+                        brand_id =30 ,
+                        name = "Mario Badescu Facial Spray with Aloe, Cucumber and Green Tea 29ml",
+                        amount = 50,
+                        price = 1327000 ,
+                        description = "là những bác sĩ da liễu từng đoạt giải Nobel đã phát triển hệ thống thương hiệu Healing Concentrate ™ để cung cấp các khoáng chất trị liệu, mang lại một làn da trẻ trung hơn. Các sản phẩm chứa khoáng chất với các hoạt chất tự nhiên khác như làm sạch bùn đất Hungary, các sản phẩm của Omorovicza đã có được sự sùng bái trên toàn thế giới nhờ các đặc tính chống lão hóa, phát sáng. Được kết hợp với các vitamin tốt nhất, tinh dầu và các thành phần tự nhiên khác có nguồn gốc từ khắp nơi trên thế giới, từ lòng hồ Heviz đến đỉnh núi Andes. Stephen và Margaret tin rằng sắc đẹp chỉ đến khi các sản phẩm chăm sóc da không chứa các thành phần có hại, gây bí bách cho da, cũng như vẻ đẹp đẹp hiện đại là sự kết hợp hoàn hảo của các thành phần truyền thống và các công thức khoa học tiên tiến. ",
+                        use = "Xịt bất cứ lúc nào da cảm thấy khô và mệt mỏi. Xịt sau khi make up để lớp make up lâu trôi và bền đẹp.",
+                        img = "/image/sp168.jpg"
+                    },
+                    new SanPham{
+                        product_id =170,
+                        product_type_id = 2,
+                        brand_id = 50,
+                        name = "Mario Badescu Acne Facial Cleanser - 177ml ",
+                        amount = 50,
+                        price = 62000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp169.jpg"
+                    },
+                    new SanPham{
+                        product_id = 171,
+                        product_type_id = 2,
+                        brand_id = 14,
+                        name = "Neutrogena Oil - Free Acne Wash - 269ml",
+                        amount = 50,
+                        price = 621000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp170.jpg"
+                    },
+                    new SanPham{
+                        product_id =172,
+                        product_type_id = 2,
+                        brand_id = 35,
+                        name = "AHA 7 WHITEHEAD POWER LIQUID 100ML",
+                        amount = 50,
+                        price = 52000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp171.jpg"
+                    },
+                    new SanPham{
+                        product_id = 173,
+                        product_type_id = 2,
+                        brand_id = 46,
+                        name = "SUNDAY RILEY Flash Fix Kit",
+                        amount = 50,
+                        price = 562000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp172.jpg"
+                    },
+                    new SanPham{
+                        product_id = 174,
+                        product_type_id = 2,
+                        brand_id = 38,
+                        name = "ELEMIS Papaya Enzyme Peel 15ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp173.jpg"
+                    },
+                    new SanPham{
+                        product_id = 175,
+                        product_type_id = 2,
+                        brand_id =52 ,
+                        name = "So Natural Red Peel Tingle Serum",
+                        amount = 50,
+                        price = 622000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp174.jpg"
+                    },
+                    new SanPham{
+                        product_id = 176,
+                        product_type_id = 2,
+                        brand_id = 41,
+                        name = "Clinique iD™: Hydrating Jelly + Cartridge for Irritation 125ml",
+                        amount = 50,
+                        price = 921000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp175.jpg"
+                    },
+                    new SanPham{
+                        product_id =177 ,
+                        product_type_id = 2,
+                        brand_id = 41,
+                        name = "Clinique iD™: Hydrating Jelly + Cartridge for Fatigue 125ml",
+                        amount = 50,
+                        price = 757000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp176.jpg"
+                    },
+                    new SanPham{
+                        product_id =178,
+                        product_type_id = 2,
+                        brand_id = 41,
+                        name = "Clinique iD™: Hydrating Jelly + Cartridge for Lines & Wrinkles - Jelly 125ml",
+                        amount = 50,
+                        price = 743000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp177.jpg"
+                    },
+                    new SanPham{
+                        product_id =179 ,
+                        product_type_id = 2,
+                        brand_id = 51,
+                        name = "Balance Active Formula Dragon’s Blood Lifting Serum 30ml",
+                        amount = 50,
+                        price = 214000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp178.jpg"
+                    },
+                    new SanPham{
+                        product_id =180 ,
+                        product_type_id = 2,
+                        brand_id = 36,
+                        name = "Cosrx Galactomyces 95 Tone Balancing Essence",
+                        amount = 50,
+                        price = 521000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp179.jpg"
+                    },
+                    new SanPham{
+                        product_id = 181,
+                        product_type_id = 2,
+                        brand_id =46 ,
+                        name = "Some By Mi 30 Days Miracle Tea Tree Clear Spot Oil 10ml",
+                        amount = 50,
+                        price = 251000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp180.jpg"
+                    },
+                    new SanPham{
+                        product_id =182 ,
+                        product_type_id = 2,
+                        brand_id =47 ,
+                        name = "Epiconce Intense Defense Serum 12ml",
+                        amount = 50,
+                        price = 342000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp181.jpg"
+                    },
+                    new SanPham{
+                        product_id = 183,
+                        product_type_id = 2,
+                        brand_id =51 ,
+                        name = "Balance Active Formula Dragon’s Blood Lifting Serum 30ml",
+                        amount = 50,
+                        price = 1154000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp182.jpg"
+                    },
+                    new SanPham{
+                        product_id = 184,
+                        product_type_id = 2,
+                        brand_id = 9,
+                        name = "HYALURONIC ACID SERUM 100 % PURE 30ml",
+                        amount = 50,
+                        price = 742000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp183.jpg"
+                    },
+                    new SanPham{
+                        product_id =185 ,
+                        product_type_id = 2,
+                        brand_id =19 ,
+                        name = "Natural Red Peel Tingle Serum",
+                        amount = 50,
+                        price =522000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp184.jpg"
+                    },
+                    new SanPham{
+                        product_id =186 ,
+                        product_type_id = 2,
+                        brand_id =51 ,
+                        name = "Balance Active Formula Gold Collagen Rejuvenating Eye Serum 15ml",
+                        amount = 50,
+                        price = 521000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp185.jpg"
+                    },
+                    new SanPham{
+                        product_id = 187,
+                        product_type_id = 2,
+                        brand_id = 51,
+                        name = "Balance Active Formula Gold Collagen Rejuvenating Serum 30ml",
+                        amount = 50,
+                        price = 767000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp186.jpg"
+                    },
+                    new SanPham{
+                        product_id = 188,
+                        product_type_id = 2,
+                        brand_id = 24,
+                        name = "Dr.Dennis Gross Ferulic + Retinol Triple Corection Eye Serum 15ml",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "Tinh chất với những thành phần chuyên biệt giúp da săn chắc hơn, tăng độ đàn hồi đồng thời giảm thiểu sự xuất hiện của những đường nhăn, làm mờ những nếp nhăn, phục hồi sức sống cho làn da và đem nét tươi trẻ đến cho từng đường nét trên gương mặt bạn.",
+                        use = "Sau khi rửa mặt và lau khô, apply serum lên đều khắp mặt, massage nhẹ nhàng trên da cho đến khi serum chuyển từ màu đỏ sang tím, không để quá 10', rồi rửa lại với nước ấm.",
+                        img = "/image/sp187.jpg"
+                    },
+                    new SanPham{
+                        product_id =189 ,
+                        product_type_id = 2,
+                        brand_id = 42,
+                        name = "Bioderma Atoderm Lèvres Stick Hydratant",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "là loại son dưỡng môi dạng sáp đến từ thương hiệu cao cấp Choonee thuộc tập đoàn IKE của Hàn Quốc, là một nhãn hàng với hình tượng xuyên suốt là  Story of a girl from countryside - đem lại những sản phảm gần gũi với nguyên liệu chính từ tự nhiên. ",
+                        use = "Trang điểm đôi môi trông tự nhiên bằng cách thoa lên toàn bộ môi dọc theo đường viền môi hoặc bằng cách thoa vào giữa môi.",
+                        img = "/image/sp188.jpg"
+                    },
+                    new SanPham{
+                        product_id = 190,
+                        product_type_id = 2,
+                        brand_id =49 ,
+                        name = "Carmex Lip Balm Stick SPF 15",
+                        amount = 50,
+                        price = 427000 ,
+                        description = "là loại son dưỡng môi dạng sáp đến từ thương hiệu cao cấp Choonee thuộc tập đoàn IKE của Hàn Quốc, là một nhãn hàng với hình tượng xuyên suốt là  Story of a girl from countryside - đem lại những sản phảm gần gũi với nguyên liệu chính từ tự nhiên. ",
+                        use = "Trang điểm đôi môi trông tự nhiên bằng cách thoa lên toàn bộ môi dọc theo đường viền môi hoặc bằng cách thoa vào giữa môi.",
+                        img = "/image/sp189.jpg"
+                    },
+                    new SanPham{
+                        product_id =191 ,
+                        product_type_id = 2,
+                        brand_id =8 ,
+                        name = "innisfree Glow tint lip balm 3.5g - 01",
+                        amount = 50,
+                        price =637000 ,
+                        description = "là loại son dưỡng môi dạng sáp đến từ thương hiệu cao cấp Choonee thuộc tập đoàn IKE của Hàn Quốc, là một nhãn hàng với hình tượng xuyên suốt là  Story of a girl from countryside - đem lại những sản phảm gần gũi với nguyên liệu chính từ tự nhiên. ",
+                        use = "Trang điểm đôi môi trông tự nhiên bằng cách thoa lên toàn bộ môi dọc theo đường viền môi hoặc bằng cách thoa vào giữa môi.",
+                        img = "/image/sp190.jpg"
+                    },
+                    new SanPham{
+                        product_id = 192,
+                        product_type_id = 2,
+                        brand_id = 16,
+                        name = "HOONEE WATERLIP TINT BALM - PINK GUAVA",
+                        amount = 50,
+                        price = 874000 ,
+                        description = "là loại son dưỡng môi dạng sáp đến từ thương hiệu cao cấp Choonee thuộc tập đoàn IKE của Hàn Quốc, là một nhãn hàng với hình tượng xuyên suốt là  Story of a girl from countryside - đem lại những sản phảm gần gũi với nguyên liệu chính từ tự nhiên. ",
+                        use = "Trang điểm đôi môi trông tự nhiên bằng cách thoa lên toàn bộ môi dọc theo đường viền môi hoặc bằng cách thoa vào giữa môi.",
+                        img = "/image/sp191.jpg"
+                    },
+                    new SanPham{
+                        product_id =193 ,
+                        product_type_id = 2,
+                        brand_id =23 ,
+                        name = "Elizabeth Arden Eight Hour® Cream Intensive Moisture Hand Treatment 30ml",
+                        amount = 50,
+                        price = 921000 ,
+                        description = "là loại son dưỡng môi dạng sáp đến từ thương hiệu cao cấp Choonee thuộc tập đoàn IKE của Hàn Quốc, là một nhãn hàng với hình tượng xuyên suốt là  Story of a girl from countryside - đem lại những sản phảm gần gũi với nguyên liệu chính từ tự nhiên. ",
+                        use = "Trang điểm đôi môi trông tự nhiên bằng cách thoa lên toàn bộ môi dọc theo đường viền môi hoặc bằng cách thoa vào giữa môi.",
+                        img = "/image/sp192.jpg"
+                    },
+                    new SanPham{
+                        product_id = 194,
+                        product_type_id = 3,
+                        brand_id =10 ,
+                        name = "Dưỡng thể tẩy tế bào chết ALPHA SKINCARE - RENEWAL BODY LOTION WITH 12 % AHA, 12 OZ 340ml",
+                        amount = 50,
+                        price = 777000 ,
+                        description = "Với sự pha trộn giữ ẩm của sáp ong, dầu đậu phộng và dầu ngô làm cho chân tay mịn màng, mềm mại và sáng bóng sau khi bôi.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp193.jpg"
+                    },
+                    new SanPham{
+                        product_id = 195,
+                        product_type_id = 3,
+                        brand_id = 52,
+                        name = "Mario Badescu summer shine body lotion 29 ml",
+                        amount = 50,
+                        price = 927000 ,
+                        description = "Với sự pha trộn giữ ẩm của sáp ong, dầu đậu phộng và dầu ngô làm cho chân tay mịn màng, mềm mại và sáng bóng sau khi bôi.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp194.jpg"
+                    },
+                    new SanPham{
+                        product_id =196 ,
+                        product_type_id = 3,
+                        brand_id =12 ,
+                        name = "Molton Brown Bath & Shower Gel - Heavenly Gingerlily 30ml ",
+                        amount = 50,
+                        price = 631000 ,
+                        description = "Với sự pha trộn giữ ẩm của sáp ong, dầu đậu phộng và dầu ngô làm cho chân tay mịn màng, mềm mại và sáng bóng sau khi bôi.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp195.jpg"
+                    },
+                    new SanPham{
+                        product_id = 197,
+                        product_type_id = 3,
+                        brand_id =48 ,
+                        name = "Shiro Waki Hime Underarm Exfoliating & Brightening Cream",
+                        amount = 50,
+                        price = 867000 ,
+                        description = "Với sự pha trộn giữ ẩm của sáp ong, dầu đậu phộng và dầu ngô làm cho chân tay mịn màng, mềm mại và sáng bóng sau khi bôi.",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp196.jpg"
+                    },
+                    new SanPham{
+                        product_id =198 ,
+                        product_type_id = 4,
+                        brand_id =13 ,
+                        name = "Natural World Argan Oil of Morrocco Moisture Rich Shampoo 500ml",
+                        amount = 50,
+                        price = 827000 ,
+                        description = "Dầu Xả được chiết xuất từ tinh dầu Argan - thứ vàng lỏng quý hiếm từ Bắc Phi và một hỗn hợp cao cấp của 4 loại tinh dầu (hương thảo, xả, cam và ngọc lan tây Ylang Ylang).",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp197.jpg"
+                    },
+                    new SanPham{
+                        product_id =199 ,
+                        product_type_id = 4,
+                        brand_id =30 ,
+                        name = "SACHAJUAN Colour Protect Shampoo(100ml)",
+                        amount = 50,
+                        price = 622000 ,
+                        description = "Dầu Xả được chiết xuất từ tinh dầu Argan - thứ vàng lỏng quý hiếm từ Bắc Phi và một hỗn hợp cao cấp của 4 loại tinh dầu (hương thảo, xả, cam và ngọc lan tây Ylang Ylang).",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp198.jpg"
+                    },
+                    new SanPham{
+                        product_id = 200,
+                        product_type_id = 4,
+                        brand_id =13 ,
+                        name = "Natural World Argan Oil of Morrocco Moisture Rich Conditioner 500ml",
+                        amount = 50,
+                        price = 252000 ,
+                        description = "Dầu Xả được chiết xuất từ tinh dầu Argan - thứ vàng lỏng quý hiếm từ Bắc Phi và một hỗn hợp cao cấp của 4 loại tinh dầu (hương thảo, xả, cam và ngọc lan tây Ylang Ylang).",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp199.jpg"
+                    },
+                    new SanPham{
+                        product_id =201 ,
+                        product_type_id = 4,
+                        brand_id =12 ,
+                        name = "John Masters Rosemary & Peppermint Detangler",
+                        amount = 50,
+                        price = 521000 ,
+                        description = "Dầu Xả được chiết xuất từ tinh dầu Argan - thứ vàng lỏng quý hiếm từ Bắc Phi và một hỗn hợp cao cấp của 4 loại tinh dầu (hương thảo, xả, cam và ngọc lan tây Ylang Ylang).",
+                        use = "Sau khi làm sạch da bằng sữa rửa mặt (Clarifying Cleanser), cân bằng da với toner (Clarifying Toner) và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu Oil-Control Mattifier SPF 15 PA++ lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu Skin Perfecting Lotion vào quy trình chăm sóc da buổi tối. ",
+                        img = "/image/sp200.jpg"
+                    },
+                    new SanPham{
+                        product_id = 202,
+                        product_type_id = 5,
+                        brand_id =4 ,
+                        name = "Vasanti Eyeshadow Brush", 
+                        amount = 50,
+                        price = 655000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp201.jpg"
+                    },
+                    new SanPham{
+                        product_id = 203,
+                        product_type_id = 5,
+                        brand_id = 19,
+                        name = "Morphe E3 Precision Pointed Powder Brush",
+                        amount = 50,
+                        price = 541000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp202.jpg"
+                    },
+                    new SanPham{
+                        product_id = 204,
+                        product_type_id = 5,
+                        brand_id = 19,
+                        name = "Morphe E3 Precision Pointed Powder Brush",
+                        amount = 50,
+                        price = 1227000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp203.jpg"
+                    },
+                    new SanPham{
+                        product_id =205 ,
+                        product_type_id = 5,
+                        brand_id =13 ,
+                        name = "M.A.C 210 Precise EyeLiner Brush",
+                        amount = 50,
+                        price = 2427000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp204.jpg"
+                    },
+                    new SanPham{
+                        product_id =206 ,
+                        product_type_id = 5,
+                        brand_id = 51,
+                        name = "Lixibox Brush Net Guard Set 10 pcs",
+                        amount = 50,
+                        price = 427000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp205.jpg"
+                    },
+                    new SanPham{
+                        product_id =207 ,
+                        product_type_id = 5,
+                        brand_id = 51,
+                        name = "Cọ Chikuhodo R - P6 Powder",
+                        amount = 50,
+                        price = 627000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp206.jpg"
+                    },
+                    new SanPham{
+                        product_id = 208,
+                        product_type_id = 5,
+                        brand_id =5 ,
+                        name = "BH Cosmetics Sculpt and Blend 2 – 10 Piece Brush Set",
+                        amount = 50,
+                        price = 511000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp207.jpg"
+                    },
+                    new SanPham{
+                        product_id =209 ,
+                        product_type_id = 5,
+                        brand_id = 51,
+                        name = "Lixibox Konjac Sponge",
+                        amount = 50,
+                        price = 861000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp208.jpg"
+                    },
+                    new SanPham{
+                        product_id = 210,
+                        product_type_id = 5,
+                        brand_id =43 ,
+                        name = "Bông mút trang điểm The Duo Rain Drop",
+                        amount = 50,
+                        price = 468000 ,
+                        description = "là hãng mỹ phẩm trang điểm chuyên nghiệp nổi tiếng trên thế giới với trụ sở chính đặt tại thành phố New York. Thương hiệu này được sáng lập bởi 2 người Canada là Frank Toskan và Frank Angelo. Năm 1991, công ty mở cửa hàng đầu tiên tại New York. Ban đầu thiết kế sản phẩm dành cho các chuyên viên trang điểm chuyên nghiệp, tuy nhiên, hiện nay thương hiệu đã được bán cho tất cả các khách hàng trên toàn thế giới. Mỹ phẩm nổi tiếng về độ bám màu, bảng màu sắc phong phú và đa dạng, lên hình đẹp, phù hợp cho các sàn diễn, diễn viên khi lên sân khấu, bên cạnh đó các sản phẩm của hãng được rất nhiều người phụ nữ dùng hàng ngày để làm đẹp cho bản thân.",
+                        use = "Sử dụng cọ để tán phấn mắt màu sáng vào giữa bầu mắt như là 1 cách highlight cho mắt để làm mắt to hơn và sáng hơn",
+                        img = "/image/sp209.jpg"
+                    },
+                    new SanPham{
+                        product_id = 211,
+                        product_type_id = 6,
+                        brand_id =53 ,
+                        name = "Foellie Inner Perfume - Bijou",
+                        amount = 50,
+                        price = 2227000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp210.jpg"
+                    },
+                    new SanPham{
+                        product_id = 212,
+                        product_type_id = 6,
+                        brand_id =54 ,
+                        name = "Jo Malone Oud & Bergamot Intense 9ml",
+                        amount = 50,
+                        price = 1754000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp211.jpg"
+                    },
+                    new SanPham{
+                        product_id =213 ,
+                        product_type_id = 6,
+                        brand_id = 54,
+                        name = "Jo Malone Dark & Amber & Ginger Lily 9ml",
+                        amount = 50,
+                        price = 2442000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp212.jpg"
+                    },
+                    new SanPham{
+                        product_id =214 ,
+                        product_type_id = 6,
+                        brand_id = 54,
+                        name = "Jo Malone Tuberose & Angelica 9ml",
+                        amount = 50,
+                        price = 1278000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp213.jpg"
+                    },
+                    new SanPham{
+                        product_id =215 ,
+                        product_type_id = 6,
+                        brand_id = 54,
+                        name = "Jo Malone London Cologne Intense - Myrrh & Tonka 9ml",
+                        amount = 50,
+                        price = 1422000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp214.jpg"
+                    },
+                    new SanPham{
+                        product_id = 216,
+                        product_type_id = 6,
+                        brand_id = 55,
+                        name = "Diptyque L'Ombre dans l'Eau Set",
+                        amount = 50,
+                        price = 5222000,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp215.jpg"
+                    },
+                    new SanPham{
+                        product_id = 217,
+                        product_type_id = 6,
+                        brand_id = 54,
+                        name = "Jo Malone London Velvet Rose & Oud Cologne Intense",
+                        amount = 50,
+                        price = 522000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp216.jpg"
+                    },
+                    new SanPham{
+                        product_id =218 ,
+                        product_type_id = 6,
+                        brand_id = 57,
+                        name = "LE LABO FLEUR D'ORANGER 27 eau de parfum - 50ml",
+                        amount = 50,
+                        price = 2652000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp217.jpg"
+                    },
+                    new SanPham{
+                        product_id =219 ,
+                        product_type_id = 6,
+                        brand_id = 57,
+                        name = "LE LABO AMBRETTE 9 eau de parfum - 50ml",
+                        amount = 50,
+                        price = 532000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp218.jpg"
+                    },
+                    new SanPham{
+                        product_id =220 ,
+                        product_type_id = 6,
+                        brand_id =55 ,
+                        name = "DIPTYQUE Eau Duelle Eau de Parfum - 75ml",
+                        amount = 50,
+                        price = 1667000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp219.jpg"
+                    },
+                    new SanPham{
+                        product_id =221 ,
+                        product_type_id = 6,
+                        brand_id =55 ,
+                        name = "DIPTYQUE Fleur de Peau Eau de parfum - 75ml",
+                        amount = 50,
+                        price =5221000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp220.jpg"
+                    },
+                    new SanPham{
+                        product_id = 222,
+                        product_type_id = 6,
+                        brand_id = 55,
+                        name = "DIPTYQUE Volutes Eau de Parfum - 75ml",
+                        amount = 50,
+                        price = 1422000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp221.jpg"
+                    },
+                    new SanPham{
+                        product_id =223 ,
+                        product_type_id = 6,
+                        brand_id = 55,
+                        name = "DIPTYQUE Philosykos Eau de Parfum - 75ml",
+                        amount = 50,
+                        price = 2342000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp222.jpg"
+                    },
+                    new SanPham{
+                        product_id =224 ,
+                        product_type_id = 6,
+                        brand_id =55 ,
+                        name = "DIPTYQUE L'Ombre Dans L'Eau Eau de Parfum - 75ml",
+                        amount = 50,
+                        price = 4227000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp223.jpg"
+                    },
+                    new SanPham{
+                        product_id = 225,
+                        product_type_id = 6,
+                        brand_id = 55,
+                        name = "Diptyque Eau Duelle Eau de Toilette - 50 ml",
+                        amount = 50,
+                        price = 2242000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp224.jpg"
+                    },
+                    new SanPham{
+                        product_id = 226,
+                        product_type_id = 6,
+                        brand_id = 56,
+                        name = "ATELIER COLOGNE Iris Rebelle Cologne Absolue Pure Perfume - 10 ml",
+                        amount = 50,
+                        price =1225000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp225.jpg"
+                    },
+                    new SanPham{
+                        product_id =227 ,
+                        product_type_id = 6,
+                        brand_id = 54,
+                        name = "Jo Malone Lime Basil & Mandarin Cologne 30ml",
+                        amount = 50,
+                        price =3266000 ,
+                        description = "Một mẫu nước hoa mang mùi hương ngọt và phức tạp là một phần trong bộ sưu tập Intense Collection của  Jo Malone và đã được ra mắt vào năm 2010. Bộ sưu tập này được lấy cảm hứng từ nghi lễ thế tục ở vùng Trung Đông. Bộ sưu tập này là đứa con tinh thần của sự hợp tác giữa Christine Nagel và văn phòng thiết kế của Jo Malone, nhằm tạo ra những chai nước hoa mang hương thơm táo bạo từ những nguyên liệu nước hoa phổ biến.",
+                        use = "Hướng dẫn sử dụng: Làm ẩm miếng bọt biển rồi tạo bọt bằng sửa rửa mặt. Dùng miếng bọt biển mát xa trên da mặt theo hình tròn, tránh vùng mắt. Rửa sạch mặt và miếng bọt biển. Chú ý để miếng bọt biển ở nơi khô ráo sau khi sử dụng",
+                        img = "/image/sp226.jpg"
                     }
                 });
             }
@@ -864,6 +2915,98 @@ namespace Infrastructure.Persistence
                     new ThuongHieu{
                         brand_id = 34,
                         name = "Dior"
+                    },
+                    new ThuongHieu{
+                        brand_id = 35,
+                        name = "E.L.F"
+                    },
+                    new ThuongHieu{
+                        brand_id = 36,
+                        name = "Yves Saint Laurent"
+                    },
+                    new ThuongHieu{
+                        brand_id = 37,
+                        name = "Nars"
+                    },
+                    new ThuongHieu{
+                        brand_id = 38,
+                        name = "Lime Crime"
+                    },
+                    new ThuongHieu{
+                        brand_id = 39,
+                        name = "Tarte"
+                    },
+                    new ThuongHieu{
+                        brand_id = 40,
+                        name = "Byphasse"
+                    },
+                    new ThuongHieu{
+                        brand_id = 41,
+                        name = "Clinique"
+                    },
+                    new ThuongHieu{
+                        brand_id = 42,
+                        name = "Bioderma"
+                    },
+                    new ThuongHieu{
+                        brand_id = 43,
+                        name = "DHC"
+                    },
+                    new ThuongHieu{
+                        brand_id = 44,
+                        name = "Mad Hippie"
+                    },
+                    new ThuongHieu{
+                        brand_id = 45,
+                        name = "Huxley"
+                    },
+                    new ThuongHieu{
+                        brand_id = 46,
+                        name = "Simple"
+                    },
+                    new ThuongHieu{
+                        brand_id = 47,
+                        name = "Dinky Touch"
+                    },
+                    new ThuongHieu{
+                        brand_id = 48,
+                        name = "Shiro Waki Hime"
+                    },
+                    new ThuongHieu{
+                        brand_id = 49,
+                        name = "Pixi"
+                    },
+                    new ThuongHieu{
+                        brand_id = 50,
+                        name = "Naruko"
+                    },
+                    new ThuongHieu{
+                        brand_id = 51,
+                        name = "LIXIBOX"
+                    },
+                    new ThuongHieu{
+                        brand_id = 52,
+                        name = "UK"
+                    },
+                    new ThuongHieu{
+                        brand_id = 53,
+                        name = "Foellie"
+                    },
+                    new ThuongHieu{
+                        brand_id = 54,
+                        name = "Jo Malone London"
+                    },
+                    new ThuongHieu{
+                        brand_id = 55,
+                        name = "Diptyque"
+                    },
+                    new ThuongHieu{
+                        brand_id = 56,
+                        name = "Atelier Cologne"
+                    },
+                    new ThuongHieu{
+                        brand_id = 57,
+                        name = "LE LABON"
                     }
                 });
             }

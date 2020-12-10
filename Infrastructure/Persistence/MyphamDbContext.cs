@@ -20,6 +20,9 @@ namespace Infrastructure.Persistence
         public DbSet<Quyen> Quyens { get; set;}
 
         public DbSet<NhanVien> NhanViens { get; set;}
+        public DbSet<NCC> NCCs { get; set;}
+        public DbSet<HoaDon> HoaDons { get; set;}
+        public DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set;}
 
         // public DbSet<ThuongHieuAndSanPham> ThuongHieuAndSanPhams {get; set;}
 
@@ -27,6 +30,8 @@ namespace Infrastructure.Persistence
         {
             // modelBuilder.Entity<ThuongHieuAndSanPham>()
             //     .HasKey(o => new { o.brand_id, o.product_id });
+            modelBuilder.Entity<ChiTietHoaDon>()
+                .HasKey(o => new { o.bill_id, o.product_id });
         }
     }
 }

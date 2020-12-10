@@ -1,5 +1,7 @@
+using Application.DTOs;
 using Application.Services;
 using CNPM_MyPham.Areas.Admin.Models;
+using CNPM_MyPham.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CNPM_MyPham.Areas.Admin.Controllers
@@ -10,15 +12,21 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
         private readonly SanPhamService SPservice;
         private readonly ThuongHieuService THservice;
         private readonly LoaiSanPhamService LSPservice;
-        public ProductController(SanPhamService SPservice, ThuongHieuService THservice, LoaiSanPhamService LSPservice)
+        private readonly QuyenService Qservice;
+        public ProductController(SanPhamService SPservice, ThuongHieuService THservice, LoaiSanPhamService LSPservice,
+        QuyenService Qservice)
         {
             this.SPservice = SPservice;
             this.THservice = THservice;
             this.LSPservice = LSPservice;
+            this.Qservice = Qservice;
         }
 
         public IActionResult Index()
         {
+            if(!ViewChung()){
+                return Redirect("/Admin/Login/Index");
+            }
             var IndexProduct = new IndexViewProductModel();
             IndexProduct.ListSP = SPservice.SanPham_GetAll();
             IndexProduct.ListTH = THservice.ThuongHieu_GetAll();
@@ -53,6 +61,15 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
                 return new JsonResult(-1);
             }
             return new JsonResult(SP);
+        }
+        public bool ViewChung(){
+            ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
+            
+            if(ViewBag.CurrentUserAdmin == null){
+                return false;
+            }
+            ViewBag.QuyenCurrentUserAdmin = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+            return true;
         }
     }
 }

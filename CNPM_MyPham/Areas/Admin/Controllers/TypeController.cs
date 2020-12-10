@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.DTOs;
 using Application.Services;
 using CNPM_MyPham.Areas.Admin.Models;
+using CNPM_MyPham.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CNPM_MyPham.Areas.Admin.Controllers
@@ -14,13 +15,18 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
     {
         private readonly LoaiSanPhamService LSPservice;
         private readonly SanPhamService SPservice;
-        public TypeController(LoaiSanPhamService LSPservice, SanPhamService SPservice)
+        private readonly QuyenService Qservice;
+        public TypeController(LoaiSanPhamService LSPservice, SanPhamService SPservice, QuyenService Qservice)
         {
             this.LSPservice = LSPservice;
             this.SPservice = SPservice;
+            this.Qservice = Qservice;
         }
         public IActionResult Index()
         {
+            if(!ViewChung()){
+                return Redirect("/Admin/Login/Index");
+            }
             var IndexType = new IndexViewTypeModel();
             IndexType.ListLSP = LSPservice.LoaiSanPham_GetAll();
             return View(IndexType);
@@ -51,6 +57,15 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             SPservice.SanPham_RemoveBy_Product_Type_Id(product_type_id);
             LSPservice.LoaiSanPham_Remove(product_type_id);
             return new JsonResult("ok");
+        }
+        public bool ViewChung(){
+            ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
+            
+            if(ViewBag.CurrentUserAdmin == null){
+                return false;
+            }
+            ViewBag.QuyenCurrentUserAdmin = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+            return true;
         }
     }
 }

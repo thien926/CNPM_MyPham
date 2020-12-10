@@ -48,6 +48,12 @@ namespace CNPM_MyPham
             services.AddScoped<QuyenService>();
             services.AddScoped<INhanVienEFContext, NhanVienEFContext>();
             services.AddScoped<NhanVienService>();
+            services.AddScoped<INCCEFContext, NCCEFContext>();
+            services.AddScoped<NCCService>();
+            services.AddScoped<IHoaDonEFContext, HoaDonEFContext>();
+            services.AddScoped<HoaDonService>();
+            services.AddScoped<IChiTietHoaDonEFContext, ChiTietHoaDonEFContext>();
+            services.AddScoped<ChiTietHoaDonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

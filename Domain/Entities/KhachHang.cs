@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 //Microsoft.EntityFrameworkCore
 using System.ComponentModel.DataAnnotations;
 
@@ -46,9 +47,12 @@ namespace Domain.Entities
         [RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
         public int status{get; set;}
 
+        public ICollection<HoaDon> hoadons {get; set;}
+
         public KhachHang()
         {
             status = 1;
+            this.hoadons = new HashSet<HoaDon>();
         }
     }
 }
