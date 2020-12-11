@@ -40,6 +40,13 @@ namespace CNPM_MyPham.Controllers
                 // Không cho hiện mật khẩu khách hàng vào session
                 U.KhachHangDto.pass = "";
                 U.KhachHangDto.repass = "";
+                
+                var donhang = SessionHelper.GetObjectFromJson<DonHangDto>(HttpContext.Session, "DonHang");
+                if(donhang != null){
+                    U.DonHangDto = donhang;
+                    donhang = null;
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "DonHang", donhang);
+                }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", U);
                 ViewBag.Message_Login = "Đăng nhập thành công!";
                 View_Chung();

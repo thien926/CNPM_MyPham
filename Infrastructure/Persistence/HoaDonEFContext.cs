@@ -22,6 +22,14 @@ namespace Infrastructure.Persistence
             return context.HoaDons.ToList();
         }
 
+        public IEnumerable<HoaDon> HoaDon_GetByUser(string user)
+        {
+            var query = context.HoaDons.AsQueryable();
+            query = query.Where(m => m.user_kh == user);
+            query = query.OrderByDescending(m => m.date_order);
+            return query.ToList();
+        }
+
         public HoaDon HoaDon_GetById(int id)
         {
             return context.HoaDons.Find(id);
@@ -37,6 +45,9 @@ namespace Infrastructure.Persistence
         {
             context.HoaDons.Update(U);
             context.SaveChanges();
+        }
+        public int HoaDon_GetMaxId(){
+            return context.HoaDons.Max(m => m.bill_id);
         }
     }
 }

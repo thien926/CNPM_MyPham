@@ -37,5 +37,13 @@ namespace Application.Services
             if(HD == null) return;
             HDcontext.HoaDon_Remove(HD);
         }
+
+        public int HoaDon_GetMaxId(){
+            return HDcontext.HoaDon_GetMaxId();
+        }
+        public IEnumerable<HoaDonDto> HoaDon_GetByUser(string user){
+            var ListHD = HDcontext.HoaDon_GetByUser(user);
+            return ListHD.MappingHoaDonDtos();
+        }
     }
 }

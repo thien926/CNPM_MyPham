@@ -15,11 +15,13 @@ namespace CNPM_MyPham.Controllers
     {
         private readonly LoaiSanPhamService LSPservice;
         private readonly KhachHangService KHservice;
+        private readonly HoaDonService HDservice;
 
-        public UserController(LoaiSanPhamService LSPservice, KhachHangService KHservice)
+        public UserController(LoaiSanPhamService LSPservice, KhachHangService KHservice, HoaDonService HDservice)
         {
             this.LSPservice = LSPservice;
             this.KHservice = KHservice;
+            this.HDservice = HDservice;
         }
         [HttpGet]
         public IActionResult Index(){
@@ -125,7 +127,9 @@ namespace CNPM_MyPham.Controllers
             if(ViewBag.CurrentUser == null){
                 return Redirect("/Login/Index");
             }
-            return View();
+            var currentuser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
+            var ListHD = HDservice.HoaDon_GetByUser(currentuser.KhachHangDto.user);
+            return View(ListHD);
         }
 
         public IActionResult LogOut(){

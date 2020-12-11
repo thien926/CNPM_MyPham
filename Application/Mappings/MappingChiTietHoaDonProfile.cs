@@ -36,5 +36,10 @@ namespace Application.Mappings
                 yield return hd.MappingChiTietHoaDonDto();
             }
         }
+        public static IEnumerable<ChiTietHoaDon> MappingChiTietHoaDon(this IEnumerable<ChiTietHoaDonDto> hddtos){
+            foreach(var hd in hddtos){
+                yield return hd.MappingChiTietHoaDon();
+            }
+        }
     }
 }

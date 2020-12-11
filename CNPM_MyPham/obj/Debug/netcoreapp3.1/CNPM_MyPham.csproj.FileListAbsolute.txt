@@ -307,3 +307,5 @@ G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\C
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\NCC\Index.cshtml.g.cs
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Bill\Index.cshtml.g.cs
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
+G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
+G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\DetailCart\Index.cshtml.g.cs

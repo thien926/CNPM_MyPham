@@ -38,6 +38,7 @@ namespace Application.DTOs.CurrentUserDTO
             foreach(var q in ListSP){
                 if(q.SP.product_id == idsp){
                     q.soluong = soluong;
+                    return;
                 }
             }
         }
@@ -46,6 +47,18 @@ namespace Application.DTOs.CurrentUserDTO
             foreach(var q in ListSP){
                 if(q.SP.product_id == idsp){
                     q.soluong = q.soluong + 1;
+                    return;
+                }
+            }
+        }
+        public void subtractonesoluongforsanpham(int idsp){
+            foreach(var q in ListSP){
+                if(q.SP.product_id == idsp){
+                    q.soluong = q.soluong - 1;
+                    if(q.soluong <= 1){
+                        q.soluong = 1;
+                    } 
+                    return;
                 }
             }
         }

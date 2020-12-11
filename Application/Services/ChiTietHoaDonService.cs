@@ -31,6 +31,11 @@ namespace Application.Services
             var ctdh = U.MappingChiTietHoaDon();
             ctdhcontext.ChiTietHoaDon_Add(ctdh);
         }
+
+        public void ChiTietHoaDon_AddRange(IEnumerable<ChiTietHoaDonDto> Listcthddto){
+            var Listcthd = Listcthddto.MappingChiTietHoaDon();
+            ctdhcontext.ChiTietHoaDon_AddRange(Listcthd);
+        }
         // Hóa đơn chưa cần sửa và xóa
         // public void ChiTietHoaDon_Update(ChiTietHoaDonDto U){
         //     var ctdh = ctdhcontext.ChiTietHoaDon_GetByUser(U.user);

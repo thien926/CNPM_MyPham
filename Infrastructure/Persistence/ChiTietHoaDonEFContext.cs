@@ -16,6 +16,11 @@ namespace Infrastructure.Persistence
             context.ChiTietHoaDons.Add(U);
             context.SaveChanges();
         }
+        public void ChiTietHoaDon_AddRange(IEnumerable<ChiTietHoaDon> Listcthd)
+        {
+            context.ChiTietHoaDons.AddRange(Listcthd);
+            context.SaveChanges();
+        }
 
         public List<ChiTietHoaDon> ChiTietHoaDon_GetAll()
         {

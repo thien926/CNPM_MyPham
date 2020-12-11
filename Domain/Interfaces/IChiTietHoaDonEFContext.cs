@@ -10,6 +10,7 @@ namespace Domain.Interfaces
         List<ChiTietHoaDon> ChiTietHoaDon_GetByBillId(int bill_id);
         List<ChiTietHoaDon> ChiTietHoaDon_GetByProductId(int product_id);
         void ChiTietHoaDon_Add(ChiTietHoaDon U);
+        void ChiTietHoaDon_AddRange(IEnumerable<ChiTietHoaDon> Listcthd);
         void ChiTietHoaDon_Update(ChiTietHoaDon U);
         void ChiTietHoaDon_Remove(ChiTietHoaDon U);
     }
