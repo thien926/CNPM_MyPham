@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Application.DTOs;
 using Application.Services;
 using CNPM_MyPham.Areas.Admin.Models;
@@ -61,6 +63,17 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
                 return new JsonResult(-1);
             }
             return new JsonResult(SP);
+        }
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input){
+            if(String.IsNullOrEmpty(input)){
+                input = "";
+            }
+            IEnumerable<SanPhamDto> sps = SPservice.SanPhams_AdminTimKiem(type, input);
+            if(sps != null){
+                return new JsonResult(sps);
+            }
+            return new JsonResult(-1);
         }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");

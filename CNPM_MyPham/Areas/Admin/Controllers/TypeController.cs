@@ -58,6 +58,17 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             LSPservice.LoaiSanPham_Remove(product_type_id);
             return new JsonResult("ok");
         }
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input){
+            if(String.IsNullOrEmpty(input)){
+                input = "";
+            }
+            IEnumerable<LoaiSanPhamDto> lsps = LSPservice.LoaiSanPham_AdminTimKiem(type, input);
+            if(lsps != null){
+                return new JsonResult(lsps);
+            }
+            return new JsonResult(-1);
+        }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
             

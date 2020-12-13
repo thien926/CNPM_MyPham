@@ -54,38 +54,50 @@ namespace Infrastructure.Persistence
                     new ChiTietHoaDon{
                         bill_id = 1,
                         product_id = 1,
+                        name = "Lustre Eyeshadow Base",
                         amount = 1,
-                        price = 200000
+                        price = 200000,
+                        img = "/image/sp0.jpg"
                     },
                     new ChiTietHoaDon{
                         bill_id = 1,
                         product_id = 2,
+                        name = "GOLDEN ROSE EYESHADOW PRIMER",
                         amount = 1,
-                        price = 167000
+                        price = 167000,
+                        img = "/image/sp1.jpg"
                     },
                     new ChiTietHoaDon{
                         bill_id = 1,
                         product_id = 5,
+                        name = "BH Cosmetics Solar Flare",
                         amount = 1,
-                        price = 688000
+                        price = 688000,
+                        img = "/image/sp4.jpg"
                     },
                     new ChiTietHoaDon{
                         bill_id = 2,
                         product_id = 5,
+                        name = "BH Cosmetics Solar Flare",
                         amount = 1,
-                        price = 688000
+                        price = 688000,
+                        img = "/image/sp4.jpg"
                     },
                     new ChiTietHoaDon{
                         bill_id = 2,
                         product_id = 6,
+                        name = "BH Cosmetics Mini Zodiac",
                         amount = 1,
-                        price = 437000
+                        price = 437000,
+                        img = "/image/sp5.jpg"
                     },
                     new ChiTietHoaDon{
                         bill_id = 3,
                         product_id = 7,
+                        name = "BH Cosmetics Blushing In Bali",
                         amount = 1,
-                        price = 669000
+                        price = 669000,
+                        img = "/image/sp5.jpg"
                     }
                 });
             }
@@ -2002,7 +2014,7 @@ namespace Infrastructure.Persistence
                         price = 612000 ,
                         description = "Là một trong những hãng có 100% thành phần chiết xuất từ thiên nhiên, giúp điều trị và xoa dịu làn da từ sâu trong lỗ chân lông. được thành lập từ những năm 2000 với chủ sở hữu thương hiệu là một nam beauty guru. như một thương hiệu mỹ phẩm cao cấp với các sản phẩm chăm sóc da chứa thành phần dầu hạt cây xương rồng Prickly Pear.",
                         use = "Sau khi làm sạch da bằng sữa rửa mặt , cân bằng da với toner  và cung cấp dưỡng chất với các sản phẩm điều trị , bạn thoa kem dưỡng kiểm soát dầu lên toàn mặt, cổ và vùng hở ngực. Sản phẩm này chỉ dùng vào buổi sáng. Thế nên, bạn nên bổ sung kem dưỡng ẩm ban đêm dành cho da dầu vào quy trình chăm sóc da buổi tối. ",
-                        img = "/image/sp.156jpg"
+                        img = "/image/sp156.jpg"
                     },
                     new SanPham{
                         product_id = 158,

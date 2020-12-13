@@ -65,6 +65,71 @@ namespace Infrastructure.Persistence
             return maxprice;
         }
 
+        public List<SanPham> SanPhams_AdminTimKiem(string type, string input){
+            var query = context.SanPhams.AsQueryable();
+            switch(type){
+                case "all": {
+                    input = input.Trim().ToLower();
+                    if(input == ""){
+                        return SanPham_GetAll();
+                    }
+                    int ip; bool success = int.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.product_id == ip || m.name.ToLower().Contains(input) ||
+                        m.product_type_id == ip || m.brand_id == ip || m.price == ip);
+                    }
+                    else{
+                        query = query.Where(m => m.name.ToLower().Contains(input));
+                    }
+                    break;
+                }
+                case "product_id": {
+                    int ip; bool success = int.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.product_id == ip);
+                    }
+                    else{
+                        return new List<SanPham>();
+                    }
+                    break;
+                }
+                case "name": {
+                    input = input.Trim().ToLower();
+                    query = query.Where(m => m.name.ToLower().Contains(input));
+                    break;
+                }
+                case "product_type_id":{
+                    int ip; bool success = int.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.product_type_id == ip);
+                    }
+                    else{
+                        return new List<SanPham>();
+                    }
+                    break;
+                }
+                case "brand_id":{
+                    int ip; bool success = int.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.brand_id == ip);
+                    }
+                    else{
+                        return new List<SanPham>();
+                    }
+                    break;
+                }
+                case "price":{
+                    long ip; bool success = long.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.price == ip);
+                    }
+                    break;
+                }
+                default: break;
+            }
+            return query.ToList();
+        }
+
         public List<SanPham> SanPham_Filter(string Type, string Brand, string SearchString, string sort, int pageIndex, int pageSize, out int count, out decimal pricemax, string price)
         {
             var query = context.SanPhams.AsQueryable();

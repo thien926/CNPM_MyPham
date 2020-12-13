@@ -39,5 +39,9 @@ namespace Application.Services
             if(th == null) return;
             THcontext.ThuongHieu_Remove(th);
         }
+        public IEnumerable<ThuongHieuDto> ThuongHieu_AdminTimKiem(string type, string input){
+            var ths = THcontext.ThuongHieu_AdminTimKiem(type, input);
+            return ths.MappingThuongHieuDtos();
+        }
     }
 }

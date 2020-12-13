@@ -10,8 +10,10 @@ namespace Application.Mappings
             return new ChiTietHoaDonDto{
                 bill_id = hd.bill_id,
                 product_id = hd.product_id,
+                name = hd.name,
                 amount = hd.amount,
-                price = hd.price
+                price = hd.price,
+                img = hd.img
             };
         }
 
@@ -19,16 +21,20 @@ namespace Application.Mappings
             return new ChiTietHoaDon{
                 bill_id = hddto.bill_id,
                 product_id = hddto.product_id,
+                name = hddto.name,
                 amount = hddto.amount,
-                price = hddto.price
+                price = hddto.price,
+                img = hddto.img
             };
         }
 
         public static void MappingChiTietHoaDon(this ChiTietHoaDonDto hddto, ChiTietHoaDon hd){
             // hd.bill_id = hddto.bill_id;
             // hd.product_id = hddto.product_id;
+            hd.name = hddto.name;
             hd.amount = hddto.amount;
             hd.price = hddto.price;
+            hd.img = hddto.img;
         }
 
         public static IEnumerable<ChiTietHoaDonDto> MappingChiTietHoaDonDtos(this IEnumerable<ChiTietHoaDon> hds){

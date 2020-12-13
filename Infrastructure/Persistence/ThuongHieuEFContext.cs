@@ -35,5 +35,41 @@ namespace Infrastructure.Persistence
             context.ThuongHieus.Remove(TH);
             context.SaveChanges();
         }
+        public List<ThuongHieu> ThuongHieu_AdminTimKiem(string type, string input){
+            var query = context.ThuongHieus.AsQueryable();
+            switch(type){
+                case "all": {
+                    input = input.Trim().ToLower();
+                    if(input == ""){
+                        return ThuongHieu_GetAll();
+                    }
+                    int ip; bool success = int.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.brand_id == ip || m.name.ToLower().Contains(input));
+                    }
+                    else{
+                        query = query.Where(m => m.name.ToLower().Contains(input));
+                    }
+                    break;
+                }
+                case "brand_id": {
+                    int ip; bool success = int.TryParse(input,out ip);
+                    if(success){
+                        query = query.Where(m => m.brand_id == ip);
+                    }
+                    else{
+                        return new List<ThuongHieu>();
+                    }
+                    break;
+                }
+                case "name": {
+                    input = input.Trim().ToLower();
+                    query = query.Where(m => m.name.ToLower().Contains(input));
+                    break;
+                }
+                default: break;
+            }
+            return query.ToList();
+        }
     }
 }

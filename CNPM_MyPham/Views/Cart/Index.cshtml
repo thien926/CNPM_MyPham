@@ -64,6 +64,25 @@
                 $("#intput_dcnh").css("display", "block");
             }
         }
+        function RemoveCart(idsp){
+            $.ajax({
+                url : "@Url.Action("RemoveCart")",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    idsp: idsp
+                },
+                async: false,
+                success: function(data){
+                    if(data != null){
+                        location.reload();
+                    }
+                },
+                error: function(e){
+                    alert(e.responseText);
+                }
+            });
+        }
         function ChangeSL(tag, idsp){
             var slsp = tag.value;
             $.ajax({
@@ -240,7 +259,7 @@
                                                 </div>
                                             </td>
                                             <td class="total-price first-row">@(String.Format("{0:n0}", q.SP.price*q.soluong)) đ</td>
-                                            <td class="close-td first-row"><i class="ti-close"></i></td>
+                                            <td class="close-td first-row"><i class="ti-close" onclick="RemoveCart(@q.SP.product_id)"></i></td>
                                         </tr>
                                     }
                                 }

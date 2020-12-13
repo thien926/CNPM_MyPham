@@ -49,5 +49,11 @@ namespace Infrastructure.Persistence
         public int HoaDon_GetMaxId(){
             return context.HoaDons.Max(m => m.bill_id);
         }
+        // Kiểm tra có tồn tại hóa đơn theo id và user_kh ko
+        public HoaDon HoaDon_GetByUserAndID(string user, int id){
+            var hd = HoaDon_GetById(id);
+            if(hd.user_kh == user) return hd;
+            return null;
+        }
     }
 }

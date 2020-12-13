@@ -45,5 +45,11 @@ namespace Application.Services
             var ListHD = HDcontext.HoaDon_GetByUser(user);
             return ListHD.MappingHoaDonDtos();
         }
+
+        public HoaDonDto HoaDon_GetByUserAndID(string user, int id){
+            var hd = HDcontext.HoaDon_GetByUserAndID(user, id);
+            if (hd == null) return null;
+            return hd.MappingHoaDonDto();
+        }
     }
 }

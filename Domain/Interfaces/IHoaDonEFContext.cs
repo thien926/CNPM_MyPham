@@ -12,5 +12,6 @@ namespace Domain.Interfaces
         void HoaDon_Remove(HoaDon U);
         int HoaDon_GetMaxId();
         IEnumerable<HoaDon> HoaDon_GetByUser(string user);
+        HoaDon HoaDon_GetByUserAndID(string user, int id);
     }
 }

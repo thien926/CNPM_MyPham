@@ -26,6 +26,17 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             IndexQuyen.ListQ = Qservice.Quyen_GetAll();
             return View(IndexQuyen);
         }
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input){
+            if(String.IsNullOrEmpty(input)){
+                input = "";
+            }
+            IEnumerable<QuyenDto> qs = Qservice.Quyen_AdminTimKiem(type, input);
+            if(qs != null){
+                return new JsonResult(qs);
+            }
+            return new JsonResult(-1);
+        }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
             

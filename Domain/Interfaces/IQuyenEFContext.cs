@@ -10,5 +10,6 @@ namespace Domain.Interfaces
         void Quyen_Add(Quyen Q);
         void Quyen_Update(Quyen Q);
         void Quyen_Remove(Quyen Q);
+        List<Quyen> Quyen_AdminTimKiem(string type, string input);
     }
 }

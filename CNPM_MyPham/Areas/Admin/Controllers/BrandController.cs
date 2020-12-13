@@ -26,6 +26,17 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             var ListTH = THservice.ThuongHieu_GetAll();
             return View(ListTH);
         }
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input){
+            if(String.IsNullOrEmpty(input)){
+                input = "";
+            }
+            IEnumerable<ThuongHieuDto> ths = THservice.ThuongHieu_AdminTimKiem(type, input);
+            if(ths != null){
+                return new JsonResult(ths);
+            }
+            return new JsonResult(-1);
+        }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
             if(ViewBag.CurrentUserAdmin == null){

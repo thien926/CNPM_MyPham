@@ -183,63 +183,7 @@
                         <a class="navbar-brand">@ViewData["Title"]</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @*<ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-dashboard"></i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        <b class="caret hidden-sm hidden-xs"></b>
-                                        <span class="notification hidden-sm hidden-xs">5</span>
-                                        <p class="hidden-lg hidden-md">
-                                            5 Notifications
-                                            <b class="caret"></b>
-                                        </p>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-search"></i>
-                                        <p class="hidden-lg hidden-md">Search</p>
-                                    </a>
-                                </li>
-                            </ul>*@
-
                         <ul class="nav navbar-nav navbar-right">
-                            @*<li>
-                                    <a href="">
-                                        <p>Account</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <p>
-                                            Dropdown
-                                            <b class="caret"></b>
-                                        </p>
-
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>*@
                             <li>
                                 <a href="#">
                                     <p>@ViewBag.CurrentUserAdmin.full_name | <span>Đăng xuất</span></p>
@@ -258,8 +202,19 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Striped Table with Hover</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
+                                    <form class="title" onsubmit="return false;">
+                                        <p>
+                                            <select style="height: 30px;" id="select">
+                                                <option value="all">Tất cả</option>
+                                                <option value="product_type_id">Tìm theo mã loại sản phẩm</option>
+                                                <option value="name">Tìm theo tên loại sản phẩm</option>
+                                                <option value="description">Tìm theo mô tả loại sản phẩm</option>
+                                            </select>
+                                            <input type="text" style="height: 30px;" id="input_search"/>
+                                            <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
+                                            <input type="button" value="Thêm loại sản phẩm" style="float: right;"/>
+                                        </p>
+                                    </form>
                                 </div>
                                 <div class="content table-responsive table-full-width" id="id1">
                                     <table class="table table-hover table-striped">
@@ -269,7 +224,7 @@
                                         <th>Mô tả</th>
                                         <th>Hành động</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="sualsp1">
                                             @{
                                                 foreach (var q in Model.ListLSP)
                                                 {
@@ -285,49 +240,7 @@
                                                     </tr>
                                                 }
                                             }
-                                            @* <tr>
-                                                    <td>1</td>
-                                                    <td><img src="~/assets/img/tim_80x80.png"></td>
-                                                    <!-- <td>Dakota Rice</td> -->
-                                                    <td>$36,738</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr> *@
+                                            
                                         </tbody>
                                     </table>
 
@@ -514,6 +427,44 @@
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
+    function TimKiem(){
+        var type = $("#select").val();
+        var input = $("#input_search").val();
+        @* alert(type + ' ' + input); *@
+        $.ajax({
+            url: '/Admin/Type/TimKiem',
+            type: "post",
+            dataType: "json",
+            data: {
+                type: type,
+                input: input
+            },
+            success: function (data) {
+                if (data != -1) {
+                    var s = "";
+                    for(let i = 0; i < data.length; ++i){
+                        s += `<tr>
+                                <td>`+ data[i].product_type_id +`</td>
+                                <td>`+ data[i].name +`</td>
+                                <td>`+ data[i].description +`</td>
+                                <td>
+                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditLSP(`+ data[i].product_type_id +`)"><i class="pe-7s-config"></i></button>
+                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveLSP(`+ data[i].product_type_id +`)"><i class="pe-7s-trash"></i></button>
+                                </td>
+                            </tr>`;
+                    }
+                    $("#sualsp1").html(s);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi tìm kiếm loại sản phẩm => TimKiem",
+                    html: e.responseText
+                });
+            }
+        });
+    }
 
     function EditLSP(product_type_id) {
         $("#title-modal").html("Sửa loại sản phẩm " + product_type_id);

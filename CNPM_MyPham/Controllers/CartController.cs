@@ -84,6 +84,22 @@ namespace CNPM_MyPham.Controllers
             return new JsonResult(null);
         }
         [HttpPost]
+        public IActionResult RemoveCart(int idsp){
+            var currentuser = SessionHelper.GetObjectFromJson<CurrentUserDto>(HttpContext.Session, "CurrentUser");
+            if(currentuser != null){
+                currentuser.DonHangDto.removeSPfromID(idsp);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUser", currentuser);
+                return new JsonResult(currentuser.DonHangDto);
+            }
+            var donhang = SessionHelper.GetObjectFromJson<DonHangDto>(HttpContext.Session, "DonHang");
+            if(donhang != null){
+                donhang.removeSPfromID(idsp);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "DonHang", donhang);
+                return new JsonResult(donhang);
+            }
+            return new JsonResult(null);
+        }
+        [HttpPost]
         public IActionResult CheckOutCart(string address){
             var MessError = "";
             long total = 0;
@@ -122,9 +138,11 @@ namespace CNPM_MyPham.Controllers
                         var ctdh = new ChiTietHoaDonDto();
                         ctdh.bill_id = hd.bill_id;
                         ctdh.product_id = q.SP.product_id;
+                        ctdh.name = q.SP.name;
                         ctdh.amount = q.soluong;
                         ctdh.price = q.SP.price;
-                        
+                        ctdh.img = q.SP.img;
+
                         // Giảm số lượng sản phẩm trong kho
                         var sp = SPservice.SanPham_GetById(q.SP.product_id);
                         sp.amount -= q.soluong;

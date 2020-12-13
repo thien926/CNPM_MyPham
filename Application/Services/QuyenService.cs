@@ -39,5 +39,9 @@ namespace Application.Services
             if(q == null) return;
             Qcontext.Quyen_Remove(q);
         }
+        public IEnumerable<QuyenDto> Quyen_AdminTimKiem(string type, string input){
+            var qs = Qcontext.Quyen_AdminTimKiem(type, input);
+            return qs.MappingQuyenDtos();
+        }
     }
 }

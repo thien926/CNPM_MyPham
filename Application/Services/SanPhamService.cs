@@ -46,6 +46,11 @@ namespace Application.Services
             return sps.MappingSanPhamDtos();
         }
 
+        public IEnumerable<SanPhamDto> SanPhams_AdminTimKiem(string type, string input){
+            var sps = SPcontext.SanPhams_AdminTimKiem(type, input);
+            return sps.MappingSanPhamDtos();
+        }
+
         public void SanPham_RemoveBy_Product_Type_Id(int product_type_id)
         {
             SPcontext.SanPham_RemoveBy_Product_Type_Id(product_type_id);

@@ -39,5 +39,9 @@ namespace Application.Services
             if(lsp == null) return;
             LSPcontext.LoaiSanPham_Remove(lsp);
         }
+        public IEnumerable<LoaiSanPhamDto> LoaiSanPham_AdminTimKiem(string type, string input){
+            var lsps = LSPcontext.LoaiSanPham_AdminTimKiem(type, input);
+            return lsps.MappingLoaiSanPhamDtos();
+        }
     }
 }
