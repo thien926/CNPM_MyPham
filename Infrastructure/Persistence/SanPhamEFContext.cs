@@ -53,6 +53,13 @@ namespace Infrastructure.Persistence
             context.SanPhams.RemoveRange(query.ToList());
             context.SaveChanges();
         }
+        public void SanPham_RemoveBy_Brand_Id(int brand_id)
+        {
+            var query = context.SanPhams.AsQueryable();
+            query = query.Where(m => m.brand_id == brand_id);
+            context.SanPhams.RemoveRange(query.ToList());
+            context.SaveChanges();
+        }
 
         public decimal SanPham_MaxPrice(){
             List<SanPham> ListSP = SanPham_GetAll();

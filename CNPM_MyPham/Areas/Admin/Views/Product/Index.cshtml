@@ -260,60 +260,13 @@
                                                     </tr>
                                                 }
                                             }
-                                            @* <tr>
-                                                    <td>1</td>
-                                                    <td><img src="~/assets/img/tim_80x80.png"></td>
-                                                    <!-- <td>Dakota Rice</td> -->
-                                                    <td>$36,738</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr> *@
+                                            
                                         </tbody>
                                     </table>
 
                                 </div>
                             </div>
                         </div>
-
-
-                        
-
-
                     </div>
                 </div>
             </div>
@@ -387,7 +340,7 @@
                                         }
                                     }
                                 </select>
-                                <input type="text" class="form-control" id="product_type_id" placeholder="Mã loại sản phẩm" asp-for="@Model.SP.product_type_id" readonly style="display: block;">
+                                <input type="text" class="form-control" id="product_type_id" placeholder="Mã loại sản phẩm" asp-for="@Model.SP.product_type_id" readonly style="display: none;">
                                 <span asp-validation-for="@Model.SP.product_type_id"></span>
                             </div>
                             <div class="form-group">
@@ -400,7 +353,7 @@
                                         }
                                     }
                                 </select>
-                                <input type="text" class="form-control" id="brand_id" placeholder="Mã thương hiệu" asp-for="@Model.SP.brand_id" readonly style="display: block;">
+                                <input type="text" class="form-control" id="brand_id" placeholder="Mã thương hiệu" asp-for="@Model.SP.brand_id" readonly style="display: none;">
                                 <span asp-validation-for="@Model.SP.brand_id"></span>
                             </div>
                             <div class="form-group">
@@ -430,17 +383,17 @@
                             </div>
                             <div class="form-group">
                                 <label>Hình ảnh</label>
-                                <input type="file" class="form-control" id="img" asp-for="@Model.SP.img">
+                                <input class="form-control" id="img" asp-for="@Model.photo" onchange="openFile(event)">
                                 <span asp-validation-for="@Model.SP.img"></span>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
-                                <input type="text" class="form-control" placeholder="Trạng thái" id="img" asp-for="@Model.SP.status">
+                                <input type="text" class="form-control" placeholder="Trạng thái" id="status" asp-for="@Model.SP.status" readonly>
                                 <span asp-validation-for="@Model.SP.status"></span>
                             </div>
                             <div class="checkbox">
                             </div>
-                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditLSP()">Sửa</button>
+                            <button type="button" class="btn btn-success btn-block" onclick="SubmitEditLSP()">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -533,6 +486,46 @@
             }
         });
     }
+    var reader = new FileReader();
+    var openFile = function(event) {
+        var input = event.target;
+
+        reader.onload = function(){
+        var dataURL = reader.result;
+        @* var output = document.getElementById('output');
+        output.src = dataURL; *@
+        };
+        reader.readAsDataURL(input.files[0]);
+    };
+    function SubmitEditLSP(){
+        @* console.log($("#img").val());
+        var file = new FileReader($("#img").val());
+        console.log(file); *@
+        console.log(reader.result);
+        $.ajax({
+            url: '/Admin/Product/SubmitEditLSP',
+            type: "post",
+            dataType: "json",
+            data: {
+                photo: reader.DONE
+            },
+            success: function (data) {
+                if (data != -1) {
+                    console.log("đã load ảnh");
+                }
+                else{
+                    console.log("load ảnh thất bại");
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy thông tin sản phẩm => EditSP",
+                    html: e.responseText
+                });
+            }
+        });
+    }
     function changeLSP() {
         $("#product_type_id").val($("#sl_product_type_id").val());
     }
@@ -561,8 +554,8 @@
                     $("#price").val(data.price);
                     $("#description").val(data.description);
                     $("#use").val(data.use);
-                    $("#img").val(data.img);
                     $("#status").val(data.status);
+                    $("#img").val(data.img);
                 }
             },
             error: function (e) {

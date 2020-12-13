@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace CNPM_MyPham.Areas.Admin.Models
 {
@@ -12,5 +14,8 @@ namespace CNPM_MyPham.Areas.Admin.Models
         public SanPhamDto SP { get; set; }
         public IEnumerable<ThuongHieuDto> ListTH { get; set; }
         public IEnumerable<LoaiSanPhamDto> ListLSP { get; set; }
+        
+        [Required(ErrorMessage = "Hình ảnh là bắt buộc")]
+        public IFormFile photo { get; set; }
     }
 }

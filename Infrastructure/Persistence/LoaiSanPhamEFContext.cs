@@ -35,6 +35,9 @@ namespace Infrastructure.Persistence
             context.LoaiSanPhams.Remove(LSP);
             context.SaveChanges();
         }
+        public int LoaiSanPham_GetMaxId(){
+            return context.LoaiSanPhams.Max(m => m.product_type_id);
+        }
         public List<LoaiSanPham> LoaiSanPham_AdminTimKiem(string type, string input){
             var query = context.LoaiSanPhams.AsQueryable();
             switch(type){

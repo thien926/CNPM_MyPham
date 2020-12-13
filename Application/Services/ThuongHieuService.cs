@@ -43,5 +43,8 @@ namespace Application.Services
             var ths = THcontext.ThuongHieu_AdminTimKiem(type, input);
             return ths.MappingThuongHieuDtos();
         }
+        public int ThuongHieu_GetMaxId(){
+            return THcontext.ThuongHieu_GetMaxId();
+        }
     }
 }

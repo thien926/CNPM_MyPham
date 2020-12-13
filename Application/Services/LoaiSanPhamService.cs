@@ -43,5 +43,8 @@ namespace Application.Services
             var lsps = LSPcontext.LoaiSanPham_AdminTimKiem(type, input);
             return lsps.MappingLoaiSanPhamDtos();
         }
+        public int LoaiSanPham_GetMaxId(){
+            return LSPcontext.LoaiSanPham_GetMaxId();
+        }
     }
 }

@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Application.DTOs;
 using Application.Services;
 using CNPM_MyPham.Areas.Admin.Models;
 using CNPM_MyPham.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CNPM_MyPham.Areas.Admin.Controllers
@@ -15,13 +18,15 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
         private readonly ThuongHieuService THservice;
         private readonly LoaiSanPhamService LSPservice;
         private readonly QuyenService Qservice;
+        private readonly IHostingEnvironment hostingEnvironment;
         public ProductController(SanPhamService SPservice, ThuongHieuService THservice, LoaiSanPhamService LSPservice,
-        QuyenService Qservice)
+        QuyenService Qservice, IHostingEnvironment hostingEnvironment)
         {
             this.SPservice = SPservice;
             this.THservice = THservice;
             this.LSPservice = LSPservice;
             this.Qservice = Qservice;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -72,6 +77,18 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             IEnumerable<SanPhamDto> sps = SPservice.SanPhams_AdminTimKiem(type, input);
             if(sps != null){
                 return new JsonResult(sps);
+            }
+            return new JsonResult(-1);
+        }
+        [HttpPost]
+        public IActionResult SubmitEditLSP(IFormFile photo){
+            string uniqueFileName = null;
+            if(photo != null){
+                string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "image");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+                photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                return new JsonResult(1);
             }
             return new JsonResult(-1);
         }

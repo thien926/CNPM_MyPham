@@ -11,5 +11,6 @@ namespace Domain.Interfaces
         void SanPham_Update(LoaiSanPham LSP);
         void LoaiSanPham_Remove(LoaiSanPham LSP);
         List<LoaiSanPham> LoaiSanPham_AdminTimKiem(string type, string input);
+        int LoaiSanPham_GetMaxId();
     }
 }

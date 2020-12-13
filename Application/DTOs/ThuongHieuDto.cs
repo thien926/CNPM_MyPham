@@ -19,5 +19,9 @@ namespace Application.DTOs
         public ThuongHieuDto(){
             this.SanPhamdtos = new HashSet<SanPhamDto>();
         }
+        public ThuongHieuDto(int brand_id, string name){
+            this.brand_id = brand_id;
+            this.name = name;
+        }
     }
 }

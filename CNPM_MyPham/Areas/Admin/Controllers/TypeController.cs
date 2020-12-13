@@ -52,6 +52,14 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public IActionResult SubmitThemLSP(int product_type_id, string name, string description)
+        {
+            var LSP = new LoaiSanPhamDto(product_type_id, name, description);
+            LSPservice.LoaiSanPham_Add(LSP);
+            return new JsonResult(1);
+        }
+
+        [HttpPost]
         public IActionResult RemoveLSP(int product_type_id)
         {
             SPservice.SanPham_RemoveBy_Product_Type_Id(product_type_id);
@@ -68,6 +76,10 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
                 return new JsonResult(lsps);
             }
             return new JsonResult(-1);
+        }
+        [HttpPost]
+        public IActionResult MaxProduct_Type_ID(){
+            return new JsonResult(LSPservice.LoaiSanPham_GetMaxId() + 1);
         }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");

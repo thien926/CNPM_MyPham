@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Application.DTOs.ThuongHieuDto>
+﻿@model IndexViewBrandModel
 @{
     ViewData["Title"] = "Thương hiệu";
 }
@@ -48,6 +48,14 @@
 
         .modal-footer {
             background-color: #f9f9f9;
+        }
+
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
         }
     </style>
 </head>
@@ -259,7 +267,7 @@
                                             </select>
                                             <input type="text" style="height: 30px;" id="input_search"/>
                                             <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
-                                            <input type="button" value="Thêm thương hiệu" style="float: right;"/>
+                                            <input type="button" value="Thêm thương hiệu" style="float: right;" onclick="ThemTH()"/>
                                         </p>
                                     </form>
                                 </div>
@@ -268,14 +276,19 @@
                                         <thead>
                                         <th>Mã</th>
                                         <th>Tên thương hiệu</th>
+                                        <th>Hành động</th>
                                         </thead>
                                         <tbody id="suath1">
                                             @{
-                                                foreach (var q in Model)
+                                                foreach (var q in Model.ListTH)
                                                 {
                                                     <tr>
                                                         <td>@q.brand_id</td>
                                                         <td>@q.name</td>
+                                                        <td>
+                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditBrand(@q.brand_id)"><i class="pe-7s-config"></i></button>
+                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveBrand(@q.brand_id)"><i class="pe-7s-trash"></i></button>
+                                                        </td>
                                                     </tr>
                                                 }
                                             }
@@ -383,25 +396,30 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                        <h4><span id="title-modal">Login</span></h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <form role="form" onsubmit="return false;">
+                            <div asp-validation-summary="ModelOnly">
+                                @* <span>Danh sách lỗi</span> *@
                             </div>
                             <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                                <label>Mã thương hiệu</label>
+                                <input type="text" class="form-control" id="brand_id" placeholder="Mã thương hiệu" asp-for="@Model.TH.brand_id">
+                                <span asp-validation-for="@Model.TH.brand_id"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Tên thương hiệu</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tên thương hiệu" asp-for="@Model.TH.name">
+                                <span asp-validation-for="@Model.TH.name"></span>
                             </div>
                             <div class="checkbox">
                             </div>
-                            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditTH()" id="button_submit">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Hủy</button>
                     </div>
                 </div>
 
@@ -425,7 +443,11 @@
 <script src="~/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="~/assets/js/demo.js"></script>
-
+@*Validate Script*@
+<script src="~/js/Validate-client/jquery-2.2.0.min.js"></script>
+<script src="~/js/Validate-client/jquery.validate.min.js"></script>
+<script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/js/sweetalert2@8.js"></script>
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
@@ -447,6 +469,10 @@
                         s += `<tr>
                                 <td>`+ data[i].brand_id +`</td>
                                 <td>`+ data[i].name +`</td>
+                                <td>
+                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditBrand(`+ data[i].brand_id +`)"><i class="pe-7s-config"></i></button>
+                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveBrand(`+ data[i].brand_id +`)"><i class="pe-7s-trash"></i></button>
+                                </td>
                             </tr>`;
                     }
                     $("#suath1").html(s);
@@ -456,6 +482,154 @@
                 Swal.fire({
                     type: "error",
                     title: "Lỗi tìm kiếm thương hiệu => TimKiem",
+                    html: e.responseText
+                });
+            }
+        });
+    }
+
+    function EditBrand(brand_id) {
+        $("#title-modal").html("Sửa thương hiệu sản phẩm " + brand_id);
+        $("#brand_id").attr('readonly', true);
+        $.ajax({
+            url: '/Admin/Brand/EditBrand',
+            type: "post",
+            dataType: "json",
+            data: {
+                brand_id: brand_id
+            },
+            success: function (data) {
+                if (data != -1) {
+                    $("#brand_id").val(data.brand_id);
+                    $("#name").val(data.name);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy thông tin thương hiệu => EditBrand",
+                    html: e.responseText
+                });
+            }
+        });
+        $("#button_submit").html("Sửa");
+        $("#button_submit").attr('onclick', 'SubmitEditTH()');
+        $("#myModal").modal();
+
+    }
+    function SubmitEditTH() {
+        var brand_id = parseInt($('#brand_id').val());
+        var name = $('#name').val();
+        if(name.trim() == ""){
+            return;
+        }
+        $.ajax({
+            url: '/Admin/Brand/SubmitEditTH',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                brand_id: brand_id,
+                name: name
+            },
+            async: false,
+            success: function (data) {
+                alert("Sửa thành công");
+                location.reload();
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi sửa thương hiệu',
+                    html: e.responseText
+                });
+            }
+        });
+    }
+    function RemoveBrand(brand_id){
+        Swal.fire({
+            type: "question",
+            title: "Xác nhận",
+            text: "Bạn có muốn xóa thương hiệu và tất cả các sản phẩm thuộc thương hiệu này?",
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/Admin/Brand/RemoveTH',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        brand_id: brand_id
+                    },
+                    success: function (data) {
+                        if (data == "ok") {
+                            alert("Đã xóa thành công");
+                            location.reload();
+                        }
+                        else {
+                            alert("Xóa không thành công");
+                        }
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi xóa thương hiệu',
+                            html: e.responseText
+                        });
+                    }
+                });
+            }
+        });
+    }
+    function ThemTH(){
+        $("#title-modal").html("Thêm thương hiệu");
+        $("#myModal").modal();
+        $.ajax({
+            url: '/Admin/Brand/MaxBrand_ID',
+            type: "post",
+            dataType: "json",
+            data: {
+            },
+            success: function (data) {
+                if (data != -1) {
+                    $("#brand_id").val(data);
+                    $("#brand_id").attr('readonly', true);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy mã thương hiệu MAX=> ThemTH",
+                    html: e.responseText
+                });
+            }
+        });
+        $("#button_submit").html("Thêm");
+        $("#button_submit").attr('onclick', 'SubmitThemTH()');
+    }
+
+    function SubmitThemTH(){
+        $("#button_submit").focus();
+        var brand_id = parseInt($('#brand_id').val());
+        var name = $('#name').val();
+        $.ajax({
+            url: '/Admin/Brand/SubmitThemTH',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                brand_id: brand_id,
+                name: name
+            },
+            async: false,
+            success: function (data) {
+                alert("Thêm thành công");
+                location.reload();
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi thêm thương hiệu',
                     html: e.responseText
                 });
             }

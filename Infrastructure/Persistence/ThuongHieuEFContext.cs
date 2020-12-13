@@ -35,6 +35,9 @@ namespace Infrastructure.Persistence
             context.ThuongHieus.Remove(TH);
             context.SaveChanges();
         }
+        public int ThuongHieu_GetMaxId(){
+            return context.ThuongHieus.Max(m => m.brand_id);
+        }
         public List<ThuongHieu> ThuongHieu_AdminTimKiem(string type, string input){
             var query = context.ThuongHieus.AsQueryable();
             switch(type){

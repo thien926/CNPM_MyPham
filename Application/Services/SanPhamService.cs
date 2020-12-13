@@ -55,6 +55,9 @@ namespace Application.Services
         {
             SPcontext.SanPham_RemoveBy_Product_Type_Id(product_type_id);
         }
+        public void SanPham_RemoveBy_Brand_Id(int brand_id){
+            SPcontext.SanPham_RemoveBy_Brand_Id(brand_id);
+        }
 
         public IEnumerable<SanPhamDto> SanPham_Shop_GetAll(){
             var sps = SPcontext.SanPham_Shop_GetAll();

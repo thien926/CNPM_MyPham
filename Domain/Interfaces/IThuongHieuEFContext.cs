@@ -11,5 +11,6 @@ namespace Domain.Interfaces
          void ThuongHieu_Update(ThuongHieu TH);
          void ThuongHieu_Remove(ThuongHieu TH);
          List<ThuongHieu> ThuongHieu_AdminTimKiem(string type, string input);
+         int ThuongHieu_GetMaxId();
     }
 }
