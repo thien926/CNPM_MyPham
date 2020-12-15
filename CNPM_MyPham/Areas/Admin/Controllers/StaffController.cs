@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.DTOs;
 using Application.Services;
+using CNPM_MyPham.Areas.Admin.Models;
 using CNPM_MyPham.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,8 +24,20 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             if(!ViewChung()){
                 return Redirect("/Admin/Login/Index");
             }
-            var ListNV = NVservice.NhanVien_GetAll();
-            return View(ListNV);
+            var IndexView = new IndexViewNhanVienModel();
+            IndexView.ListNV = NVservice.NhanVien_GetAll();
+            return View(IndexView);
+        }
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input){
+            if(String.IsNullOrEmpty(input)){
+                input = "";
+            }
+            IEnumerable<NhanVienDto> nvs = NVservice.NhanVien_AdminTimKiem(type, input);
+            if(nvs != null){
+                return new JsonResult(nvs);
+            }
+            return new JsonResult(-1);
         }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");

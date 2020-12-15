@@ -37,5 +37,9 @@ namespace Application.Services
             if(nv == null) return;
             NVcontext.NhanVien_Remove(nv);
         }
+        public IEnumerable<NhanVienDto> NhanVien_AdminTimKiem(string type, string input){
+            var nvs = NVcontext.NhanVien_AdminTimKiem(type, input);
+            return nvs.MappingNhanVienDtos();
+        }
     }
 }
