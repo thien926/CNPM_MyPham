@@ -132,17 +132,17 @@ namespace Infrastructure.Persistence
                     new Quyen{
                         permission_id = 1,
                         name = "Admin",
-                        details = "qlNhapHang-qlNhanVien-qlSanPham-qlHoaDon-qlKhuyenMai-qlKhachHang-qlPhieuNhap-qlNCC-qlTaiKhoan-qlQuyen-qlThongKe"
+                        details = "qlNhapHang-qlNhanVien-qlSanPham-qlHoaDon-qlKhachHang-qlPhieuNhap-qlNCC-qlTaiKhoan-qlQuyen-qlThongKe"
                     },
                     new Quyen{
                         permission_id = 2,
                         name = "Quản lý",
-                        details = "qlNhanVien-xemSanPham-xemHoaDon-qlKhuyenMai-qlKhachHang-xemPhieuNhap-xemNCC-qlTaiKhoan-qlThongKe"
+                        details = "qlNhanVien-xemSanPham-xemHoaDon-qlKhachHang-xemPhieuNhap-xemNCC-qlTaiKhoan-qlThongKe"
                     },
                     new Quyen{
                         permission_id = 3,
                         name = "Nhân viên bán hàng",
-                        details = "xemSanPham-qlHoaDon-xemKhuyenMai-xemKhachHang-qlThongKe"
+                        details = "xemSanPham-qlHoaDon-xemKhachHang-qlThongKe"
                     },
                     new Quyen{
                         permission_id = 4,

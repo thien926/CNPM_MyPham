@@ -18,5 +18,10 @@ namespace Application.DTOs
         public string details { get; set;}
 
         public ICollection<NhanVienDto> NhanViens {get; set;}
+        public QuyenDto(int permission_id, string name, string details){
+            this.permission_id = permission_id;
+            this.name = name;
+            this.details = details;
+        }
     }
 }

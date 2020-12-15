@@ -37,6 +37,36 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             return new JsonResult(-1);
         }
+        [HttpPost]
+        public IActionResult EditQuyen(int permission_id)
+        {
+            var Quyen = Qservice.Quyen_GetById(permission_id);
+            if(Quyen == null)
+            {
+                return new JsonResult(-1);
+            }
+            return new JsonResult(Quyen);
+        }
+
+        [HttpPost]
+        public IActionResult SubmitEditQuyen(int permission_id, string name, string details)
+        {
+            var Q = new QuyenDto(permission_id, name, details);
+            Qservice.Quyen_Update(Q);
+            return new JsonResult(1);
+        }
+        [HttpPost]
+        public IActionResult MaxPermission_ID(){
+            return new JsonResult(Qservice.Quyen_GetMaxId() + 1);
+        }
+
+        [HttpPost]
+        public IActionResult SubmitThemQuyen(int permission_id, string name, string details)
+        {
+            var Q = new QuyenDto(permission_id, name, details);
+            Qservice.Quyen_Add(Q);
+            return new JsonResult(1);
+        }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
             

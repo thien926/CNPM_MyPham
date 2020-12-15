@@ -43,5 +43,8 @@ namespace Application.Services
             var qs = Qcontext.Quyen_AdminTimKiem(type, input);
             return qs.MappingQuyenDtos();
         }
+        public int Quyen_GetMaxId(){
+            return Qcontext.Quyen_GetMaxId();
+        }
     }
 }

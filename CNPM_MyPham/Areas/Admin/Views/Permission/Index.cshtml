@@ -49,6 +49,14 @@
         .modal-footer {
             background-color: #f9f9f9;
         }
+
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
     </style>
 </head>
 <body>
@@ -204,7 +212,7 @@
                                             </select>
                                             <input type="text" style="height: 30px;" id="input_search"/>
                                             <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
-                                            <input type="button" value="Thêm quyền" style="float: right;"/>
+                                            <input type="button" value="Thêm quyền" style="float: right;" onclick="ThemQuyen()"/>
                                         </p>
                                     </form>
                                 </div>
@@ -226,8 +234,8 @@
                                                         <td>@q.details</td>
                                                         <td>
                                                             @*<i class="pe-7s-config"></i><i class="pe-7s-trash"></i>*@
-                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="cc()"><i class="pe-7s-config"></i></button>
-                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash"><i class="pe-7s-trash"></i></button>
+                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditQuyen(@q.permission_id)"><i class="pe-7s-config"></i></button>
+                                                            @* <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash"><i class="pe-7s-trash"></i></button> *@
                                                         </td>
                                                     </tr>
                                                 }
@@ -359,25 +367,118 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                        <h4><span id="title-modal">Login</span></h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <form role="form" onsubmit="return false;">
+                            <div asp-validation-summary="ModelOnly">
+                                @* <span>Danh sách lỗi</span> *@
                             </div>
                             <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                                <label>Mã quyền</label>
+                                <input type="text" class="form-control" id="permission_id" placeholder="Mã quyền" asp-for="@Model.Quyen.permission_id">
+                                <span asp-validation-for="@Model.Quyen.permission_id"></span>
                             </div>
+                            <div class="form-group">
+                                <label>Tên quyền</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tên quyền" asp-for="@Model.Quyen.name">
+                                <span asp-validation-for="@Model.Quyen.name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Chi tiết quyền</label>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Nhập hàng</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="NhapHang" onclick="changecheck('NhapHang')">
+                                <select style="margin-left: 5%;" id="QNhapHang">
+                                    <option value="xemNhapHang">Chỉ được xem</option>
+                                    <option value="qlNhapHang">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Nhân viên</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="NhanVien" onclick="changecheck('NhanVien')">
+                                <select style="margin-left: 5%;" id="QNhanVien">
+                                    <option value="xemNhanVien">Chỉ được xem</option>
+                                    <option value="qlNhanVien">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Sản phẩm</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="SanPham" onclick="changecheck('SanPham')">
+                                <select style="margin-left: 5%;" id="QSanPham">
+                                    <option value="xemSanPham">Chỉ được xem</option>
+                                    <option value="qlSanPham">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Hóa đơn</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="HoaDon" onclick="changecheck('HoaDon')">
+                                <select style="margin-left: 5%;" id="QHoaDon">
+                                    <option value="xemHoaDon">Chỉ được xem</option>
+                                    <option value="qlHoaDon">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Khách hàng</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="KhachHang" onclick="changecheck('KhachHang')">
+                                <select style="margin-left: 5%;" id="QKhachHang">
+                                    <option value="xemKhachHang">Chỉ được xem</option>
+                                    <option value="qlKhachHang">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Phiếu nhập</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="PhieuNhap" onclick="changecheck('PhieuNhap')">
+                                <select style="margin-left: 5%;" id="QPhieuNhap">
+                                    <option value="xemPhieuNhap">Chỉ được xem</option>
+                                    <option value="qlPhieuNhap">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Nhà cung cấp</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="NCC" onclick="changecheck('NCC')">
+                                <select style="margin-left: 5%;" id="QNCC">
+                                    <option value="xemNCC">Chỉ được xem</option>
+                                    <option value="qlNCC">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Tài khoản</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="TaiKhoan" onclick="changecheck('TaiKhoan')">
+                                <select style="margin-left: 5%;" id="QTaiKhoan">
+                                    <option value="xemTaiKhoan">Chỉ được xem</option>
+                                    <option value="qlTaiKhoan">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Quyền</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="Quyen" onclick="changecheck('Quyen')">
+                                <select style="margin-left: 5%;" id="QQuyen">
+                                    <option value="xemQuyen">Chỉ được xem</option>
+                                    <option value="qlQuyen">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-left: 5%;">
+                                <label>Thống kê</label>
+                                <input type="checkbox" style="margin-left: 20%;" id="ThongKe" onclick="changecheck('ThongKe')">
+                                <select style="margin-left: 5%;" id="QThongKe">
+                                    <option value="xemThongKe">Chỉ được xem</option>
+                                    <option value="qlThongKe">Xem và quản lý</option>
+                                </select>
+                            </div>
+                            @* <div class="form-group" style="display: none;">
+                                <label>Chi tiết quyền</label>
+                                <input type="text" class="form-control" id="details" placeholder="Mô tả" asp-for="@Model.Quyen.details">
+                                <span asp-validation-for="@Model.Quyen.details"></span>
+                            </div> *@
                             <div class="checkbox">
                             </div>
-                            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditQuyen()" id="button_submit">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Hủy</button>
                     </div>
                 </div>
 
@@ -401,10 +502,24 @@
 <script src="~/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="~/assets/js/demo.js"></script>
-
+@*Validate Script*@
+<script src="~/js/Validate-client/jquery-2.2.0.min.js"></script>
+<script src="~/js/Validate-client/jquery.validate.min.js"></script>
+<script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/js/sweetalert2@8.js"></script>
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
+    function changecheck(id){
+        var t = document.getElementById(id).checked;
+        if(t){
+            $("#Q" + id).prop( "disabled", false );
+        }
+        else{
+            $("#Q" + id).prop( "disabled", true );
+        }
+        
+    }
     function TimKiem(){
         var type = $("#select").val();
         var input = $("#input_search").val();
@@ -425,8 +540,7 @@
                                     <td>`+ data[i].name +`</td>
                                     <td>`+ data[i].details +`</td>
                                     <td>
-                                        <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="cc()"><i class="pe-7s-config"></i></button>
-                                        <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash"><i class="pe-7s-trash"></i></button>
+                                        <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditQuyen(`+ data[i].permission_id +`)"><i class="pe-7s-config"></i></button>
                                     </td>
                                 </tr>`;
                     }
@@ -438,6 +552,357 @@
                     type: "error",
                     title: "Lỗi tìm kiếm quyền => TimKiem",
                     html: e.responseText
+                });
+            }
+        });
+    }
+
+    function EditQuyen(permission_id) {
+        $("#title-modal").html("Sửa quyền " + permission_id);
+        $("#permission_id").attr('readonly', true);
+        $.ajax({
+            url: '/Admin/Permission/EditQuyen',
+            type: "post",
+            dataType: "json",
+            data: {
+                permission_id: permission_id
+            },
+            success: function (data) {
+                if (data != -1) {
+                    var s = data.details.toLowerCase();
+                    $("#permission_id").val(data.permission_id);
+                    $("#name").val(data.name);
+                    if(s.indexOf("nhaphang") >= 0){
+                        document.getElementById("NhapHang").checked = true;
+                        if(s.indexOf("xemnhaphang") >= 0){
+                            document.getElementById("QNhapHang").value = "xemNhapHang";
+                        }
+                        else {
+                            document.getElementById("QNhapHang").value = "qlNhapHang";
+                        }
+                        $("#QNhapHang").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("NhapHang").checked = false;
+                        $("#QNhapHang").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("nhanvien") >= 0){
+                        document.getElementById("NhanVien").checked = true;
+                        if(s.indexOf("xemnhanvien") >= 0){
+                            document.getElementById("QNhanVien").value = "xemNhanVien";
+                        }
+                        else {
+                            document.getElementById("QNhanVien").value = "qlNhanVien";
+                        }
+                        $("#QNhanVien").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("NhanVien").checked = false;
+                        $("#QNhanVien").prop( "disabled", true );
+                    }
+                    
+                    if(s.indexOf("sanpham") >= 0){
+                        document.getElementById("SanPham").checked = true;
+                        if(s.indexOf("xemsanpham") >= 0){
+                            document.getElementById("QSanPham").value = "xemSanPham";
+                        }
+                        else {
+                            document.getElementById("QSanPham").value = "qlSanPham";
+                        }
+                        $("#QSanPham").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("SanPham").checked = false;
+                        $("#QSanPham").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("hoadon") >= 0){
+                        document.getElementById("HoaDon").checked = true;
+                        if(s.indexOf("xemhoadon") >= 0){
+                            document.getElementById("QHoaDon").value = "xemHoaDon";
+                        }
+                        else {
+                            document.getElementById("QHoaDon").value = "qlHoaDon";
+                        }
+                        $("#QHoaDon").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("HoaDon").checked = false;
+                        $("#QHoaDon").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("khachhang") >= 0){
+                        document.getElementById("KhachHang").checked = true;
+                        if(s.indexOf("xemkhachhang") >= 0){
+                            document.getElementById("QKhachHang").value = "xemKhachHang";
+                        }
+                        else {
+                            document.getElementById("QKhachHang").value = "qlKhachHang";
+                        }
+                        $("#QKhachHang").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("KhachHang").checked = false;
+                        $("#QKhachHang").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("phieunhap") >= 0){
+                        document.getElementById("PhieuNhap").checked = true;
+                        if(s.indexOf("xemphieunhap") >= 0){
+                            document.getElementById("QPhieuNhap").value = "xemPhieuNhap";
+                        }
+                        else {
+                            document.getElementById("QPhieuNhap").value = "qlPhieuNhap";
+                        }
+                        $("#QPhieuNhap").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("PhieuNhap").checked = false;
+                        $("#QPhieuNhap").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("ncc") >= 0){
+                        document.getElementById("NCC").checked = true;
+                        if(s.indexOf("xemncc") >= 0){
+                            document.getElementById("QNCC").value = "xemNCC";
+                        }
+                        else {
+                            document.getElementById("QNCC").value = "qlNCC";
+                        }
+                        $("#QNCC").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("NCC").checked = false;
+                        $("#QNCC").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("taikhoan") >= 0){
+                        document.getElementById("TaiKhoan").checked = true;
+                        if(s.indexOf("xemtaikhoan") >= 0){
+                            document.getElementById("QTaiKhoan").value = "xemTaiKhoan";
+                        }
+                        else {
+                            document.getElementById("QTaiKhoan").value = "qlTaiKhoan";
+                        }
+                        $("#QTaiKhoan").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("TaiKhoan").checked = false;
+                        $("#QTaiKhoan").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("quyen") >= 0){
+                        document.getElementById("Quyen").checked = true;
+                        if(s.indexOf("xemquyen") >= 0){
+                            document.getElementById("QQuyen").value = "xemQuyen";
+                        }
+                        else {
+                            document.getElementById("QQuyen").value = "qlQuyen";
+                        }
+                        $("#QQuyen").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("Quyen").checked = false;
+                        $("#QQuyen").prop( "disabled", true );
+                    }
+
+                    if(s.indexOf("thongke") >= 0){
+                        document.getElementById("ThongKe").checked = true;
+                        if(s.indexOf("xemthongke") >= 0){
+                            document.getElementById("QThongKe").value = "xemThongKe";
+                        }
+                        else {
+                            document.getElementById("QThongKe").value = "qlThongKe";
+                        }
+                        $("#QThongKe").prop( "disabled", false );
+                    }
+                    else{
+                        document.getElementById("ThongKe").checked = false;
+                        $("#QThongKe").prop( "disabled", true );
+                    }
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy thông tin quyền => EditQuyen"
+                });
+            }
+        });
+        $("#button_submit").html("Sửa");
+        $("#button_submit").attr('onclick', 'SubmitEditQuyen()');
+        $("#myModal").modal();
+
+    }
+    function SubmitEditQuyen() {
+        var permission_id = parseInt($('#permission_id').val());
+        var name = $('#name').val();
+        var details = "";
+        if(document.getElementById("NhapHang").checked){
+            details += document.getElementById("QNhapHang").value + "-";
+        }
+        if(document.getElementById("NhanVien").checked){
+            details += document.getElementById("QNhanVien").value + "-";
+        }
+        if(document.getElementById("SanPham").checked){
+            details += document.getElementById("QSanPham").value + "-";
+        }
+        if(document.getElementById("HoaDon").checked){
+            details += document.getElementById("QHoaDon").value + "-";
+        }
+        if(document.getElementById("KhachHang").checked){
+            details += document.getElementById("QKhachHang").value + "-";
+        }
+        if(document.getElementById("PhieuNhap").checked){
+            details += document.getElementById("QPhieuNhap").value + "-";
+        }
+        if(document.getElementById("NCC").checked){
+            details += document.getElementById("QNCC").value + "-";
+        }
+        if(document.getElementById("TaiKhoan").checked){
+            details += document.getElementById("QTaiKhoan").value + "-";
+        }
+        if(document.getElementById("Quyen").checked){
+            details += document.getElementById("QQuyen").value + "-";
+        }
+        if(document.getElementById("ThongKe").checked){
+            details += document.getElementById("QThongKe").value + "-";
+        }
+        details = details.substring(0, details.length - 1);
+        $.ajax({
+            url: '/Admin/Permission/SubmitEditQuyen',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                permission_id: permission_id,
+                name: name,
+                details: details
+            },
+            async: false,
+            success: function (data) {
+                alert("Sửa thành công");
+                location.reload();
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi sửa quyền'
+                });
+            }
+        });
+    }
+
+    function ThemQuyen(){
+        $("#title-modal").html("Thêm quyền");
+        $("#myModal").modal();
+        document.getElementById("NhapHang").checked = true;
+        document.getElementById("QNhapHang").value = "xemNhapHang";
+
+        document.getElementById("NhanVien").checked = true;
+        document.getElementById("QNhanVien").value = "xemNhanVien";
+
+        document.getElementById("SanPham").checked = true;
+        document.getElementById("QSanPham").value = "xemSanPham";
+
+        document.getElementById("HoaDon").checked = true;
+        document.getElementById("QHoaDon").value = "xemHoaDon";
+
+        document.getElementById("KhachHang").checked = true;
+        document.getElementById("QKhachHang").value = "xemKhachHang";
+
+        document.getElementById("PhieuNhap").checked = true;
+        document.getElementById("QPhieuNhap").value = "xemPhieuNhap";
+
+        document.getElementById("NCC").checked = true;
+        document.getElementById("QNCC").value = "xemNCC";
+
+        document.getElementById("TaiKhoan").checked = true;
+        document.getElementById("QTaiKhoan").value = "xemTaiKhoan";
+
+        document.getElementById("Quyen").checked = true;
+        document.getElementById("QQuyen").value = "xemQuyen";
+        
+        document.getElementById("ThongKe").checked = true;
+        document.getElementById("QThongKe").value = "xemThongKe";
+        $.ajax({
+            url: '/Admin/Permission/MaxPermission_ID',
+            type: "post",
+            dataType: "json",
+            data: {
+            },
+            success: function (data) {
+                if (data != -1) {
+                    $("#permission_id").val(data);
+                    $("#name").val("");
+                    $("#permission_id").attr('readonly', true);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy mã quyền MAX=> ThemQuyen",
+                    html: e.responseText
+                });
+            }
+        });
+        $("#button_submit").html("Thêm");
+        $("#button_submit").attr('onclick', 'SubmitThemQuyen()');
+    }
+
+    function SubmitThemQuyen(){
+        var permission_id = parseInt($('#permission_id').val());
+        var name = $('#name').val();
+        var details = "";
+        if(document.getElementById("NhapHang").checked){
+            details += document.getElementById("QNhapHang").value + "-";
+        }
+        if(document.getElementById("NhanVien").checked){
+            details += document.getElementById("QNhanVien").value + "-";
+        }
+        if(document.getElementById("SanPham").checked){
+            details += document.getElementById("QSanPham").value + "-";
+        }
+        if(document.getElementById("HoaDon").checked){
+            details += document.getElementById("QHoaDon").value + "-";
+        }
+        if(document.getElementById("KhachHang").checked){
+            details += document.getElementById("QKhachHang").value + "-";
+        }
+        if(document.getElementById("PhieuNhap").checked){
+            details += document.getElementById("QPhieuNhap").value + "-";
+        }
+        if(document.getElementById("NCC").checked){
+            details += document.getElementById("QNCC").value + "-";
+        }
+        if(document.getElementById("TaiKhoan").checked){
+            details += document.getElementById("QTaiKhoan").value + "-";
+        }
+        if(document.getElementById("Quyen").checked){
+            details += document.getElementById("QQuyen").value + "-";
+        }
+        if(document.getElementById("ThongKe").checked){
+            details += document.getElementById("QThongKe").value + "-";
+        }
+        details = details.substring(0, details.length - 1);
+        $.ajax({
+            url: '/Admin/Permission/SubmitThemQuyen',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                permission_id: permission_id,
+                name: name,
+                details: details
+            },
+            async: false,
+            success: function (data) {
+                alert("Thêm thành công");
+                location.reload();
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi thêm quyền'
                 });
             }
         });

@@ -7,11 +7,7 @@ namespace Application.Mappings
     public static class MappingQuyenProfile
     {
         public static QuyenDto MappingQuyenDto(this Quyen Q){
-            return new QuyenDto{
-                permission_id = Q.permission_id,
-                name = Q.name,
-                details = Q.details
-            };
+            return new QuyenDto(Q.permission_id, Q.name, Q.details);
         }
 
         public static Quyen MappingQuyen(this QuyenDto Qdto){

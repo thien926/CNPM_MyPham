@@ -40,6 +40,9 @@ namespace Infrastructure.Persistence
             context.Quyens.Update(Q);
             context.SaveChanges();
         }
+        public int Quyen_GetMaxId(){
+            return context.Quyens.Max(m => m.permission_id);
+        }
         public List<Quyen> Quyen_AdminTimKiem(string type, string input){
             var query = context.Quyens.AsQueryable();
             switch(type){
