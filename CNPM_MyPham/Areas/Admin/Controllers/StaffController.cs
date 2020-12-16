@@ -26,6 +26,7 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var IndexView = new IndexViewNhanVienModel();
             IndexView.ListNV = NVservice.NhanVien_GetAll();
+            IndexView.ListQ = Qservice.Quyen_GetAll();
             return View(IndexView);
         }
         [HttpPost]
@@ -38,6 +39,60 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
                 return new JsonResult(nvs);
             }
             return new JsonResult(-1);
+        }
+        [HttpPost]
+        public IActionResult EditNV(string user)
+        {
+            var NV = NVservice.NhanVien_GetByUser(user);
+            if(NV == null)
+            {
+                return new JsonResult(-1);
+            }
+            return new JsonResult(NV);
+        }
+        [HttpPost]
+        public IActionResult SubmitEditNV(string user, string pass, string repass, string full_name, string phone, string mail,
+        string address, string sex, DateTime dateborn, int permission_id)
+        {
+            if(pass != repass){
+                return new JsonResult(-1);
+            }
+            int status = NVservice.NhanVien_GetByUser(user).status;
+            var NV = new NhanVienDto(user, pass, repass, full_name, phone, mail, address, sex, dateborn, permission_id, status);
+            NVservice.NhanVien_Update(NV);
+            return new JsonResult(1);
+        }
+
+        [HttpPost]
+        public IActionResult SubmitThemNV(string user, string pass, string repass, string full_name, string phone, string mail,
+        string address, string sex, DateTime dateborn, int permission_id)
+        {
+            if(pass != repass){
+                return new JsonResult(-1);
+            }
+            var NV = new NhanVienDto(user, pass, repass, full_name, phone, mail, address, sex, dateborn, permission_id, 1);
+            NVservice.NhanVien_Add(NV);
+            return new JsonResult(1);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveNV(string user)
+        {
+            //NVservice.SanPham_Remove(user);
+            var NV = NVservice.NhanVien_GetByUser(user);
+            NV.status = 0;
+            NVservice.NhanVien_Update(NV);
+            return new JsonResult("ok");
+        }
+
+        [HttpPost]
+        public IActionResult BackNV(string user)
+        {
+            //NVservice.SanPham_Remove(user);
+            var NV = NVservice.NhanVien_GetByUser(user);
+            NV.status = 1;
+            NVservice.NhanVien_Update(NV);
+            return new JsonResult("ok");
         }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");

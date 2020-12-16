@@ -48,6 +48,14 @@
         .modal-footer {
             background-color: #f9f9f9;
         }
+
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
+        }
     </style>
 </head>
 <body>
@@ -244,14 +252,14 @@
                                                             <td>Ẩn</td>
                                                         }
                                                         <td>
-                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditNV(@q.user)"><i class="pe-7s-config"></i></button>
+                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditNV('@q.user')"><i class="pe-7s-config"></i></button>
                                                             @if (q.status != 0)
                                                             {
-                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveNV(@q.user)"><i class="pe-7s-lock"></i></button>
+                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveNV('@q.user')"><i class="pe-7s-lock"></i></button>
                                                             }
                                                             else
                                                             {
-                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackNV(@q.user)"><i class="pe-7s-unlock"></i></button>
+                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackNV('@q.user')"><i class="pe-7s-unlock"></i></button>
                                                             }
                                                         </td>
                                                     </tr>
@@ -263,74 +271,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="col-md-12">
-                            <div class="card card-plain">
-                                <div class="header">
-                                    <h4 class="title">Table on Plain Background</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
-                                </div>
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Salary</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>$63,542</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>$78,615</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -381,25 +321,82 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span id="title-modal">Login</span></h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <form role="form" onsubmit="return false;">
+                            <div asp-validation-summary="ModelOnly">
+                                @* <span>Danh sách lỗi</span> *@
                             </div>
                             <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                                <label>Tài khoản</label>
+                                <input type="text" class="form-control" id="user" placeholder="Tài khoản" asp-for="@Model.NV.user">
+                                <span asp-validation-for="@Model.NV.user"></span>
                             </div>
+                            <div class="form-group">
+                                <label>Mật khẩu</label>
+                                <input type="password" class="form-control" id="pass" placeholder="Mật khẩu" asp-for="@Model.NV.pass">
+                                <span asp-validation-for="@Model.NV.pass"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu</label>
+                                <input type="password" class="form-control" id="repass" placeholder="Nhập lại mật khẩu" asp-for="@Model.NV.repass">
+                                <span asp-validation-for="@Model.NV.repass"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Họ tên</label>
+                                <input type="text" class="form-control" id="full_name" placeholder="Họ tên" asp-for="@Model.NV.full_name">
+                                <span asp-validation-for="@Model.NV.full_name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Số điện thoại" asp-for="@Model.NV.phone">
+                                <span asp-validation-for="@Model.NV.phone"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Thư điện tử</label>
+                                <input type="text" class="form-control" id="mail" placeholder="Thư điện tử" asp-for="@Model.NV.mail">
+                                <span asp-validation-for="@Model.NV.mail"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ" asp-for="@Model.NV.address">
+                                <span asp-validation-for="@Model.NV.address"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                <select id="sex" style="height: 30px; margin-left: 5%;">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                                <span asp-validation-for="@Model.NV.sex"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <input type="date" class="form-control" id="dateborn" placeholder="Ngày sinh" asp-for="@Model.NV.dateborn">
+                                <span asp-validation-for="@Model.NV.dateborn"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Mã quyền</label>
+                                <select id="permission_id" style="height: 30px; margin-left: 5%;">
+                                    @{
+                                        foreach(var q in Model.ListQ){
+                                            <option value="@q.permission_id">@q.permission_id - @q.name</option>
+                                        }
+                                    }
+                                </select>
+                                @* <input type="text" class="form-control" id="permission_id" placeholder="Mã quyền" asp-for="@Model.NV.permission_id"> *@
+                                <span asp-validation-for="@Model.NV.permission_id"></span>
+                            </div>
+                            
                             <div class="checkbox">
                             </div>
-                            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditNV()" id="button_submit">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Hủy</button>
                     </div>
                 </div>
 
@@ -431,6 +428,9 @@
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
+    function Onchange_sex(){
+        $("#sex").val(document.getElementById("select_sex").value);
+    }
     function TimKiem(){
         var type = $("#select").val();
         var input = $("#input_search").val();
@@ -465,14 +465,14 @@
                                     s += `<td>Ẩn</td>`;
                                 }
                         s +=    `<td>
-                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditNV(data[i].user)"><i class="pe-7s-config"></i></button>`;
+                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditNV('`+ data[i].user +`')"><i class="pe-7s-config"></i></button>`;
                                     if (data[i].status != 0)
                                     {
-                                        s+= `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveNV(data[i].user)"><i class="pe-7s-lock"></i></button>`;
+                                        s+= `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveNV('`+ data[i].user +`')"><i class="pe-7s-lock"></i></button>`;
                                     }
                                     else
                                     {
-                                        s+= `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackNV(data[i].user)"><i class="pe-7s-unlock"></i></button>`;
+                                        s+= `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackNV('`+ data[i].user +`')"><i class="pe-7s-unlock"></i></button>`;
                                     }
                         s +=    `</td>
                             </tr>`;
@@ -485,6 +485,210 @@
                     type: "error",
                     title: "Lỗi tìm kiếm loại sản phẩm => TimKiem",
                     html: e.responseText
+                });
+            }
+        });
+    }
+    function EditNV(user) {
+        $(".form-group span").text("");
+        $("#title-modal").html("Sửa nhân viên " + user);
+        $("#user").attr('readonly', true);
+        $.ajax({
+            url: '/Admin/Staff/EditNV',
+            type: "post",
+            dataType: "json",
+            data: {
+                user: user
+            },
+            success: function (data) {
+                if (data != -1) {
+                    $("#user").val(data.user);
+                    $("#pass").val(data.pass);
+                    $("#repass").val(data.repass);
+                    $("#full_name").val(data.full_name);
+                    $("#phone").val(data.phone);
+                    $("#mail").val(data.mail);
+                    $("#address").val(data.address);
+                    @* document.getElementById("select_sex").value = data.sex; *@
+                    $("#sex").val(data.sex);
+                    $("#permission_id").val(data.permission_id);
+                    var d = formatDate(data.dateborn);
+                    $("#dateborn").val(d);
+
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy thông tin nhân viên => EditNV",
+                    html: e.responseText
+                });
+            }
+        });
+        $("#button_submit").html("Sửa");
+        $("#button_submit").attr('onclick', 'SubmitEditNV()');
+        $("#myModal").modal();
+
+    }
+    function SubmitEditNV() {
+        $.ajax({
+            url: '/Admin/Staff/SubmitEditNV',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                user: $('#user').val(),
+                pass: $('#pass').val(),
+                repass: $('#repass').val(),
+                full_name: $('#full_name').val(),
+                phone: $('#phone').val(),
+                mail: $('#mail').val(),
+                address: $('#address').val(),
+                sex: $('#sex').val(),
+                dateborn: $('#dateborn').val(),
+                permission_id: $('#permission_id').val()
+            },
+            async: false,
+            success: function (data) {
+                if(data != -1){
+                    alert("Sửa thành công");
+                    location.reload();
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi sửa tài khoản'
+                });
+            }
+        });
+    }
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
+    function BackNV(user) {
+        Swal.fire({
+            type: "question",
+            title: "Xác nhận",
+            text: "Bạn có muốn mở khóa tài khoản này này?",
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/Admin/Staff/BackNV',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        user: user
+                    },
+                    success: function (data) {
+                        if (data == "ok") {
+                            alert("Đã mở khóa thành công");
+                            location.reload();
+                        }
+                        else {
+                            alert("Mở khóa không thành công");
+                        }
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi mở khóa tài khoản này',
+                            html: e.responseText
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function RemoveNV(user) {
+        Swal.fire({
+            type: "question",
+            title: "Xác nhận",
+            text: "Bạn có muốn khóa tài khoản này này?",
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/Admin/Staff/RemoveNV',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        user: user
+                    },
+                    success: function (data) {
+                        if (data == "ok") {
+                            alert("Đã khóa thành công");
+                            location.reload();
+                        }
+                        else {
+                            alert("Khóa không thành công");
+                        }
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi khóa tài khoản này',
+                            html: e.responseText
+                        });
+                    }
+                });
+            }
+        });
+    }
+    function ThemNV(){
+        $("#title-modal").html("Thêm tài khoản");
+        $("#myModal").modal();
+        $(".form-group span").text("");
+        
+        $("#button_submit").html("Thêm");
+        $("#button_submit").attr('onclick', 'SubmitThemNV()');
+    }
+
+    function SubmitThemNV(){
+        $("#button_submit").focus();
+        $.ajax({
+            url: '/Admin/Staff/SubmitThemNV',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                user: $('#user').val(),
+                pass: $('#pass').val(),
+                repass: $('#repass').val(),
+                full_name: $('#full_name').val(),
+                phone: $('#phone').val(),
+                mail: $('#mail').val(),
+                address: $('#address').val(),
+                sex: $('#sex').val(),
+                dateborn: $('#dateborn').val(),
+                permission_id: $('#permission_id').val()
+            },
+            async: false,
+            success: function (data) {
+                if(data != -1){
+                    alert("Thêm thành công");
+                    location.reload();
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi thêm nhân viên'
                 });
             }
         });

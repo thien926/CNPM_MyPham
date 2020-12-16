@@ -53,5 +53,20 @@ namespace Application.DTOs
         {
             status = 1;
         }
+        public NhanVienDto(string user, string pass, string repass, string full_name, string phone, string mail,
+        string address, string sex, DateTime dateborn, int permission_id, int status)
+        {
+            this.user = user;
+            this.pass = pass;
+            this.repass = repass;
+            this.full_name = full_name;
+            this.phone = phone;
+            this.mail = mail;
+            this.address = address;
+            this.sex = sex;
+            this.dateborn = dateborn;
+            this.permission_id = permission_id;
+            this.status = status;
+        }
     }
 }
