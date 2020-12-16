@@ -18,16 +18,25 @@ namespace CNPM_MyPham.Controllers
     public class HomeController : Controller
     {
         private readonly LoaiSanPhamService LSPservice;
+        private readonly SanPhamService SPservice;
+        private readonly ThuongHieuService THservice;
 
-        public HomeController(LoaiSanPhamService LSPservice)
+        public HomeController(LoaiSanPhamService LSPservice, SanPhamService SPservice, ThuongHieuService THservice)
         {
             this.LSPservice = LSPservice;
+            this.SPservice = SPservice;
+            this.THservice = THservice;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             View_Chung();
-            return View();
+            var IndexView = new IndexViewHomeModel();
+            IndexView.ListSPChay = SPservice.TenSPChay();
+            IndexView.ListSPNoi = SPservice.TenSPNoi();
+            IndexView.ListTH = THservice.ThuongHieu_GetAll();
+            return View(IndexView);
         }
 
         public IActionResult Privacy()

@@ -51,5 +51,10 @@ namespace Application.Services
             if (hd == null) return null;
             return hd.MappingHoaDonDto();
         }
+
+        public IEnumerable<HoaDonDto> HoaDon_AdminTimKiem(string type, string input, int status){
+            var hds = HDcontext.HoaDon_AdminTimKiem(type, input, status);
+            return hds.MappingHoaDonDtos();
+        }
     }
 }

@@ -59,6 +59,24 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             return View(IndexBill);
         }
 
+        [HttpPost]
+        public IActionResult ViewCTHD(int bill_id){
+            IEnumerable<ChiTietHoaDonDto> cthds= cthdservice.ChiTietHoaDon_GetByBillId(bill_id);
+            if(cthds == null){
+                return new JsonResult(-1);
+            }
+            return new JsonResult(cthds);
+        }
+
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input, int status){
+            var hds = hdservice.HoaDon_AdminTimKiem(type, input, status);
+            if(hds == null){
+                return new JsonResult(-1);
+            }
+            return new JsonResult(hds);
+        }
+
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");
             

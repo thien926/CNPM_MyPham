@@ -20,6 +20,9 @@
     <script src="~/js/Validate-client/jquery.validate.min.js"></script>
     <script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
     <script>
+        $(".nav-menu li").removeClass( "active" );
+        $("#page_login").addClass("active");
+
         Message_Login();
         function Message_Login(){
             @if(ViewBag.Message_Login != null){

@@ -13,5 +13,6 @@ namespace Domain.Interfaces
         int HoaDon_GetMaxId();
         IEnumerable<HoaDon> HoaDon_GetByUser(string user);
         HoaDon HoaDon_GetByUserAndID(string user, int id);
+        List<HoaDon> HoaDon_AdminTimKiem(string type, string input, int status);
     }
 }

@@ -15,5 +15,7 @@ namespace Domain.Interfaces
         void SanPham_RemoveBy_Brand_Id(int brand_id);
         List<SanPham> SanPham_Filter(string Type, string Brand, string SearchString, string sort, int pageIndex, int pageSize, out int count, out decimal pricemax, string price);
         List<SanPham> SanPhams_AdminTimKiem(string type, string input);
+        List<SanPham> TenSPChay();
+        List<SanPham> TenSPNoi();
     }
 }

@@ -63,5 +63,14 @@ namespace Application.Services
             var sps = SPcontext.SanPham_Shop_GetAll();
             return sps.MappingSanPhamDtos();
         }
+        public IEnumerable<SanPhamDto> TenSPChay(){
+            var sps = SPcontext.TenSPChay();
+            return sps.MappingSanPhamDtos();
+        }
+
+        public IEnumerable<SanPhamDto> TenSPNoi(){
+            var sps = SPcontext.TenSPNoi();
+            return sps.MappingSanPhamDtos();
+        }
     }
 }

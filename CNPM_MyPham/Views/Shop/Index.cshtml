@@ -8,6 +8,9 @@
 
 @section Scripts{
     <script>
+        $(".nav-menu li").removeClass( "active" );
+        $("#page_shop").addClass("active");
+
         function ShopThemSPAjax(idsp){
             $.ajax({
                 url : "@Url.Action("ShopThemSPAjax")",

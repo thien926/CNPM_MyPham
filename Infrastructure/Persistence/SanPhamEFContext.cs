@@ -219,5 +219,23 @@ namespace Infrastructure.Persistence
             return query.Skip((pageIndex - 1) * pageSize)
                         .Take(pageSize).ToList();
         }
+
+        public List<SanPham> TenSPChay(){
+            var query = context.SanPhams.AsQueryable();
+            int pageIndex = 1;
+            int pageSize = 10;
+            query = query.OrderBy(m => m.amount);
+            return query.Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize).ToList();
+        }
+
+        public List<SanPham> TenSPNoi(){
+            var query = context.SanPhams.AsQueryable();
+            int pageIndex = 1;
+            int pageSize = 10;
+            query = query.OrderBy(m => (int?)m.price);
+            return query.Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize).ToList();
+        }
     }
 }

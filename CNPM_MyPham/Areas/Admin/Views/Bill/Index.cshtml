@@ -202,8 +202,26 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Striped Table with Hover</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
+                                    <form class="title" onsubmit="return false;">
+                                        <p>
+                                            <select style="height: 30px;" id="select">
+                                                <option value="all">Tất cả</option>
+                                                <option value="bill_id">Tìm theo mã hóa đơn</option>
+                                                <option value="user_kh">Tìm theo mã khách hàng</option>
+                                                <option value="user_nv">Tìm theo mã nhân viên</option>
+                                            </select>
+                                            <input type="text" style="height: 30px;" id="input_search"/>
+                                            <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
+                                            <select style="height: 30px; float: right" id="select_trangthai" onchange="TimKiem()">
+                                                <option value="0">Tất cả</option>
+                                                <option value="1">Đang xử lý</option>
+                                                <option value="2">Đang giao hàng</option>
+                                                <option value="3">Đã giao hàng</option>
+                                                <option value="4">Đã hủy đơn hàng</option>
+                                            </select>
+                                            <span style="float: right; margin-right: 2%;">Trạng thái: </span>
+                                        </p>
+                                    </form>
                                 </div>
                                 <div class="content table-responsive table-full-width" id="id1">
                                     <table class="table table-hover table-striped">
@@ -219,7 +237,7 @@
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="suahd1"> 
                                             @{
                                                 foreach (var q in Model.ListHD)
                                                 {
@@ -274,8 +292,8 @@
                         <div class="col-md-12">
                             <div class="card card-plain">
                                 <div class="header">
-                                    <h4 class="title">Chi tiết hóa đơn</h4>
-                                    <p class="title">Tổng tiền</p>
+                                    <h4 class="title" id="id_cthd">Chi tiết hóa đơn</h4>
+                                    <p class="title" id="id_thanhtien">Thành tiền: </p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover">
@@ -449,6 +467,78 @@
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
+    function TimKiem(){
+        var type = $("#select").val();
+        var input = $("#input_search").val();
+        var status = $("#select_trangthai").val();
+        $.ajax({
+            url: '/Admin/Bill/TimKiem',
+            type: "post",
+            dataType: "json",
+            data: {
+                type: type,
+                input: input,
+                status : status
+            },
+            success: function (data) {
+                if (data != -1) {
+                    var s = "";
+                    var dn = "";
+                    var dg = "";
+                    for(let i = 0; i < data.length; ++i){
+                        dn = "";
+                        dg = "";
+                        if(data[i].date_receice != null){
+                            dn = data[i].date_receice.split("T");
+                            dn[0] = dn[0].split("-");
+                            dn[1] = dn[1].split(":");
+                            dn = dn[0][2] + "/" + dn[0][1] + "/" + dn[0][0] + " " + dn[1][0] + ":" + dn[1][1] + ":" + dn[1][2];
+                        }
+                        
+                        dg = data[i].date_order.split("T");
+                        dg[0] = dg[0].split("-");
+                        dg[1] = dg[1].split(":");
+                        dg = dg[0][2] + "/" + dg[0][1] + "/" + dg[0][0] + " " + dg[1][0] + ":" + dg[1][1] + ":" + dg[1][2];
+                        s += `<tr>
+                                    <td>`+ data[i].bill_id +`</td>
+                                    <td>`+ data[i].user_kh +`</td>
+                                    <td>`+ data[i].user_nv +`</td>
+                                    <td>`+ data[i].phone +`</td>
+                                    <td>`+ data[i].address +`</td>
+                                    <td>`+ dn +`</td>`;
+                        s +=        `<td>`+ dg +`</td>
+                                    <td>data[i].total</td>`;
+                                    switch(data[i].status){
+                                        case 1: s += `<td>Đang xử lý</td>`;
+                                                break;
+                                        case 2: s += `<td>Đang giao hàng</td>`;
+                                                break;
+                                        case 3: s += `<td><td>Đã giao hàng</td>`;
+                                                break;
+                                        case 4: s += `<td>Đã hủy đơn hàng</td>`;
+                                                break;
+                                        default: break;
+                                    }
+                        s +=        `<td>`;
+                                        if(data[i].status < 3){
+                                            s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditHD(`+ data[i].bill_id +`)"><i class="pe-7s-config"></i></button>`;
+                                        }
+                                        s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="ViewCTHD(`+ data[i].bill_id +`)"><i class="pe-7s-look"></i></button>`;
+                        s +=        `</td>
+                                </tr>`;
+                    }
+                    $("#suahd1").html(s);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi tìm kiếm hóa đơn => TimKiem",
+                    html: e.responseText
+                });
+            }
+        });
+    }
 
     function EditHD(bill_id) {
         $("#title-modal").html("Sửa hóa đơn " + bill_id);
@@ -511,7 +601,43 @@
         });
     }
     function ViewCTHD(bill_id){
-
+        $.ajax({
+            url: '/Admin/Bill/ViewCTHD',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                bill_id: bill_id
+            },
+            async: false,
+            success: function (data) {
+                if(data != -1){
+                    var s = "";
+                    var tongtien = 0;
+                    var thanhtien = 0;
+                    for(let i = 0; i < data.length; ++i){
+                        tongtien = parseInt(data[i].price) * parseInt(data[i].amount);
+                        thanhtien += tongtien;
+                        s += `<tr>
+                                <td>`+ data[i].product_id +`</td>
+                                <td style="width: 80px; height: 80px;"><img src="`+ data[i].img +`" style="width: 100%; height: 100%;"></td>
+                                <td>`+ data[i].name +`</td>
+                                <td>`+ data[i].price +`</td>
+                                <td>`+ data[i].amount +`</td>
+                                <td>`+ tongtien +` đ</td>
+                            </tr>`;
+                    }
+                    $("#suacthd1").html(s);
+                    $("#id_thanhtien").html("Thành tiền: " + thanhtien + " đ");
+                    $("#id_cthd").html("Chi tiết hóa đơn " + bill_id);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi sửa tài khoản'
+                });
+            }
+        });
     }
 
 </script>

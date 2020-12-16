@@ -15,6 +15,9 @@
 
 @section Scripts{
     <script>
+        $(".nav-menu li").removeClass( "active" );
+        $("#page_cart").addClass("active");
+
         function CheckOutCart(){
             this.focus();
             var address = $("#input_nhapdcnh").val();
