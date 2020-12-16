@@ -399,6 +399,7 @@
     }
 
     function EditLSP(product_type_id) {
+        $(".form-group span").text("");
         $("#title-modal").html("Sửa loại sản phẩm " + product_type_id);
         $("#product_type_id").attr('readonly', true);
         $.ajax({
@@ -430,6 +431,7 @@
     }
 
     function ThemLSP(){
+        $(".form-group span").text("");
         $("#title-modal").html("Thêm loại sản phẩm");
         $("#myModal").modal();
         $.ajax({
@@ -481,8 +483,7 @@
             error: function (e) {
                 Swal.fire({
                     type: 'error',
-                    title: 'Lỗi thêm loại sản phẩm',
-                    html: e.responseText
+                    title: 'Lỗi thêm loại sản phẩm'
                 });
             }
         });

@@ -183,63 +183,7 @@
                         <a class="navbar-brand">@ViewData["Title"]</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @*<ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-dashboard"></i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        <b class="caret hidden-sm hidden-xs"></b>
-                                        <span class="notification hidden-sm hidden-xs">5</span>
-                                        <p class="hidden-lg hidden-md">
-                                            5 Notifications
-                                            <b class="caret"></b>
-                                        </p>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-search"></i>
-                                        <p class="hidden-lg hidden-md">Search</p>
-                                    </a>
-                                </li>
-                            </ul>*@
-
                         <ul class="nav navbar-nav navbar-right">
-                            @*<li>
-                                    <a href="">
-                                        <p>Account</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <p>
-                                            Dropdown
-                                            <b class="caret"></b>
-                                        </p>
-
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>*@
                             <li>
                                 <a>
                                     <p>@ViewBag.CurrentUserAdmin.full_name | <span>Đăng xuất</span></p>
@@ -311,55 +255,14 @@
                                                         
                                                         <td>
                                                             @*<i class="pe-7s-config"></i><i class="pe-7s-trash"></i>*@
-                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditHD(@q.bill_id)"><i class="pe-7s-config"></i></button>
-                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveHD(@q.bill_id)"><i class="pe-7s-trash"></i></button>
+                                                            @if(@q.status < 3){
+                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditHD(@q.bill_id)"><i class="pe-7s-config"></i></button>
+                                                            }
+                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="ViewCTHD(@q.bill_id)"><i class="pe-7s-look"></i></button>
                                                         </td>
                                                     </tr>
                                                 }
                                             }
-                                            @* <tr>
-                                                    <td>1</td>
-                                                    <td><img src="~/assets/img/tim_80x80.png"></td>
-                                                    <!-- <td>Dakota Rice</td> -->
-                                                    <td>$36,738</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr> *@
                                         </tbody>
                                     </table>
 
@@ -371,20 +274,21 @@
                         <div class="col-md-12">
                             <div class="card card-plain">
                                 <div class="header">
-                                    <h4 class="title">Table on Plain Background</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
+                                    <h4 class="title">Chi tiết hóa đơn</h4>
+                                    <p class="title">Tổng tiền</p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover">
                                         <thead>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Salary</th>
-                                        <th>Country</th>
-                                        <th>City</th>
+                                            <th>Mã sản phẩm</th>
+                                            <th>Ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
+                                        <tbody id="suacthd1">
+                                            @* <tr>
                                                 <td>1</td>
                                                 <td>Dakota Rice</td>
                                                 <td>$36,738</td>
@@ -425,7 +329,7 @@
                                                 <td>$78,615</td>
                                                 <td>Chile</td>
                                                 <td>Gloucester</td>
-                                            </tr>
+                                            </tr> *@
                                         </tbody>
                                     </table>
 
@@ -497,23 +401,23 @@
                                 <input type="text" class="form-control" id="bill_id" placeholder="Mã loại" asp-for="@Model.HD.bill_id">
                                 <span asp-validation-for="@Model.HD.bill_id"></span>
                             </div>
-                            @* <div class="form-group">
-                                <label>Tên loại</label>
-                                <input type="text" class="form-control" id="name" placeholder="Tên loại" asp-for="@Model.HD.name">
-                                <span asp-validation-for="@Model.HD.name"></span>
-                            </div>
                             <div class="form-group">
-                                <label>Mô tả</label>
-                                <input type="text" class="form-control" id="description" placeholder="Mô tả" asp-for="@Model.HD.description">
-                                <span asp-validation-for="@Model.HD.description"></span>
-                            </div> *@
+                                <label>Trạng thái</label>
+                                <select id="status" style="width: 100%; height: 40px;">
+                                    <option value="1">Đang xử lý</option>
+                                    <option value="2">Đang giao hàng</option>
+                                    <option value="3">Đã giao hàng</option>
+                                    <option value="4">Đã hủy đơn hàng</option>
+                                </select>
+                                <span asp-validation-for="@Model.HD.status"></span>
+                            </div>
                             <div class="checkbox">
                             </div>
                             <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditHD()">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Hủy</button>
                     </div>
                 </div>
 
@@ -547,10 +451,10 @@
 <script>
 
     function EditHD(bill_id) {
-        $("#title-modal").html("Sửa loại sản phẩm " + bill_id);
+        $("#title-modal").html("Sửa hóa đơn " + bill_id);
         $("#bill_id").attr('readonly', true);
         $.ajax({
-            url: '/Admin/Type/EditHD',
+            url: '/Admin/Bill/EditHD',
             type: "post",
             dataType: "json",
             data: {
@@ -559,14 +463,13 @@
             success: function (data) {
                 if (data != -1) {
                     $("#bill_id").val(data.bill_id);
-                    $("#name").val(data.name);
-                    $("#description").val(data.description);
+                    $("#status").val(data.status);
                 }
             },
             error: function (e) {
                 Swal.fire({
                     type: "error",
-                    title: "Lỗi lấy thông tin loại sản phẩm => EditHD",
+                    title: "Lỗi lấy thông tin hóa đơn => EditHD",
                     html: e.responseText
                 });
             }
@@ -576,71 +479,41 @@
     }
 
     function SubmitEditHD() {
-
         var bill_id = parseInt($('#bill_id').val());
-        var name = $('#name').val();
-        var description = $('#description').val();
+        var status = $('#status').val();
         $.ajax({
-            url: '/Admin/Type/SubmitEditHD',
+            url: '/Admin/Bill/SubmitEditHD',
             type: 'post',
             dataType: 'json',
             data: {
                 bill_id: bill_id,
-                name: name,
-                description: description
+                status: status
             },
             async: false,
             success: function (data) {
-                alert("Sửa thành công");
-                location.reload();
+                if(data != -1){
+                    alert("Sửa thành công");
+                    location.reload();
+                }
+                else{
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Hóa đơn không thể sửa thành trạng thái kém hơn'
+                    });
+                }
             },
             error: function (e) {
                 Swal.fire({
                     type: 'error',
-                    title: 'Lỗi sửa loại sản phẩm',
-                    html: e.responseText
+                    title: 'Lỗi sửa hóa đơn'
                 });
             }
         });
+    }
+    function ViewCTHD(bill_id){
+
     }
 
-    function RemoveHD(bill_id) {
-        Swal.fire({
-            type: "question",
-            title: "Xác nhận",
-            text: "Bạn có muốn xóa loại sản phẩm và tất cả các sản phẩm thuộc loại sản phẩm này?",
-            showCancelButton: true,
-            confirmButtonText: 'Đồng ý',
-            cancelButtonText: 'Hủy'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: '/Admin/Type/RemoveHD',
-                    type: 'post',
-                    dataType: 'json',
-                    data: {
-                        bill_id: bill_id
-                    },
-                    success: function (data) {
-                        if (data == "ok") {
-                            alert("Đã xóa thành công");
-                            location.reload();
-                        }
-                        else {
-                            alert("Xóa không thành công");
-                        }
-                    },
-                    error: function (e) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Lỗi xóa loại sản phẩm',
-                            html: e.responseText
-                        });
-                    }
-                });
-            }
-        });
-    }
 </script>
 
 </html>

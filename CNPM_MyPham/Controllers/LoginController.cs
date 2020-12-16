@@ -30,10 +30,16 @@ namespace CNPM_MyPham.Controllers
             if(ModelState.IsValid){
                 KhachHangDto kh = KHservice.KhachHang_GetByUser(lg.user);
                 if(kh == null){
-                    return View();
+                    ModelState.AddModelError("", "Tài khoản không tồn tại!");
+                    return View(lg);
                 }
                 else if(kh.pass != lg.pass){
-                    return View();
+                    ModelState.AddModelError("", "Mật khẩu không đúng!");
+                    return View(lg);
+                }
+                else if (kh.status != 1){
+                    ModelState.AddModelError("", "Tài khoản đã bị khóa!");
+                    return View(lg);
                 }
                 CurrentUserDto U = new CurrentUserDto();
                 U.KhachHangDto = kh;

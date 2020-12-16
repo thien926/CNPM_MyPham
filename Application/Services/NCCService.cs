@@ -39,5 +39,13 @@ namespace Application.Services
             if(NCC == null) return;
             NCCcontext.NCC_Remove(NCC);
         }
+
+        public IEnumerable<NCCDto> NCC_AdminTimKiem(string type, string input){
+            var nccs = NCCcontext.NCC_AdminTimKiem(type, input);
+            return nccs.MappingNCCDtos();
+        }
+        public int NCC_GetMaxId(){
+            return NCCcontext.NCC_GetMaxId();
+        }
     }
 }

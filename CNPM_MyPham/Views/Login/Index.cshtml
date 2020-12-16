@@ -56,6 +56,9 @@
                 <div class="login-form">
                     <h2>Đăng nhập</h2>
                     <form action="/Login/Index" method="post">
+                        <div asp-validation-summary="ModelOnly">
+                            <span></span>
+                        </div>
                         <div class="group-input">
                             <label asp-for="@Model.user">Tài khoản *</label>
                             <input asp-for="@Model.user">

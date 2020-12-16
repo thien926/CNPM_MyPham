@@ -10,5 +10,6 @@ namespace Domain.Interfaces
         void KhachHang_Add(KhachHang U);
         void KhachHang_Update(KhachHang U);
         void KhachHang_Remove(KhachHang U);
+        List<KhachHang> KhachHang_AdminTimKiem(string type, string input);
     }
 }

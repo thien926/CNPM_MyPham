@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Application.DTOs.KhachHangDto>
+﻿@model IndexViewKhachHangModel
 @{
     ViewData["Title"] = "Khách hàng";
 }
@@ -48,6 +48,14 @@
 
         .modal-footer {
             background-color: #f9f9f9;
+        }
+
+        .field-validation-error {
+            color: red
+        }
+
+        .validation-summary-errors {
+            color: red
         }
     </style>
 </head>
@@ -175,63 +183,7 @@
                         <a class="navbar-brand">@ViewData["Title"]</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @*<ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-dashboard"></i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        <b class="caret hidden-sm hidden-xs"></b>
-                                        <span class="notification hidden-sm hidden-xs">5</span>
-                                        <p class="hidden-lg hidden-md">
-                                            5 Notifications
-                                            <b class="caret"></b>
-                                        </p>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-search"></i>
-                                        <p class="hidden-lg hidden-md">Search</p>
-                                    </a>
-                                </li>
-                            </ul>*@
-
                         <ul class="nav navbar-nav navbar-right">
-                            @*<li>
-                                    <a href="">
-                                        <p>Account</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <p>
-                                            Dropdown
-                                            <b class="caret"></b>
-                                        </p>
-
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>*@
                             <li>
                                 <a href="#">
                                     <p>@ViewBag.CurrentUserAdmin.full_name | <span>Đăng xuất</span></p>
@@ -250,8 +202,21 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Striped Table with Hover</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
+                                    <form class="title" onsubmit="return false;">
+                                        <p>
+                                            <select style="height: 30px;" id="select">
+                                                <option value="all">Tất cả</option>
+                                                <option value="user">Tìm theo tài khoản</option>
+                                                <option value="full_name">Tìm theo họ tên</option>
+                                                <option value="phone">Tìm theo số điện thoại</option>
+                                                <option value="mail">Tìm theo thư điện tử</option>
+                                                <option value="address">Tìm theo địa chỉ</option>
+                                            </select>
+                                            <input type="text" style="height: 30px;" id="input_search"/>
+                                            <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
+                                            @* <input type="button" value="Thêm khách hàng" style="float: right;" onclick="ThemKH()"/> *@
+                                        </p>
+                                    </form>
                                 </div>
                                 <div class="content table-responsive table-full-width" id="id1">
                                     <table class="table table-hover table-striped">
@@ -264,10 +229,11 @@
                                         <th>Giới tính</th>
                                         <th>Ngày sinh</th>
                                         <th>Trạng thái</th>
+                                        <th>Hành động</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="suakh1">
                                             @{
-                                                foreach (var q in Model)
+                                                foreach (var q in Model.ListKH)
                                                 {
                                                     <tr>
                                                         <td>@q.user</td>
@@ -277,127 +243,32 @@
                                                         <td>@q.address</td>
                                                         <td>@q.sex</td>
                                                         <td>@q.dateborn.ToString("dd/MM/yyyy")</td>
-                                                        <td>@q.status</td>
+                                                        @if(q.status == 1){
+                                                            <td>Hiện</td>
+                                                        }
+                                                        else{
+                                                            <td>Ẩn</td>
+                                                        }
+                                                        <td>
+                                                            <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditKH('@q.user')"><i class="pe-7s-config"></i></button>
+                                                            @if (q.status != 0)
+                                                            {
+                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveKH('@q.user')"><i class="pe-7s-lock"></i></button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackKH('@q.user')"><i class="pe-7s-unlock"></i></button>
+                                                            }
+                                                        </td>
                                                     </tr>
                                                 }
                                             }
-                                            @* <tr>
-                                            <td>1</td>
-                                            <td><img src="~/assets/img/tim_80x80.png"></td>
-                                            <!-- <td>Dakota Rice</td> -->
-                                            <td>$36,738</td>
-                                            <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                            <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Minerva Hooper</td>
-                                            <td>$23,789</td>
-                                            <td>Curaçao</td>
-                                            <td>Sinaai-Waas</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sage Rodriguez</td>
-                                            <td>$56,142</td>
-                                            <td>Netherlands</td>
-                                            <td>Baileux</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Philip Chaney</td>
-                                            <td>$38,735</td>
-                                            <td>Korea, South</td>
-                                            <td>Overland Park</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Doris Greene</td>
-                                            <td>$63,542</td>
-                                            <td>Malawi</td>
-                                            <td>Feldkirchen in Kärnten</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Mason Porter</td>
-                                            <td>$78,615</td>
-                                            <td>Chile</td>
-                                            <td>Gloucester</td>
-                                        </tr> *@
                                         </tbody>
                                     </table>
 
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="col-md-12">
-                            <div class="card card-plain">
-                                <div class="header">
-                                    <h4 class="title">Table on Plain Background</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
-                                </div>
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Salary</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>$63,542</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>$78,615</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -449,25 +320,68 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+                        <h4><span id="title-modal">Login</span></h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <form role="form" onsubmit="return false;">
+                            <div asp-validation-summary="ModelOnly">
+                                @* <span>Danh sách lỗi</span> *@
                             </div>
                             <div class="form-group">
-                                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                                <label>Tài khoản</label>
+                                <input type="text" class="form-control" id="user" placeholder="Tài khoản" asp-for="@Model.KH.user">
+                                <span asp-validation-for="@Model.KH.user"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Mật khẩu</label>
+                                <input type="password" class="form-control" id="pass" placeholder="Mật khẩu" asp-for="@Model.KH.pass">
+                                <span asp-validation-for="@Model.KH.pass"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu</label>
+                                <input type="password" class="form-control" id="repass" placeholder="Nhập lại mật khẩu" asp-for="@Model.KH.repass">
+                                <span asp-validation-for="@Model.KH.repass"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Họ tên</label>
+                                <input type="text" class="form-control" id="full_name" placeholder="Họ tên" asp-for="@Model.KH.full_name">
+                                <span asp-validation-for="@Model.KH.full_name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Số điện thoại" asp-for="@Model.KH.phone">
+                                <span asp-validation-for="@Model.KH.phone"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Thư điện tử</label>
+                                <input type="text" class="form-control" id="mail" placeholder="Thư điện tử" asp-for="@Model.KH.mail">
+                                <span asp-validation-for="@Model.KH.mail"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ" asp-for="@Model.KH.address">
+                                <span asp-validation-for="@Model.KH.address"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                <select id="sex" style="height: 30px; margin-left: 5%;">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                                <span asp-validation-for="@Model.KH.sex"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày sinh</label>
+                                <input type="date" class="form-control" id="dateborn" placeholder="Ngày sinh" asp-for="@Model.KH.dateborn">
+                                <span asp-validation-for="@Model.KH.dateborn"></span>
                             </div>
                             <div class="checkbox">
                             </div>
-                            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditKH()" id="button_submit">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Hủy</button>
                     </div>
                 </div>
 
@@ -491,10 +405,229 @@
 <script src="~/assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="~/assets/js/demo.js"></script>
-
+@*Validate Script*@
+<script src="~/js/Validate-client/jquery-2.2.0.min.js"></script>
+<script src="~/js/Validate-client/jquery.validate.min.js"></script>
+<script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/js/sweetalert2@8.js"></script>
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
+    function TimKiem(){
+        var type = $("#select").val();
+        var input = $("#input_search").val();
+        $.ajax({
+            url: '/Admin/Customer/TimKiem',
+            type: "post",
+            dataType: "json",
+            data: {
+                type: type,
+                input: input
+            },
+            success: function (data) {
+                if (data != -1) {
+                    var s = "";
+                    var d = "";
+                    for(let i = 0; i < data.length; ++i){
+                        d = data[i].dateborn.replace("T00:00:00", "");
+                        d = d.split("-");
+                        s +=`<tr>
+                                <td>`+ data[i].user +`</td>
+                                <td>`+ data[i].full_name +`</td>
+                                <td>`+ data[i].phone +`</td>
+                                <td>`+ data[i].mail +`</td>
+                                <td>`+ data[i].address +`</td>
+                                <td>`+ data[i].sex +`</td>
+                                <td>`+ d[2] + `/` + d[1] + '/' + d[0] +`</td>`;
+                                if(data[i].status == 1){
+                                    s += `<td>Hiện</td>`;
+                                }
+                                else{
+                                    s += `<td>Ẩn</td>`;
+                                }
+                        s +=    `<td>
+                                    <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditKH('`+ data[i].user +`')"><i class="pe-7s-config"></i></button>`;
+                                    if (data[i].status != 0)
+                                    {
+                                        s+= `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveKH('`+ data[i].user +`')"><i class="pe-7s-lock"></i></button>`;
+                                    }
+                                    else
+                                    {
+                                        s+= `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackKH('`+ data[i].user +`')"><i class="pe-7s-unlock"></i></button>`;
+                                    }
+                        s +=    `</td>
+                            </tr>`;
+                    }
+                    $("#suakh1").html(s);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi tìm kiếm khách hàng => TimKiem",
+                    html: e.responseText
+                });
+            }
+        });
+    }
+    function EditKH(user) {
+        $(".form-group span").text("");
+        $("#title-modal").html("Sửa nhân viên " + user);
+        $("#user").attr('readonly', true);
+        $.ajax({
+            url: '/Admin/Customer/EditKH',
+            type: "post",
+            dataType: "json",
+            data: {
+                user: user
+            },
+            success: function (data) {
+                if (data != -1) {
+                    $("#user").val(data.user);
+                    $("#pass").val(data.pass);
+                    $("#repass").val(data.repass);
+                    $("#full_name").val(data.full_name);
+                    $("#phone").val(data.phone);
+                    $("#mail").val(data.mail);
+                    $("#address").val(data.address);
+                    $("#sex").val(data.sex);
+                    var d = formatDate(data.dateborn);
+                    $("#dateborn").val(d);
+
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy thông tin khách hàng => EditKH",
+                    html: e.responseText
+                });
+            }
+        });
+        $("#button_submit").html("Sửa");
+        $("#button_submit").attr('onclick', 'SubmitEditKH()');
+        $("#myModal").modal();
+
+    }
+    function SubmitEditKH() {
+        $.ajax({
+            url: '/Admin/Customer/SubmitEditKH',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                user: $('#user').val(),
+                pass: $('#pass').val(),
+                repass: $('#repass').val(),
+                full_name: $('#full_name').val(),
+                phone: $('#phone').val(),
+                mail: $('#mail').val(),
+                address: $('#address').val(),
+                sex: $('#sex').val(),
+                dateborn: $('#dateborn').val()
+            },
+            async: false,
+            success: function (data) {
+                if(data != -1){
+                    alert("Sửa thành công");
+                    location.reload();
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi sửa tài khoản'
+                });
+            }
+        });
+    }
+    function BackKH(user) {
+        Swal.fire({
+            type: "question",
+            title: "Xác nhận",
+            text: "Bạn có muốn mở khóa tài khoản này này?",
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/Admin/Customer/BackKH',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        user: user
+                    },
+                    success: function (data) {
+                        if (data == "ok") {
+                            alert("Đã mở khóa thành công");
+                            location.reload();
+                        }
+                        else {
+                            alert("Mở khóa không thành công");
+                        }
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi mở khóa tài khoản này',
+                            html: e.responseText
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function RemoveKH(user) {
+        Swal.fire({
+            type: "question",
+            title: "Xác nhận",
+            text: "Bạn có muốn khóa tài khoản này này?",
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/Admin/Customer/RemoveKH',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        user: user
+                    },
+                    success: function (data) {
+                        if (data == "ok") {
+                            alert("Đã khóa thành công");
+                            location.reload();
+                        }
+                        else {
+                            alert("Khóa không thành công");
+                        }
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi khóa tài khoản này',
+                            html: e.responseText
+                        });
+                    }
+                });
+            }
+        });
+    }
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
     $(document).ready(function () {
         $("#myBtn").click(function () {
             $("#myModal").modal();
@@ -504,6 +637,7 @@
     function cc() {
         $("#myModal").modal();
     }
+    
 </script>
 
 </html>

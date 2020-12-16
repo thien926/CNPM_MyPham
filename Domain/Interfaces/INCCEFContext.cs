@@ -10,5 +10,7 @@ namespace Domain.Interfaces
         void NCC_Add(NCC ncc);
         void NCC_Update(NCC ncc);
         void NCC_Remove(NCC ncc);
+        List<NCC> NCC_AdminTimKiem(string type, string input);
+        int NCC_GetMaxId();
     }
 }

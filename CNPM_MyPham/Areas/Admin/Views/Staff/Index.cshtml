@@ -203,20 +203,20 @@
                             <div class="card">
                                 <div class="header">
                                     <form class="title" onsubmit="return false;">
-                                    <p>
-                                        <select style="height: 30px;" id="select">
-                                            <option value="all">Tất cả</option>
-                                            <option value="user">Tìm theo tài khoản</option>
-                                            <option value="full_name">Tìm theo họ tên</option>
-                                            <option value="phone">Tìm theo số điện thoại</option>
-                                            <option value="mail">Tìm theo thư điện tử</option>
-                                            <option value="address">Tìm theo địa chỉ</option>
-                                        </select>
-                                        <input type="text" style="height: 30px;" id="input_search"/>
-                                        <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
-                                        <input type="button" value="Thêm nhân viên" style="float: right;" onclick="ThemNV()"/>
-                                    </p>
-                                </form>
+                                        <p>
+                                            <select style="height: 30px;" id="select">
+                                                <option value="all">Tất cả</option>
+                                                <option value="user">Tìm theo tài khoản</option>
+                                                <option value="full_name">Tìm theo họ tên</option>
+                                                <option value="phone">Tìm theo số điện thoại</option>
+                                                <option value="mail">Tìm theo thư điện tử</option>
+                                                <option value="address">Tìm theo địa chỉ</option>
+                                            </select>
+                                            <input type="text" style="height: 30px;" id="input_search"/>
+                                            <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
+                                            <input type="button" value="Thêm nhân viên" style="float: right;" onclick="ThemNV()"/>
+                                        </p>
+                                    </form>
                                 </div>
                                 <div class="content table-responsive table-full-width" id="id1">
                                     <table class="table table-hover table-striped">
@@ -428,9 +428,6 @@
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
-    function Onchange_sex(){
-        $("#sex").val(document.getElementById("select_sex").value);
-    }
     function TimKiem(){
         var type = $("#select").val();
         var input = $("#input_search").val();
@@ -483,7 +480,7 @@
             error: function (e) {
                 Swal.fire({
                     type: "error",
-                    title: "Lỗi tìm kiếm loại sản phẩm => TimKiem",
+                    title: "Lỗi tìm kiếm nhân viên => TimKiem",
                     html: e.responseText
                 });
             }

@@ -183,63 +183,7 @@
                         <a class="navbar-brand">@ViewData["Title"]</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @*<ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-dashboard"></i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        <b class="caret hidden-sm hidden-xs"></b>
-                                        <span class="notification hidden-sm hidden-xs">5</span>
-                                        <p class="hidden-lg hidden-md">
-                                            5 Notifications
-                                            <b class="caret"></b>
-                                        </p>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-search"></i>
-                                        <p class="hidden-lg hidden-md">Search</p>
-                                    </a>
-                                </li>
-                            </ul>*@
-
                         <ul class="nav navbar-nav navbar-right">
-                            @*<li>
-                                    <a href="">
-                                        <p>Account</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <p>
-                                            Dropdown
-                                            <b class="caret"></b>
-                                        </p>
-
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </li>*@
                             <li>
                                 <a href="#">
                                     <p>@ViewBag.CurrentUserAdmin.full_name | <span>Đăng xuất</span></p>
@@ -258,8 +202,18 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Striped Table with Hover</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
+                                    <form class="title" onsubmit="return false;">
+                                        <p>
+                                            <select style="height: 30px;" id="select">
+                                                <option value="all">Tất cả</option>
+                                                <option value="ncc_id">Tìm theo mã nhà cung cấp</option>
+                                                <option value="name">Tìm theo tên nhà cung cấp</option>
+                                            </select>
+                                            <input type="text" style="height: 30px;" id="input_search"/>
+                                            <input type="button" value="Tìm kiếm" style="height: 30px;" onclick="TimKiem()"/>
+                                            <input type="button" value="Thêm nhà cung cấp" style="float: right;" onclick="ThemNCC()"/>
+                                        </p>
+                                    </form>
                                 </div>
                                 <div class="content table-responsive table-full-width" id="id1">
                                     <table class="table table-hover table-striped">
@@ -269,7 +223,7 @@
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="suancc1">
                                             @{
                                                 foreach (var q in Model.ListNCC)
                                                 {
@@ -285,7 +239,6 @@
                                                             }
                                                         }
                                                         <td>
-                                                            @*<i class="pe-7s-config"></i><i class="pe-7s-trash"></i>*@
                                                             <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditNCC(@q.ncc_id)"><i class="pe-7s-config"></i></button>
                                                             @if (q.status != 0)
                                                             {
@@ -299,123 +252,12 @@
                                                     </tr>
                                                 }
                                             }
-                                            @* <tr>
-                                                    <td>1</td>
-                                                    <td><img src="~/assets/img/tim_80x80.png"></td>
-                                                    <!-- <td>Dakota Rice</td> -->
-                                                    <td>$36,738</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                    <td>Eglips Apple Fit Blusher là phấn má hồng dạng nén khi đánh không bị vón cục cho bạn một màu má hồng thật đẹp. Hạt phấn siêu mịn có khả năng hấp thụ bã nhờn và hút mồ hôi đồng thời còn giúp che phủ khuyết điểm như lỗ chân lông to, da thiếu sức sống.., với màu sắc nổi trội bạn có thể cảm nhận được màu sắc rạng rỡ và sống động trên đôi má của mình. Eglips Apple Fit Blusher ngoài việc sử dụng làm phấn má thì còn có thể sử dụng như phấn mắt, đánh highlight và làm phấn phủ.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td>Mason Porter</td>
-                                                    <td>$78,615</td>
-                                                    <td>Chile</td>
-                                                    <td>Gloucester</td>
-                                                </tr> *@
                                         </tbody>
                                     </table>
 
                                 </div>
                             </div>
                         </div>
-
-
-                        <div class="col-md-12">
-                            <div class="card card-plain">
-                                <div class="header">
-                                    <h4 class="title">Table on Plain Background</h4>
-                                    <p class="category">Here is a subtitle for this table</p>
-                                </div>
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Salary</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>$63,542</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>$78,615</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -484,14 +326,14 @@
                                 <input type="text" class="form-control" id="name" placeholder="Tên nhà cung cấp" asp-for="@Model.NCC.name">
                                 <span asp-validation-for="@Model.NCC.name"></span>
                             </div>
-                            <div class="form-group">
+                            @* <div class="form-group">
                                 <label>Trạng thái nhà cung cấp</label>
                                 <input type="text" class="form-control" id="status" placeholder="Trạng thái nhà cung cấp" asp-for="@Model.NCC.status">
                                 <span asp-validation-for="@Model.NCC.status"></span>
-                            </div>
+                            </div> *@
                             <div class="checkbox">
                             </div>
-                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditNCC()">Sửa</button>
+                            <button type="submit" class="btn btn-success btn-block" onclick="SubmitEditNCC()" id="button_submit">Sửa</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -527,18 +369,122 @@
 <script src="~/assets/js/Modal/jquery.min.js"></script>
 <script src="~/assets/js/Modal/bootstrap.min.js"></script>
 <script>
+    function ThemNCC(){
+        $(".form-group span").text("");
+        $("#title-modal").html("Thêm nhà cung cấp");
+        $("#name").val("");
+        $("#myModal").modal();
+        $.ajax({
+            url: '/Admin/NCC/MaxNCC_ID',
+            type: "post",
+            dataType: "json",
+            data: {
+            },
+            success: function (data) {
+                if (data != -1) {
+                    $("#ncc_id").val(data);
+                    $("#ncc_id").attr('readonly', true);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi lấy mã nhà cung cấp MAX=> ThemNCC",
+                    html: e.responseText
+                });
+            }
+        });
+        $("#button_submit").html("Thêm");
+        $("#button_submit").attr('onclick', 'SubmitThemNCC()');
+    }
+
+    function SubmitThemNCC(){
+        $("#button_submit").focus();
+        var ncc_id = parseInt($('#ncc_id').val());
+        var name = $('#name').val();
+        if(name.trim() == ""){
+            return;
+        }
+        $.ajax({
+            url: '/Admin/NCC/SubmitThemNCC',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                ncc_id: ncc_id,
+                name: name
+            },
+            async: false,
+            success: function (data) {
+                alert("Thêm thành công");
+                location.reload();
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Lỗi thêm nhà cung cấp'
+                });
+            }
+        });
+    }
+    function TimKiem(){
+        var type = $("#select").val();
+        var input = $("#input_search").val();
+        $.ajax({
+            url: '/Admin/NCC/TimKiem',
+            type: "post",
+            dataType: "json",
+            data: {
+                type: type,
+                input: input
+            },
+            success: function (data) {
+                if (data != -1) {
+                    var s = "";
+                    for(let i = 0; i < data.length; ++i){
+                        s += `<tr>
+                                    <td>`+ data[i].ncc_id +`</td>
+                                    <td>`+ data[i].name +`</td>`;
+                                    if(data[i].status == 1){
+                                        s += `<td>Hiện</td>`;
+                                    }
+                                    else{
+                                        s += `<td>Ẩn</td>`;
+                                    }
+                        s +=        `<td>
+                                        <button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditNCC(`+ data[i].ncc_id +`)"><i class="pe-7s-config"></i></button>`;
+                                        if (data[i].status != 0)
+                                        {
+                                            s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="RemoveNCC(`+ data[i].ncc_id +`)"><i class="pe-7s-lock"></i></button>`;
+                                        }
+                                        else
+                                        {
+                                            s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="BackNCC(`+ data[i].ncc_id +`)"><i class="pe-7s-unlock"></i></button>`;
+                                        }
+                        s +=        `</td>
+                                </tr>`;
+                    }
+                    $("#suancc1").html(s);
+                }
+            },
+            error: function (e) {
+                Swal.fire({
+                    type: "error",
+                    title: "Lỗi tìm kiếm nhà cung cấp => TimKiem",
+                    html: e.responseText
+                });
+            }
+        });
+    }
     function SubmitEditNCC(){
         var ncc_id = parseInt($('#ncc_id').val());
         var name = $('#name').val();
-        var status = parseInt($('#status').val());
         $.ajax({
             url: '/Admin/NCC/SubmitEditNCC',
             type: 'post',
             dataType: 'json',
             data: {
                 ncc_id: ncc_id,
-                name: name,
-                status: status
+                name: name
             },
             async: false,
             success: function (data) {
@@ -548,17 +494,16 @@
             error: function (e) {
                 Swal.fire({
                     type: 'error',
-                    title: 'Lỗi sửa nhà cung cấp',
-                    html: e.responseText
+                    title: 'Lỗi sửa nhà cung cấp'
                 });
             }
         });
     }
 
     function EditNCC(ncc_id) {
+        $(".form-group span").text("");
         $("#title-modal").html("Sửa nhà cung cấp " + ncc_id);
         $("#ncc_id").attr('readonly', true);
-        $("#status").attr('readonly', true);
         $.ajax({
             url: '/Admin/NCC/EditNCC',
             type: "post",
@@ -570,19 +515,19 @@
                 if (data != -1) {
                     $("#ncc_id").val(data.ncc_id);
                     $("#name").val(data.name);
-                    $("#status").val(data.status);
                 }
             },
             error: function (e) {
                 Swal.fire({
                     type: "error",
-                    title: "Lỗi lấy thông tin loại sản phẩm => EditNCC",
+                    title: "Lỗi lấy thông tin nhà cung cấp => EditNCC",
                     html: e.responseText
                 });
             }
         });
+        $("#button_submit").html("Sửa");
+        $("#button_submit").attr('onclick', 'SubmitEditNCC()');
         $("#myModal").modal();
-
     }
 
     function BackNCC(ncc_id) {

@@ -16,7 +16,7 @@ namespace Infrastructure.Persistence
                     new HoaDon{
                         bill_id = 1,
                         user_kh = "thien",
-                        user_nv = "",
+                        user_nv = "bh01",
                         phone = "0364117408",
                         address = "Bình Định",
                         date_receice = new System.DateTime(2020, 5, 8, 5, 4, 6),

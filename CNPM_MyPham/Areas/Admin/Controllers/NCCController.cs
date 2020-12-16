@@ -57,11 +57,36 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitEditNCC(int ncc_id, string name, int status)
+        public IActionResult SubmitEditNCC(int ncc_id, string name)
         {
+            int status = NCCservice.NCC_GetById(ncc_id).status;
             var ncc = new NCCDto(ncc_id, name, status);
             NCCservice.NCC_Update(ncc);
             return new JsonResult(1);
+        }
+        [HttpPost]
+        public IActionResult TimKiem(string type, string input){
+            if(String.IsNullOrEmpty(input)){
+                input = "";
+            }
+            IEnumerable<NCCDto> nccs = NCCservice.NCC_AdminTimKiem(type, input);
+            if(nccs != null){
+                return new JsonResult(nccs);
+            }
+            return new JsonResult(-1);
+        }
+
+        [HttpPost]
+        public IActionResult SubmitThemNCC(int ncc_id, string name)
+        {
+            var NCC = new NCCDto(ncc_id, name, 1);
+            NCCservice.NCC_Add(NCC);
+            return new JsonResult(1);
+        }
+
+        [HttpPost]
+        public IActionResult MaxNCC_ID(){
+            return new JsonResult(NCCservice.NCC_GetMaxId() + 1);
         }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");

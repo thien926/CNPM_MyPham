@@ -38,5 +38,9 @@ namespace Application.Services
             if(kh == null) return;
             KHcontext.KhachHang_Remove(kh);
         }
+        public IEnumerable<KhachHangDto> KhachHang_AdminTimKiem(string type, string input){
+            var khs = KHcontext.KhachHang_AdminTimKiem(type, input);
+            return khs.MappingKhachHangDtos();
+        }
     }
 }
