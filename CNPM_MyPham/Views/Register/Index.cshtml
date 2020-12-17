@@ -20,9 +20,7 @@
     <script src="~/js/Validate-client/jquery.validate.min.js"></script>
     <script src="~/js/Validate-client/jquery.validate.unobtrusive.min.js"></script>
     <script>
-        $(".nav-menu li").removeClass( "active" );
-        $("#page_register").addClass("active");
-
+        
         Message_Register();
         function Message_Register(){
             @if(ViewBag.Message_Register != null){
@@ -33,6 +31,8 @@
                 </text>
             }
         }
+        $(".nav-menu li").removeClass( "active" );
+        $("#page_register").addClass("active");
     </script>
 }
 
@@ -63,45 +63,45 @@
                             @* <span>Danh sách lỗi</span> *@
                         </div>
                         <div class="group-input">
-                            <label asp-for="user">Tài khoản *</label>
-                            <input asp-for="user">
-                            <span asp-validation-for="user"></span>
+                            <label asp-for="@Model.user">Tài khoản *</label>
+                            <input asp-for="@Model.user">
+                            <span asp-validation-for="@Model.user"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="pass">Mật khẩu *</label>
-                            <input asp-for="pass" type="password">
-                            <span asp-validation-for="pass"></span>
+                            <label asp-for="@Model.pass">Mật khẩu *</label>
+                            <input asp-for="@Model.pass" type="password">
+                            <span asp-validation-for="@Model.pass"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="repass">Nhập lại mật khẩu *</label>
-                            <input asp-for="repass" type="password">
-                            <span asp-validation-for="repass"></span>
+                            <label asp-for="@Model.repass">Nhập lại mật khẩu *</label>
+                            <input asp-for="@Model.repass" type="password">
+                            <span asp-validation-for="@Model.repass"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="full_name">Họ tên *</label>
-                            <input asp-for="full_name">
-                            <span asp-validation-for="full_name"></span>
+                            <label asp-for="@Model.full_name">Họ tên *</label>
+                            <input asp-for="@Model.full_name">
+                            <span asp-validation-for="@Model.full_name"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="phone">Số điện thoại *</label>
-                            <input asp-for="phone">
-                            <span asp-validation-for="phone"></span>
+                            <label asp-for="@Model.phone">Số điện thoại *</label>
+                            <input asp-for="@Model.phone">
+                            <span asp-validation-for="@Model.phone"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="mail">Thư điện tử *</label>
-                            <input asp-for="mail">
-                            <span asp-validation-for="mail"></span>
+                            <label asp-for="@Model.mail">Thư điện tử *</label>
+                            <input asp-for="@Model.mail">
+                            <span asp-validation-for="@Model.mail"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="address">Địa chỉ *</label>
-                            <input asp-for="address">
-                            <span asp-validation-for="address"></span>
+                            <label asp-for="@Model.address">Địa chỉ *</label>
+                            <input asp-for="@Model.address">
+                            <span asp-validation-for="@Model.address"></span>
                         </div>
 
                         <div class="group-input">
@@ -119,13 +119,18 @@
                                 </div>
 
                             </label>
-                            <span asp-validation-for="sex"></span>
+                            <span asp-validation-for="@Model.sex"></span>
                         </div>
 
                         <div class="group-input">
-                            <label asp-for="dateborn">Ngày sinh *</label>
-                            <input asp-for="dateborn">
+                            <label asp-for="@Model.dateborn">Ngày sinh *</label>
+                            <input asp-for="@Model.dateborn">
                             <span asp-validation-for="dateborn"></span>
+                        </div>
+                        <div class="group-input" style="display: none;">
+                            <label asp-for="@Model.status">Trạng thái *</label>
+                            <input asp-for="@Model.status" value="1">
+                            <span asp-validation-for="@Model.status"></span>
                         </div>
                         <button type="submit" class="site-btn login-btn">Đăng kí</button>
                     </form>

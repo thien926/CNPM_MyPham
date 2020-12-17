@@ -44,7 +44,6 @@ namespace Application.DTOs
         public DateTime dateborn{get; set;}
 
         [Required(ErrorMessage = "Trạng thái là bắt buộc")]
-        [RegularExpression(pattern: "(1|0)/g", ErrorMessage="Trạng thái là 1 hoặc 0")]
         public int status{get; set;}
 
         public KhachHangDto()

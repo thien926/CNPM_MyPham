@@ -229,7 +229,7 @@ namespace Infrastructure.Persistence
                         repass = "1234",
                         full_name = "Nguyễn Ngọc Thịnh",
                         phone = "0364117408",
-                        mail = "thinhxamlon@gmail.com",
+                        mail = "thinh@gmail.com",
                         address = "Miền Tây",
                         sex = "Nam",
                         dateborn = new System.DateTime(2000, 5, 8),
