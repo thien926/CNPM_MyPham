@@ -309,3 +309,4 @@ G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\B
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Home\Index.cshtml.g.cs
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\DetailBill\Index.cshtml.g.cs
+G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\User\Index.cshtml.g.cs

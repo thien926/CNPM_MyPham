@@ -40,7 +40,7 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
                 NV.pass = "";
                 NV.repass = "";
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUserAdmin", NV);
-                return Redirect("/Admin/Bill/Index");
+                return Redirect("/Admin/User/Index");
             }
             return View();
         }
