@@ -34,10 +34,16 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             if(!ViewChung()){
                 return Redirect("/Admin/Login/Index");
             }
+            
             var IndexProduct = new IndexViewProductModel();
             IndexProduct.ListSP = SPservice.SanPham_GetAll();
             IndexProduct.ListTH = THservice.ThuongHieu_GetAll();
             IndexProduct.ListLSP = LSPservice.LoaiSanPham_GetAll();
+            IndexProduct.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexProduct.QUser.details.Contains("SanPham")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexProduct);
         }
 

@@ -132,22 +132,22 @@ namespace Infrastructure.Persistence
                     new Quyen{
                         permission_id = 1,
                         name = "Admin",
-                        details = "qlNhapHang-qlNhanVien-qlSanPham-qlHoaDon-qlKhachHang-qlPhieuNhap-qlNCC-qlTaiKhoan-qlQuyen-qlThongKe"
+                        details = "qlNhapHang-qlNhanVien-qlSanPham-qlHoaDon-qlKhachHang-qlPhieuNhap-qlNCC-qlTaiKhoan-qlQuyen-qlThongKe-qlLoaiSanPham-qlThuongHieu"
                     },
                     new Quyen{
                         permission_id = 2,
                         name = "Quản lý",
-                        details = "qlNhanVien-xemSanPham-xemHoaDon-qlKhachHang-xemPhieuNhap-xemNCC-qlTaiKhoan-qlThongKe"
+                        details = "qlNhanVien-xemSanPham-xemHoaDon-qlKhachHang-xemPhieuNhap-xemNCC-qlTaiKhoan-qlThongKe-qlLoaiSanPham-qlThuongHieu"
                     },
                     new Quyen{
                         permission_id = 3,
                         name = "Nhân viên bán hàng",
-                        details = "xemSanPham-qlHoaDon-xemKhachHang-qlThongKe"
+                        details = "xemSanPham-qlHoaDon-xemKhachHang-qlThongKe-xemThuongHieu"
                     },
                     new Quyen{
                         permission_id = 4,
                         name = "Nhân viên nhập hàng",
-                        details = "qlNhapHang-qlSanPham-qlPhieuNhap-qlNCC-qlThongKe"
+                        details = "qlNhapHang-qlSanPham-qlPhieuNhap-qlNCC-qlThongKe-qlLoaiSanPham-qlThuongHieu"
                     }
                 });
             }

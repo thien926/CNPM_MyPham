@@ -10,5 +10,6 @@ namespace CNPM_MyPham.Areas.Admin.Models
     {
         public IEnumerable<LoaiSanPhamDto> ListLSP { get; set; }
         public LoaiSanPhamDto LSP { get; set; }
+        public QuyenDto QUser {get;set;}
     }
 }

@@ -10,5 +10,6 @@ namespace CNPM_MyPham.Areas.Admin.Models
     {
         public NhanVienDto NV { get; set; }
         public QuyenDto Q { get; set; }
+        public QuyenDto QUser { get; set; }
     }
 }

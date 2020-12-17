@@ -17,5 +17,6 @@ namespace CNPM_MyPham.Areas.Admin.Models
         
         [Required(ErrorMessage = "Hình ảnh là bắt buộc")]
         public IFormFile photo { get; set; }
+        public QuyenDto QUser {get;set;}
     }
 }

@@ -7,5 +7,6 @@ namespace CNPM_MyPham.Areas.Admin.Models
     {
         public IEnumerable<KhachHangDto> ListKH { get; set; }
         public KhachHangDto KH { get; set; }
+        public QuyenDto QUser {get;set;}
     }
 }

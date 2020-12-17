@@ -10,5 +10,6 @@ namespace CNPM_MyPham.Areas.Admin.Models
     {
         public IEnumerable<NCCDto> ListNCC { get; set; }
         public NCCDto NCC { get; set; }
+        public QuyenDto QUser {get;set;}
     }
 }

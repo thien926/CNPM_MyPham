@@ -24,6 +24,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var IndexQuyen = new IndexViewQuyenModel();
             IndexQuyen.ListQ = Qservice.Quyen_GetAll();
+            IndexQuyen.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexQuyen.QUser.details.Contains("Quyen")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexQuyen);
         }
         [HttpPost]

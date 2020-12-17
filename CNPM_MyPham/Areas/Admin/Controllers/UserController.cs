@@ -29,6 +29,7 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             var IndexView = new IndexViewUserModel();
             IndexView.NV = NVservice.NhanVien_GetByUser(ViewBag.CurrentUserAdmin.user);
             IndexView.Q = Qservice.Quyen_GetById(IndexView.NV.permission_id);
+            IndexView.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
             return View(IndexView);
         }
         [HttpPost]
@@ -50,6 +51,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             IndexView.Q = Qservice.Quyen_GetById(IndexView.NV.permission_id);
             return View(IndexView);
+        }
+        [HttpPost]
+        public IActionResult DangXuat(){
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "CurrentUserAdmin", null);
+            return new JsonResult(1);
         }
         public bool ViewChung(){
             ViewBag.CurrentUserAdmin = SessionHelper.GetObjectFromJson<NhanVienDto>(HttpContext.Session, "CurrentUserAdmin");

@@ -82,54 +82,70 @@
                             <p>Thông tin tài khoản</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="/Admin/Product/Index">
-                            <i class="pe-7s-note2"></i>
-                            <p>Sản phẩm</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Admin/Type/Index">
-                            <i class="pe-7s-diskette"></i>
-                            <p>Loại sản phẩm</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Admin/Brand/Index">
-                            <i class="pe-7s-wallet"></i>
-                            <p>Thương hiệu</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Admin/Permission/Index">
-                            <i class="pe-7s-id"></i>
-                            <p>Quyền</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Admin/Staff/Index">
-                            <i class="pe-7s-medal"></i>
-                            <p>Nhân viên</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Admin/Customer/Index">
-                            <i class="pe-7s-user"></i>
-                            <p>Khách hàng</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Admin/NCC/Index">
-                            <i class="pe-7s-users"></i>
-                            <p>Nhà cung cấp</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="/Admin/Bill/Index">
-                            <i class="pe-7s-diskette"></i>
-                            <p>Hóa đơn</p>
-                        </a>
-                    </li>
+                    @if(Model.QUser.details.Contains("SanPham")){
+                        <li >
+                            <a href="/Admin/Product/Index">
+                                <i class="pe-7s-note2"></i>
+                                <p>Sản phẩm</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("LoaiSanPham")){
+                        <li>
+                            <a href="/Admin/Type/Index">
+                                <i class="pe-7s-diskette"></i>
+                                <p>Loại sản phẩm</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("ThuongHieu")){
+                        <li>
+                            <a href="/Admin/Brand/Index">
+                                <i class="pe-7s-wallet"></i>
+                                <p>Thương hiệu</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("Quyen")){
+                        <li>
+                            <a href="/Admin/Permission/Index">
+                                <i class="pe-7s-id"></i>
+                                <p>Quyền</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("NhanVien")){
+                        <li>
+                            <a href="/Admin/Staff/Index">
+                                <i class="pe-7s-medal"></i>
+                                <p>Nhân viên</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("KhachHang")){
+                        <li>
+                            <a href="/Admin/Customer/Index">
+                                <i class="pe-7s-user"></i>
+                                <p>Khách hàng</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("NCC")){
+                        <li>
+                            <a href="/Admin/NCC/Index">
+                                <i class="pe-7s-users"></i>
+                                <p>Nhà cung cấp</p>
+                            </a>
+                        </li>
+                    }
+                    @if(Model.QUser.details.Contains("HoaDon")){
+                        <li class="active">
+                            <a href="/Admin/Bill/Index">
+                                <i class="pe-7s-diskette"></i>
+                                <p>Hóa đơn</p>
+                            </a>
+                        </li>
+                    }
                     
                 </ul>
             </div>
@@ -150,7 +166,7 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a>
+                                <a onclick="DangXuat()">
                                     <p>@ViewBag.CurrentUserAdmin.full_name | <span>Đăng xuất</span></p>
                                 </a>
                             </li>
@@ -531,6 +547,43 @@
         });
         $("#myModal").modal();
 
+    }
+
+    function DangXuat(){
+        Swal.fire({
+            type: "question",
+            title: "Xác nhận",
+            text: "Bạn có muốn Đăng Xuất",
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/Admin/User/DangXuat',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                    },
+                    success: function (data) {
+                        if (data == 1) {
+                            alert("Đã đăng xuất");
+                            location.reload();
+                        }
+                        else {
+                            alert("Đăng xuất không thành công");
+                        }
+                    },
+                    error: function (e) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Lỗi đăng xuất',
+                            html: e.responseText
+                        });
+                    }
+                });
+            }
+        });
     }
 
     function SubmitEditHD() {

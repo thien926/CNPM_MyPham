@@ -27,6 +27,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             var IndexView = new IndexViewNhanVienModel();
             IndexView.ListNV = NVservice.NhanVien_GetAll();
             IndexView.ListQ = Qservice.Quyen_GetAll();
+            IndexView.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexView.QUser.details.Contains("NhanVien")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexView);
         }
         [HttpPost]

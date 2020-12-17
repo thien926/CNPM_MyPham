@@ -29,6 +29,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var IndexType = new IndexViewTypeModel();
             IndexType.ListLSP = LSPservice.LoaiSanPham_GetAll();
+            IndexType.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexType.QUser.details.Contains("LoaiSanPham")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexType);
         }
 

@@ -27,6 +27,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var IndexNCC = new IndexViewNCCModel();
             IndexNCC.ListNCC = NCCservice.NCC_GetAll();
+            IndexNCC.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexNCC.QUser.details.Contains("NCC")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexNCC);
         }
 

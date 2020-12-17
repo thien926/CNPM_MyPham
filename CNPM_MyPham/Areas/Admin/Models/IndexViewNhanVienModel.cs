@@ -8,5 +8,6 @@ namespace CNPM_MyPham.Areas.Admin.Models
         public IEnumerable<NhanVienDto> ListNV { get; set; }
         public IEnumerable<QuyenDto> ListQ { get; set; }
         public NhanVienDto NV { get; set; }
+        public QuyenDto QUser {get;set;}
     }
 }

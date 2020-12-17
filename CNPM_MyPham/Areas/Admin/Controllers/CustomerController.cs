@@ -26,6 +26,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var IndexView = new IndexViewKhachHangModel();
             IndexView.ListKH = KHservice.KhachHang_GetAll();
+            IndexView.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexView.QUser.details.Contains("KhachHang")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexView);
         }
         [HttpPost]

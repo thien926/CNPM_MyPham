@@ -56,6 +56,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var IndexBill = new IndexViewHoaDonModel();
             IndexBill.ListHD = hdservice.HoaDon_GetAll();
+            IndexBill.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!IndexBill.QUser.details.Contains("HoaDon")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(IndexBill);
         }
 

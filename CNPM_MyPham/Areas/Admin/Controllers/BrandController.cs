@@ -28,6 +28,11 @@ namespace CNPM_MyPham.Areas.Admin.Controllers
             }
             var indexmodel = new IndexViewBrandModel();
             indexmodel.ListTH = THservice.ThuongHieu_GetAll();
+            indexmodel.QUser = Qservice.Quyen_GetById(ViewBag.CurrentUserAdmin.permission_id);
+
+            if(!indexmodel.QUser.details.Contains("ThuongHieu")){
+                return Redirect("/Admin/User/Index");
+            }
             return View(indexmodel);
         }
         [HttpPost]
