@@ -502,7 +502,9 @@
                                     }
                         s +=        `<td>`;
                                         if(data[i].status < 3){
-                                            s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditHD(`+ data[i].bill_id +`)"><i class="pe-7s-config"></i></button>`;
+                                            s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" data-toggle="modal" data-target="#myModal" onclick="EditHD(` + data[i].
+                                                
+                                                + `)"><i class="pe-7s-config"></i></button>`;
                                         }
                                         s += `<button data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" onclick="ViewCTHD(`+ data[i].bill_id +`)"><i class="pe-7s-look"></i></button>`;
                         s +=        `</td>

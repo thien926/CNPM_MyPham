@@ -7,6 +7,7 @@ namespace Infrastructure
     {
         public PaginatedList(IEnumerable<T> items, int count, int pageIndex, int pageSize)
         {
+            // pageSize : Kích thước của 1 trang có bao nhiêu sản phẩm
             this.AddRange(items);
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);

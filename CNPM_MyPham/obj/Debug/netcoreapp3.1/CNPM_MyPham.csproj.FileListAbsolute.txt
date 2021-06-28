@@ -1,6 +1,5 @@
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\appsettings.Development.json
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\appsettings.json
-G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\CNPM_MyPham.exe
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\CNPM_MyPham.deps.json
 G:\Git\CNPM_MyPham\CNPM_MyPham\bin\Debug\netcoreapp3.1\CNPM_MyPham.runtimeconfig.json
@@ -310,3 +309,4 @@ G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\H
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Views\DetailBill\Index.cshtml.g.cs
 G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\User\Index.cshtml.g.cs
+G:\Git\CNPM_MyPham\CNPM_MyPham\obj\Debug\netcoreapp3.1\scopedcss\bundle\CNPM_MyPham.styles.css
