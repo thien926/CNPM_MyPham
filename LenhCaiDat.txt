@@ -1,6 +1,6 @@
 Dotnet tool install --global dotnet -ef
 Dotnet add package Microsoft.EntityFrameworkCore.Design
-Dotnet ef migration add IntialCreate
+Dotnet ef migrations add IntialCreate
 Dotnet ef database update
 Dotnet ef database update addratingtomovie(ten)
 Dotnet ef migration remove
@@ -9,10 +9,10 @@ Dotnet ef migrations add IntialCreate -o Data/Migrations
 
 Tải solution exploiner
 	Dotnet new sln
-	Dotnet skn add mvcMovie
+	Dotnet sln add mvcMovie
 Click solution .
 	Dotnet new classlib -n Application
-	Dotnet new classlib-n Domain
+	Dotnet new classlib -n Domain
 	Dotnet new classlib -n Infrastructure
 	Dotnet sln add Application
 	Dotnet sln add Domain
